@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+	<title>F1DB - {% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="/static/css/header.css" />
+	{% block specific_links %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      
+      <span>
+	<a href="{{ url_for('home') }}" id="logo"> <img src="/static/gallery/F1DB_Logo.svg"> <i><b id="logo-text">Formula 1 <br> DataBase</b></i></a>
+      </span>
+
+      <ul id="buttons">
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     Home 
+	  </li>
+	</a>
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     Pilots 
+	  </li>
+	</a>
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     Cars 
+	  </li>
+	</a>
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     Tracks 
+	  </li>
+	</a>
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     Brands 
+	  </li>
+	</a>
+	
+	<a href="{{ url_for('home') }}">
+	  <li class="button">
+	     About 
+	  </li>
+	</a>
+	
+      </ul>
+      
+    </header>
+    
+    <div class="gradient-background"></div>
+    <div class="header-margin"></div>
+    
+    <div class="page-content">
+      {% block body_content %}{% endblock %}
+    </div>
+    <footer>
+      <div id="time-date">{{ current_time }}</div>
+    </footer>
+  </body>
+</html>
