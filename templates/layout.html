@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/static/css/animsition.min.css" />
 	<script src="/static/js/jquery-2.1.4.min.js" type="text/javascript"></script>
 	<script src="/static/js/animsition.min.js" type="text/javascript"></script>
+	<script src="/static/js/header.js" type="text/javascript"></script>
 	
 	{% block specific_links %}{% endblock %}
   </head>
@@ -21,37 +22,37 @@
 
       <ul id="buttons">
 
-	<a class="border-top-left-radius" href="{{ url_for('home') }}">
+	<a id="home" class="border-top-left-radius" href="{{ url_for('home') }}">
 	  <li class="button border-top-left-radius">
 	     Home 
 	  </li>
 	</a>
 	
-	<a href="{{ url_for('home') }}">
+	<a id="pilots" href="{{ url_for('pilots') }}">
 	  <li class="button">
 	    Pilots 
 	  </li>
 	</a>
 	
-	<a href="{{ url_for('home') }}">
+	<a id="cars" href="{{ url_for('cars') }}">
 	  <li class="button">
 	     Cars 
 	  </li>
 	</a>
 	
-	<a href="{{ url_for('home') }}">
+	<a id="tracks" href="{{ url_for('tracks') }}">
 	  <li class="button">
-	     Tracks 
+	     Tracks
 	  </li>
 	</a>
 	
-	<a id="brands" href="{{ url_for('home') }}">
-	  <li class="button animsition-link">
-	     <b> Brands </b>
+	<a id="brands" href="{{ url_for('brands') }}">
+	  <li class="button">
+	     Brands
 	  </li>
 	</a>
 	
-	<a class="border-top-right-radius" href="{{ url_for('home') }}">
+	<a id="about" class="border-top-right-radius" href="{{ url_for('about') }}">
 	  <li class="button">
 	     About 
 	  </li>
@@ -67,7 +68,7 @@
     <div class="page-content">
       {% block body_content %}{% endblock %}
     </div>
-    <script src="/static/js/buttonsFade.js" type="text/javascript"></script>
+    
   </body>
   <footer class="gradient-background">
     <div id="time-date">{{ current_time }}</div>

@@ -161,6 +161,10 @@ ul#buttons a li:hover{
 	color: white;
 }
 
+ul#buttons a li.current-page{
+	color: white;
+}
+
 li.button{
 	display: block;
 	text-align: center;
@@ -168,7 +172,9 @@ li.button{
 	vertical-align: middle;
 }
 
-
+.current-page{
+	color: white;
+}
 
 
 
