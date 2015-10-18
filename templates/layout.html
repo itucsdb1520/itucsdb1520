@@ -4,17 +4,18 @@
 	<meta charset="utf-8" />
 	<title>F1DB - {% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="/static/css/header.css" />
+	
 	{% block specific_links %}{% endblock %}
   </head>
   <body>
-    <header>
+    <header class="gradient-background">
       
-      <span>
-	<a href="{{ url_for('home') }}" id="logo"> <img src="/static/gallery/F1DB_Logo.svg"> <i><b id="logo-text">Formula 1 <br> DataBase</b></i></a>
+      <span  id="logo">
+	<a href="{{ url_for('home') }}"> <img src="/static/gallery/F1DB_Logo.svg"> <i><b id="logo-text">Formula 1 <br> DataBase</b></i></a>
       </span>
 
       <ul id="buttons">
-	
+
 	<a href="{{ url_for('home') }}">
 	  <li class="button">
 	     Home 
@@ -55,14 +56,15 @@
       
     </header>
     
-    <div class="gradient-background"></div>
+   
     <div class="header-margin"></div>
-    
+    </div>
     <div class="page-content">
       {% block body_content %}{% endblock %}
     </div>
-    <footer>
-      <div id="time-date">{{ current_time }}</div>
-    </footer>
+
   </body>
+  <footer class="gradient-background">
+    <div id="time-date">{{ current_time }}</div>
+  </footer>
 </html>

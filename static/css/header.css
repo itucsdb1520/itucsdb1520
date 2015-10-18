@@ -1,4 +1,5 @@
 body {
+	display: block;
 	background-color: white;
 	color: #6F6F6F;
 	font-family: 'Droid Sans', 'Helvetica', 'sans';
@@ -13,7 +14,7 @@ div.page-content{
 	padding: 0;
 	position: fixed;
 	width: auto;
-	height: 100px;
+	height: auto;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -37,8 +38,10 @@ div#time-date {
 }
 
 #logo{
+	float: left;
 	width: 125px;
 	height: 125px;
+	margin-left: 75px;
 }
 #logo-text{
 	width: 80px;
@@ -64,7 +67,18 @@ header{
 	left: 0;
 	right: 0;
 	margin: auto;
-	margin-left: 75px;
+}
+
+footer{
+	z-index: 10;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	width: auto;
+	height: 25px;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 /* Margin after header */
@@ -75,7 +89,6 @@ div.header-margin{
 /* Gradient CSS Code for header */
 .gradient-background{
 	width: 100%;
-	height: 100px;
 	
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6d6d6d+0,dbdbdb+16,f1f1f1+50,e1e1e1+51,6d6d6d+100 */
 	background: #6d6d6d; /* Old browsers */
@@ -98,21 +111,28 @@ ul#buttons{
 	position: absolute;
 	list-style-type: none;
 	list-style: none;
-	top: 60px;
+	top: 58px;
 	margin: auto;
-	margin-left: 100px;
+	margin-left: 150px;
+	
 }
 
 ul#buttons a{
 	margin-right: 1px;
-	width: 120px;
+	width: 100px;
 	height: 40px;
 	float: left;
-	background-color: lime;
+	background-color: transparent;
+	border-bottom: 2px solid black;
 	font-family: 'Arial', 'Helvetica', 'sans';
 	font-size: 14pt;
+	transition: background-color 0.4s;
 }
-
+ul#buttons a:hover{
+	text-decoration: none;
+	color: white;
+	background-color: pink;
+}
 ul#buttons a:link{
 	text-decoration: none;
 	color: white;
