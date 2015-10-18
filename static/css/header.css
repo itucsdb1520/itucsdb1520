@@ -111,10 +111,17 @@ ul#buttons{
 	position: absolute;
 	list-style-type: none;
 	list-style: none;
-	top: 58px;
+	top: 55px;
 	margin: auto;
 	margin-left: 150px;
 	
+}
+
+.border-top-left-radius{
+	border-top-left-radius: 30px;
+}
+.border-top-right-radius{
+	border-top-right-radius: 30px;
 }
 
 ul#buttons a{
@@ -123,23 +130,26 @@ ul#buttons a{
 	height: 40px;
 	float: left;
 	background-color: transparent;
-	border-bottom: 2px solid black;
+	background-clip: content-box;
+	border-bottom: 4px double black;
 	font-family: 'Arial', 'Helvetica', 'sans';
 	font-size: 14pt;
-	transition: background-color 0.4s;
+	transition: background-color 0.4s, bottom-bordor 0.4s;
 }
 ul#buttons a:hover{
-	text-decoration: none;
-	color: white;
-	background-color: pink;
+	text-decoration: underline;
+	
+	color: white !important;
+	border-bottom: 5px double red;
+	background-color: rgba(255,0,0,0.5);
 }
 ul#buttons a:link{
-	text-decoration: none;
-	color: white;
+	text-decoration: inherit !important;
+	color: white !important;
 }
 ul#buttons a:visited{
-	text-decoration: none;
-	color: white;
+	text-decoration: inherit !important;
+	color: white !important;
 }
 
 li.button{
