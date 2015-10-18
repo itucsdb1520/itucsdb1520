@@ -117,13 +117,16 @@ ul#buttons{
 	
 }
 
+
+
+
+/* Button Styles */
 .border-top-left-radius{
 	border-top-left-radius: 30px;
 }
 .border-top-right-radius{
 	border-top-right-radius: 30px;
 }
-
 ul#buttons a{
 	margin-right: 1px;
 	width: 100px;
@@ -134,22 +137,28 @@ ul#buttons a{
 	border-bottom: 4px double black;
 	font-family: 'Arial', 'Helvetica', 'sans';
 	font-size: 14pt;
-	transition: background-color 0.4s, bottom-bordor 0.4s;
+	transition: background-color 0.4s, bottom-bordor 0.4s, width 0.4s;
 }
 ul#buttons a:hover{
 	text-decoration: underline;
-	
+	width: 150px;
 	color: white !important;
 	border-bottom: 5px double red;
 	background-color: rgba(255,0,0,0.5);
 }
 ul#buttons a:link{
 	text-decoration: inherit !important;
-	color: white !important;
 }
 ul#buttons a:visited{
 	text-decoration: inherit !important;
-	color: white !important;
+}
+
+ul#buttons a li{
+	color: rgba(255,0,0,0.7);
+	transition: color 0.4s;
+}
+ul#buttons a li:hover{
+	color: white;
 }
 
 li.button{
@@ -157,4 +166,45 @@ li.button{
 	text-align: center;
 	line-height: 42px;
 	vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+.animated:hover { 
+    -webkit-animation-duration: 1s; 
+    animation-duration: 1s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+    -webkit-animation-timing-function: ease-in-out; 
+    animation-timing-function: ease-in-out; 
+} 
+
+@-webkit-keyframes fadeInLeft { 
+    0% { 
+        opacity: 0; 
+        -webkit-transform: translateX(-20px); 
+    } 
+    100% { 
+        opacity: 1; 
+        -webkit-transform: translateX(0); 
+    } 
+} 
+@keyframes fadeInLeft { 
+    0% { 
+        opacity: 0; 
+        transform: translateX(-20px); 
+    } 
+    100% { 
+        opacity: 1; 
+        transform: translateX(0); 
+    } 
+} 
+.fadeInLeft { 
+    -webkit-animation-name: fadeInLeft; 
+    animation-name: fadeInLeft; 
 }

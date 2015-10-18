@@ -4,6 +4,11 @@
 	<meta charset="utf-8" />
 	<title>F1DB - {% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="/static/css/header.css" />
+	<link rel="stylesheet" href="/static/css/footer.css" />
+	<link rel="stylesheet" href="/static/css/icomoon.css" />
+	<link rel="stylesheet" href="/static/css/animsition.min.css" />
+	<script src="/static/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="/static/js/animsition.min.js" type="text/javascript"></script>
 	
 	{% block specific_links %}{% endblock %}
   </head>
@@ -24,7 +29,7 @@
 	
 	<a href="{{ url_for('home') }}">
 	  <li class="button">
-	     Pilots 
+	    Pilots 
 	  </li>
 	</a>
 	
@@ -40,9 +45,9 @@
 	  </li>
 	</a>
 	
-	<a href="{{ url_for('home') }}">
-	  <li class="button">
-	     Brands 
+	<a id="brands" href="{{ url_for('home') }}">
+	  <li class="button animsition-link">
+	     <b> Brands </b>
 	  </li>
 	</a>
 	
@@ -62,7 +67,7 @@
     <div class="page-content">
       {% block body_content %}{% endblock %}
     </div>
-
+    <script src="/static/js/buttonsFade.js" type="text/javascript"></script>
   </body>
   <footer class="gradient-background">
     <div id="time-date">{{ current_time }}</div>
