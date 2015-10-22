@@ -5,16 +5,19 @@ body {
 	font-family: 'Droid Sans', 'Helvetica', 'sans';
 	font-size: 12pt;
 	margin: 0px 0px 0px 0px;
+	
 }
 
 /* Base position for content that is coming from other HTML Files */
 div.page-content{
+	overflow-y:scroll;
+	display: block;
 	z-index: 9;
 	margin: 0;
 	padding: 0;
 	position: fixed;
 	width: auto;
-	height: auto;
+	height: 100%;
 	top: 0;
 	left: 0;
 	right: 0;
