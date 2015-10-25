@@ -3,7 +3,7 @@ import os
 
 from flask import Flask
 from flask import render_template
-
+from flask import url_for
 
 app = Flask(__name__)
 
@@ -34,6 +34,12 @@ def brands():
     now = datetime.datetime.now()
     return render_template('brands.html', current_time=now.ctime())
 
+@app.route('/brand/<the_brand>')
+def brand(the_brand):
+    now = datetime.datetime.now()
+    return render_template('brand.html', the_brand=the_brand, current_time=now.ctime())
+
+
 @app.route('/about')
 def about():
     now = datetime.datetime.now()
@@ -43,6 +49,15 @@ def about():
 def statistics():
     now = datetime.datetime.now()
     return render_template('about.html', current_time=now.ctime())
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+
+with app.test_request_context():
+    print(url_for('about'))
+    print(url_for('brand', the_brand = 'Shell'))
+    print(url_for('brands', next='/'))
 
 
 if __name__ == '__main__':

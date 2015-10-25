@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} Brands {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/brands.css') }}" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+	  <!-- After Implementing the Database, "the_brand" Will Be Used to Fetch Corresponding Brand's Info -->
+           A SINGLE BRAND: 
+	   {{ the_brand }}
+
+	{% endblock %}

@@ -1,4 +1,20 @@
 body{
 	background-color: white;
 }
+div.map-container{
+	display: block;
+	overflow-y:scroll;
+	overflow-x:scroll;
+	max-width: 1300px;
+	max-height: 370px;
+	height: 100%;
+	width: 100%;
+	margin: auto;
+}
 
+img.map-image{
+	display: block;
+	vertical-align: middle;
+	width: auto;
+	margin: auto;
+}

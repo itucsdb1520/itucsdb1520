@@ -10,13 +10,43 @@
 
 	<!-- Add specific css, js etc. for this page only!-->
 	{% block specific_links%}
-	<link rel="stylesheet" href="/static/css/brands.css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/brands.css') }}" />
 	{% endblock %}
 
 	<!-- Content for this page -->
 	{% block body_content %}
 
-	<div>
+
             BRANDS PAGE
-        </div>
+	    <!-- I AM PLANNING TO ADD MORE IMAGES TO GIVE USERS AN INTERFACE TO TAKE A LOOK AT THE BRANDS BY SELECTING THEM FROM THE IMAGE-->
+	    <div class="map-container">
+	      <img class="map-image" src="/static/gallery/brands/ferrari_slice.jpg" width="1250" height="350" alt="Ferrari Slice" usemap="#ferrari_slice">
+	      <map name="ferrari_slice">
+		<area shape="rect" coords="23,69, 48,90" href="{{ url_for('brand', the_brand = 'Shell') }}" alt="Shell">
+		<area shape="rect" coords="49,74, 136,93" href="{{ url_for('brand', the_brand = 'V-Power') }}" alt="V-Power">
+		<area shape="rect" coords="21,95, 160,120 " href="{{ url_for('brand', the_brand = 'Santander') }}" alt="Santander">
+		<area shape="rect" coords="22, 123, 78,145 " href="{{ url_for('brand', the_brand = 'Omr') }}" alt="Omr">
+		<area shape="rect" coords="19,147, 76,163 " href="{{ url_for('brand', the_brand = 'Mahle') }}" alt="Mahle">
+		<area shape="rect" coords="17,162, 90, 181 " href="{{ url_for('brand', the_brand = 'Telcel') }}" alt="Telcel">
+		<area shape="rect" coords="102, 171, 166, 188 " href="{{ url_for('brand', the_brand = 'Pirelli') }}" alt="Pirelli">
+		<area shape="rect" coords="80, 264 180, 300 " href="{{ url_for('brand', the_brand = 'P-Zero') }}" alt="P-Zero">
+		<area shape="circle" coords="336, 200, 22 " href="{{ url_for('brand', the_brand = 'AlfaRomeo') }}" alt="AlfaRomeo">
+		<area shape="rect" coords="492, 188, 541, 238 " href="{{ url_for('brand', the_brand = 'UPS') }}" alt="UPS">	
+		<area shape="rect" coords="565, 177, 638, 239 " href="{{ url_for('brand', the_brand = 'Shell') }}" alt="Shell">
+		<area shape="rect" coords="710,230,762, 281 " href="{{ url_for('brand', the_brand = 'Santander') }}" alt="Santander">
+		<area shape="rect" coords="796, 161, 903, 178" href="{{ url_for('brand', the_brand = 'Santander') }}" alt="Santander">
+		<area shape="rect" coords="798,198,859,218 " href="{{ url_for('brand', the_brand = 'Weichai') }}" alt="Weichai">
+		<area shape="rect" coords="950,170, 1015,188" href="{{ url_for('brand', the_brand = 'Pirelli') }}" alt="Pirelli">
+		<area shape="rect" coords="934, 272, 1036, 294 " href="{{ url_for('brand', the_brand = 'P-Zero') }}" alt="P-Zero">
+		<area shape="rect" coords="1057,209, 1145, 248 " href="{{ url_for('brand', the_brand = 'Kaspersky') }}" alt="Kaspersky">
+		<area shape="rect" coords="1111,251,1224,274 " href="{{ url_for('brand', the_brand = 'Santander') }}" alt="Santander">
+		<area shape="rect" coords="370,254,407,269 " href="{{ url_for('brand', the_brand = 'Brembo') }}" alt="Brembo">
+		<area shape="rect" coords="408,255,438,270 " href="{{ url_for('brand', the_brand = 'NGK') }}" alt="NGK">
+		<area shape="rect" coords="439,256,467,272 " href="{{ url_for('brand', the_brand = 'MagnetiMarelli') }}" alt="MagnetiMarelli">
+		<area shape="rect" coords="471,256,504,272 " href="{{ url_for('brand', the_brand = 'SKF') }}" alt="SKF">
+		<area shape="rect" coords="506,258,553,274 " href="{{ url_for('brand', the_brand = 'HAAS') }}" alt="HAAS">
+		<area shape="rect" coords="584,141,635,153 " href="{{ url_for('brand', the_brand = 'Hublot') }}" alt="Hublot">
+	      </map>
+	    </div>
+
 	{% endblock %}
