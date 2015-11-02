@@ -70,13 +70,21 @@ def statistics():
 def initialize_database():
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
-        
-        
+        #Database for the counter
         cursor.execute("""DROP TABLE IF EXISTS COUNTER""")
         cursor.execute("""CREATE TABLE COUNTER (N INTEGER)""")
         cursor.execute("""INSERT INTO COUNTER (N) VALUES (0)""")
         
-        connection.commit()
+        
+        #database for the brands
+        #cursor.execute("""CREATE TABLE BRANDS (ID INTEGER, NAME TEXT, PRIMARY KEY(ID))""")
+        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (1, 'Shell)""")
+        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (2, 'Pirelli)""")
+        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (3, 'F-Zero)""")
+        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (4, 'Santander)""")
+        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (5, 'Kaspersky)""")
+        #connection.commit()
+        
     return redirect(url_for('home'))
 
 @app.route('/counter')
