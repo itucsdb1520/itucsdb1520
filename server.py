@@ -4,11 +4,13 @@ import json
 import re
 import psycopg2 as dbapi2
 
+
 from flask import Flask
 from flask import render_template
 from flask import url_for
 from flask import redirect
 from flask import request
+
 
 app = Flask(__name__)
 
@@ -36,7 +38,8 @@ def pilots():
 @app.route('/cars')
 def cars():
     now = datetime.datetime.now()
-    return render_template('cars.html', current_time=now.ctime())
+
+    return render_template('cars.html', current_time=now.ctime(),text1="ffff")
 
 @app.route('/tracks')
 def tracks():
@@ -64,7 +67,6 @@ def statistics():
     now = datetime.datetime.now()
     return render_template('about.html', current_time=now.ctime())
 
-
 @app.route('/car_add',methods = ['GET','POST'])
 def car_add():
     if request.method =='POST':
@@ -81,16 +83,36 @@ def car_add():
             query =  """INSERT INTO CARS (Image_Link, Name, Engine_Name,Speed,Zero_Hundred, BRAND, PILOT) VALUES
             ('"""+image_link+"""', '"""+car_name+"""', '"""+engine_name+"""', """+speed_limit+""", """+zero_hundred+""",
              '"""+brand+"""', '"""+pilot+"""')"""
+            print(query)
 
             cursor.execute(query)
             connection.commit()
 
-        #print("The car : '" + car_name + "'" + engine_name + "'"+ speed_limit + "'"+ zero_hundred + "'")
         now = datetime.datetime.now()
         return render_template('home.html', current_time=now.ctime())
     else:
          now = datetime.datetime.now()
          return render_template('car_add.html')
+
+
+@app.route('/car_delete',methods = ['GET','POST'])
+def car_delete():
+    if request.method =='POST':
+        id = request.form['id']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """DELETE FROM CARS WHERE Id="""+id+""""""
+            print(query)
+
+            cursor.execute(query)
+            connection.commit()
+        now = datetime.datetime.now()
+        return render_template('home.html', current_time=now.ctime())
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_delete.html')
+
+
 
 #these are for testing will be edited later
 @app.route('/initdb')
