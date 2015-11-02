@@ -56,6 +56,22 @@ def brand(the_brand):
     now = datetime.datetime.now()
     return render_template('brand.html', the_brand=the_brand, current_time=now.ctime())
 
+@app.route('/add_brand', methods = ['GET','POST'])
+def add_brand():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        brand_name = request.form['brand-name']
+        description = request.form['description']
+        foundation = request.form['foundation']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            cursor.execute(query)
+            connection.commit()
+
+        
+    return redirect(url_for('brands'))
 
 @app.route('/about')
 def about():
@@ -128,11 +144,7 @@ def initialize_database():
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
         cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name TEXT, Comment TEXT)""")
-        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Shell', 'Asd')""")
-        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Pirelli', 'sadasdads')""")
-        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('F-Zero', 'sdasda')""")
-        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Santander', 'Ssss')""")
-        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Kaspersky', 'aaaa')""")
+
 
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
