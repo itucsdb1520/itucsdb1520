@@ -66,7 +66,8 @@ def add_brand():
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()    
-            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""              
+            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES ('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""              
+            print(query)
             cursor.execute(query)
             connection.commit()
 
