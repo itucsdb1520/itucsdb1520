@@ -10,6 +10,7 @@ from flask import render_template
 from flask import url_for
 from flask import redirect
 from flask import request
+from Tkinter import image_names
 
 app = Flask(__name__)
 
@@ -75,7 +76,18 @@ def car_add():
         zero_hundred = request.form['0_100_kmh']
         brand = request.form['brand']
         pilot = request.form['pilot']
-        
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+
+            query =  """INSERT INTO CARS (Image_Link, Name, Engine_Name,Speed,Zero_Hundred, BRAND, PILOT) VALUES
+            ('"""+image_link+"""', '"""+car_name+"""', '"""+engine_name+"""', '"""+speed_limit+"""', '"""+zero_hundred+"""',
+             '"""+brand+"""', '"""+pilot+"""')"""
+            print(query)
+
+            cursor.execute(query)
+            connection.commit()
+
         print("The car : '" + car_name + "'" + engine_name + "'"+ speed_limit + "'"+ zero_hundred + "'")
         now = datetime.datetime.now()
         return render_template('home.html', current_time=now.ctime())
@@ -102,6 +114,9 @@ def initialize_database():
         cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (3, 'F-Zero', 'sdasda')""")
         cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (4, 'Santander', 'Ssss')""")
         cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (5, 'Kaspersky', 'aaaa')""")
+
+        #database for the brands
+        cursor.execute("""CREATE TABLE CARS (Id SERIAL PRIMARY KEY NOT NULL, Image_Link TEXT, Name CHAR(30),Engine_Name CHAR(30),Speed INTEGER, Zero_Hundred INTEGER,BRAND CHAR(50),PILOT CHAR(50) )""")
         connection.commit()
     return redirect(url_for('home'))
 
