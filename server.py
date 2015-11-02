@@ -10,7 +10,6 @@ from flask import url_for
 from flask import redirect
 from flask import request
 
-
 app = Flask(__name__)
 
 def get_elephantsql_dsn(vcap_services):
