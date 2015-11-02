@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} Cars {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="/static/css/car_add.css" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+	<br><br><br><br>
+   <form action="/car_add" method="post">
+
+<div>  <label for='engine'>image link : </label> <input type="text" name="image_link"></input></div>
+  <div><label for='car name'>car name :</label> <input type="text" name="car_name"></input></div>
+  <div><label for='engine'>engine:</label> <input type="text" name="engine_name"></input></div>
+  <div><label for='speed_limit'>speed limit :</label> <input type="text" name="speed_limit"></input></div>
+  <div><label for='0-100-kmh'>0-100 kmh :</label> <input type="text" name="0_100_kmh"></input></div>
+  <div><label for='brand_name'>brand name :</label> <input type="text" name="brand"></input></div>
+  <div><label for='pilot_name '>pilot name :</label> <input type="text" name="pilot"></input></div>
+
+  <div class =button""><input type="submit" value="Add"></input></div>
+
+</form>
+
+	{% endblock %}
