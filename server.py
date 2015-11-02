@@ -75,6 +75,7 @@ def car_add():
         zero_hundred = request.form['0_100_kmh']
         brand = request.form['brand']
         pilot = request.form['pilot']
+        
         print("The car : '" + car_name + "'" + engine_name + "'"+ speed_limit + "'"+ zero_hundred + "'")
         now = datetime.datetime.now()
         return render_template('home.html', current_time=now.ctime())
@@ -95,14 +96,13 @@ def initialize_database():
 
 
         #database for the brands
-        #cursor.execute("""CREATE TABLE BRANDS (ID INTEGER, NAME TEXT, PRIMARY KEY(ID))""")
-        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (1, 'Shell)""")
-        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (2, 'Pirelli)""")
-        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (3, 'F-Zero)""")
-        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (4, 'Santander)""")
-        #cursor.execute("""INSERT INTO BRANDS (ID, NAME) VALUES (5, 'Kaspersky)""")
-        #connection.commit()
-
+        cursor.execute("""CREATE TABLE BRANDS (Id INTEGER PRIMARY KEY NOT NULL, Name TEXT, Comment TEXT)""")
+        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (1, 'Shell', 'Asd')""")
+        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (2, 'Pirelli', 'sadasdads')""")
+        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (3, 'F-Zero', 'sdasda')""")
+        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (4, 'Santander', 'Ssss')""")
+        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (5, 'Kaspersky', 'aaaa')""")
+        connection.commit()
     return redirect(url_for('home'))
 
 @app.route('/counter')
