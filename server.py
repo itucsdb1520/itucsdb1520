@@ -10,7 +10,7 @@ from flask import render_template
 from flask import url_for
 from flask import redirect
 from flask import request
-from Tkinter import image_names
+
 
 app = Flask(__name__)
 
@@ -83,12 +83,12 @@ def car_add():
             query =  """INSERT INTO CARS (Image_Link, Name, Engine_Name,Speed,Zero_Hundred, BRAND, PILOT) VALUES
             ('"""+image_link+"""', '"""+car_name+"""', '"""+engine_name+"""', '"""+speed_limit+"""', '"""+zero_hundred+"""',
              '"""+brand+"""', '"""+pilot+"""')"""
-            print(query)
+            #print(query)
 
             cursor.execute(query)
             connection.commit()
 
-        print("The car : '" + car_name + "'" + engine_name + "'"+ speed_limit + "'"+ zero_hundred + "'")
+        #print("The car : '" + car_name + "'" + engine_name + "'"+ speed_limit + "'"+ zero_hundred + "'")
         now = datetime.datetime.now()
         return render_template('home.html', current_time=now.ctime())
     else:
@@ -108,14 +108,16 @@ def initialize_database():
 
 
         #database for the brands
-        cursor.execute("""CREATE TABLE BRANDS (Id INTEGER PRIMARY KEY NOT NULL, Name TEXT, Comment TEXT)""")
-        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (1, 'Shell', 'Asd')""")
-        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (2, 'Pirelli', 'sadasdads')""")
-        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (3, 'F-Zero', 'sdasda')""")
-        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (4, 'Santander', 'Ssss')""")
-        cursor.execute("""INSERT INTO BRANDS (Id, Name, Comment) VALUES (5, 'Kaspersky', 'aaaa')""")
+        cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
+        cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name TEXT, Comment TEXT)""")
+        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Shell', 'Asd')""")
+        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Pirelli', 'sadasdads')""")
+        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('F-Zero', 'sdasda')""")
+        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Santander', 'Ssss')""")
+        cursor.execute("""INSERT INTO BRANDS (Name, Comment) VALUES ('Kaspersky', 'aaaa')""")
 
         #database for the brands
+        cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""CREATE TABLE CARS (Id SERIAL PRIMARY KEY NOT NULL, Image_Link TEXT, Name CHAR(30),Engine_Name CHAR(30),Speed INTEGER, Zero_Hundred INTEGER,BRAND CHAR(50),PILOT CHAR(50) )""")
         connection.commit()
     return redirect(url_for('home'))
@@ -137,10 +139,10 @@ def counter_page():
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
 
-with app.test_request_context():
-    print(url_for('about'))
-    print(url_for('brand', the_brand = 'Shell'))
-    print(url_for('brands', next='/'))
+#with app.test_request_context():
+    #print(url_for('about'))
+    #print(url_for('brand', the_brand = 'Shell'))
+    #print(url_for('brands', next='/'))
 
 
 if __name__ == '__main__':
