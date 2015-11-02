@@ -65,8 +65,23 @@ def add_brand():
         foundation = request.form['foundation']
 
         with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
+            cursor = connection.cursor()    
+            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""              
+            cursor.execute(query)
+            connection.commit()
 
+        
+    return redirect(url_for('brands'))
+
+@app.route('/delete_brand', methods = ['GET','POST'])
+def delete_brand():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        brand_name = request.form['brand-name']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()    
+            query = """DELETE FROM BRANDS WHERE Name = '""" +brand_name + """' """            
             cursor.execute(query)
             connection.commit()
 
