@@ -104,8 +104,7 @@ def car_add():
             cursor.execute(query)
             connection.commit()
 
-        now = datetime.datetime.now()
-        return render_template('home.html', current_time=now.ctime())
+        return redirect(url_for('home'))
     else:
          now = datetime.datetime.now()
          return render_template('car_add.html')
@@ -122,8 +121,7 @@ def car_delete():
 
             cursor.execute(query)
             connection.commit()
-        now = datetime.datetime.now()
-        return render_template('home.html', current_time=now.ctime())
+        return redirect(url_for('home'))
     else:
          now = datetime.datetime.now()
          return render_template('car_delete.html')
