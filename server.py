@@ -4,7 +4,6 @@ import json
 import re
 import psycopg2 as dbapi2
 
-
 from flask import Flask
 from flask import render_template
 from flask import url_for
@@ -66,6 +65,7 @@ def statistics():
     now = datetime.datetime.now()
     return render_template('about.html', current_time=now.ctime())
 
+"""
 @app.route('/car_add',methods = ['GET','POST'])
 def car_add():
     if request.method =='POST':
@@ -79,12 +79,12 @@ def car_add():
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
 
-
-            query =  """INSERT INTO CARS (Image_Link, Name, Engine_Name,Speed,Zero_Hundred, BRAND, PILOT) VALUES
-            ('"""+image_link+"""', '"""+car_name+"""', '"""+engine_name+"""', '"""+speed_limit+"""', '"""+zero_hundred+"""',
-             '"""+brand+"""', '"""+pilot+"""')"""
-            #print(query)
-
+"""
+            #query =  """INSERT INTO CARS (Image_Link, Name, Engine_Name,Speed,Zero_Hundred, BRAND, PILOT) VALUES
+            #('"""+image_link+"""', '"""+car_name+"""', '"""+engine_name+"""', '"""+speed_limit+"""', '"""+zero_hundred+"""',
+            # '"""+brand+"""', '"""+pilot+"""')"""
+            ##print(query)
+"""
             cursor.execute(query)
             connection.commit()
 
@@ -95,7 +95,7 @@ def car_add():
          now = datetime.datetime.now()
          return render_template('car_add.html')
 
-
+"""
 #these are for testing will be edited later
 @app.route('/initdb')
 def initialize_database():
