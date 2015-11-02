@@ -157,7 +157,7 @@ def initialize_database():
 
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
-        cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name TEXT, Comment TEXT)""")
+        cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER)""")
 
 
         #database for the brands
