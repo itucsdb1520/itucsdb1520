@@ -102,7 +102,7 @@ def car_delete():
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query =  """DELETE FROM CARS WHERE Id="""+id+""""""
-            print(query)
+
 
             cursor.execute(query)
             connection.commit()
