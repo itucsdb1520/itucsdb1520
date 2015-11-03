@@ -9,9 +9,9 @@ $(document).ready(function(){
       if (button_links[i].parentElement.href.split("/")[3] == current_page) {
         if (current_page == " ") {
           //homepage
-          $("a#home li").addClass("current-page");
+          $("a#home li div div").addClass("current-page");
         }
-        $("a#" + current_page + " li").addClass("current-page");
+        $("a#" + current_page + " li div div").addClass("current-page");
       }
     }
     

@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('/static/fonts/icomoon.eot?t7acrl');
-	src:url('/static/fonts/icomoon.eot?t7acrl#iefix') format('embedded-opentype'),
-		url('/static/fonts/icomoon.ttf?t7acrl') format('truetype'),
-		url('/static/fonts/icomoon.woff?t7acrl') format('woff'),
-		url('/static/fonts/icomoon.svg?t7acrl#icomoon') format('svg');
+	src:url('/static/fonts/icomoon.eot?ssr4v9');
+	src:url('/static/fonts/icomoon.eot?ssr4v9#iefix') format('embedded-opentype'),
+		url('/static/fonts/icomoon.ttf?ssr4v9') format('truetype'),
+		url('/static/fonts/icomoon.woff?ssr4v9') format('woff'),
+		url('/static/fonts/icomoon.svg?ssr4v9#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -56,6 +56,9 @@
 .icon-cog:before {
 	content: "\e80a";
 }
+.icon-chart:before {
+	content: "\e87b";
+}
 .icon-medal:before {
 	content: "\e80b";
 }
@@ -66,7 +69,6 @@
 	content: "\e80d";
 }
 .icon-ticket:before {
-        font-size: 2em;
 	content: "\e80e";
 }
 .icon-trophy:before {
@@ -153,6 +155,15 @@
 .icon-heart:before {
 	content: "\2665";
 }
+.icon-lock2:before {
+	content: "\f06a";
+}
+.icon-question:before {
+	content: "\f02c";
+}
+.icon-stop:before {
+	content: "\f08f";
+}
 .icon-triangle-left:before {
 	content: "\f044";
 }
@@ -167,6 +178,9 @@
 }
 .icon-images:before {
 	content: "\e82a";
+}
+.icon-user-tie:before {
+	content: "\e900";
 }
 .icon-spinner5:before {
 	content: "\e82b";
@@ -195,6 +209,18 @@
 .icon-star-full:before {
 	content: "\e833";
 }
+.icon-warning:before {
+	content: "\e901";
+}
+.icon-notification:before {
+	content: "\e902";
+}
+.icon-question2:before {
+	content: "\e903";
+}
+.icon-info:before {
+	content: "\e904";
+}
 .icon-google-plus2:before {
 	content: "\e834";
 }
@@ -203,6 +229,9 @@
 }
 .icon-youtube3:before {
 	content: "\e836";
+}
+.icon-file-pdf:before {
+	content: "\e905";
 }
 .icon-chrome:before {
 	content: "\e837";

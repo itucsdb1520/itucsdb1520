@@ -131,19 +131,17 @@ ul#buttons{
 }
 ul#buttons a{
 	margin-right: 1px;
-	width: 100px;
+	width: 90px;
 	height: 40px;
 	float: left;
 	background-color: transparent;
 	background-clip: content-box;
-	border-bottom: 4px double black;
 	font-family: 'Arial', 'Helvetica', 'sans';
-	font-size: 14pt;
+	font-size: 12pt;
 	transition: background-color 0.4s, bottom-bordor 0.4s, width 0.4s;
 }
 ul#buttons a:hover{
 	text-decoration: underline;
-	width: 150px;
 	color: white !important;
 	border-bottom: 5px double red;
 	background-color: rgba(255,0,0,0.5);
@@ -215,4 +213,59 @@ li.button{
 .fadeInLeft { 
     -webkit-animation-name: fadeInLeft; 
     animation-name: fadeInLeft; 
+}
+
+
+/* The flipping animation code */
+/* Source: https://davidwalsh.name/css-flip */
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 200px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 90px;
+	height: 40px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	color: rgba(255,0,0,0.7);
+	position: relative;
+}
+.flipper:hover{
+	color: white;
+}
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+	
+}
+
+div.front span{
+	vertical-align: middle;
+	font-size: 1.75em;
 }

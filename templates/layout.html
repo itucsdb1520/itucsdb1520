@@ -20,40 +20,106 @@
       </span>
 
       <ul id="buttons">
-
+	
 	<a id="home" class="border-top-left-radius" href="{{ url_for('home') }}">
 	  <li class="button border-top-left-radius">
-	     Home 
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		    <span class="icon-home"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    HOME
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
 	<a id="pilots" href="{{ url_for('pilots') }}">
 	  <li class="button">
-	    Pilots 
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		  <span class="icon-user"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    PILOTS
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
 	<a id="cars" href="{{ url_for('cars') }}">
 	  <li class="button">
-	     Cars 
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		    <span class="icon-dashboard"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    CARS
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
 	<a id="tracks" href="{{ url_for('tracks') }}">
 	  <li class="button">
-	     Tracks
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		    <span class="icon-road"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    TRACKS
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
 	<a id="brands" href="{{ url_for('brands') }}">
 	  <li class="button">
-	     Brands
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		    <span class="icon-ticket"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    BRANDS
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
 	<a id="about" class="border-top-right-radius" href="{{ url_for('about') }}">
 	  <li class="button">
-	     About 
+	     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+	       <div class="flipper">
+	        <div class="front">
+		    <!-- front content -->
+		    <span class="icon-question"></span>
+	        </div>
+	        <div class="back">
+		    <!-- back content -->
+		    ABOUT
+		</div>
+	      </div>
+	    </div> 
 	  </li>
 	</a>
 	
@@ -65,6 +131,7 @@
     <div class="header-margin"></div>
     </div>
     <div class="page-content">
+      
       {% block body_content %}{% endblock %}
     </div>
     
