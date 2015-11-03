@@ -14,6 +14,12 @@ from flask import request
 
 app = Flask(__name__)
 
+class Brand:
+    def __init__(self, name, description, year):
+        self.name = name
+        self.description = description
+        self.year = year
+
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
     parsed = json.loads(vcap_services)
@@ -49,12 +55,31 @@ def tracks():
 @app.route('/brands')
 def brands():
     now = datetime.datetime.now()
+
     return render_template('brands.html', current_time=now.ctime())
 
 @app.route('/brand/<the_brand>')
 def brand(the_brand):
     now = datetime.datetime.now()
     return render_template('brand.html', the_brand=the_brand, current_time=now.ctime())
+
+@app.route('/brands_db')
+def brands_db():
+    now = datetime.datetime.now()
+    brands_list = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()    
+            query = """SELECT * FROM BRANDS"""           
+            print(query)
+            cursor.execute(query)
+            
+            for record in cursor:
+                brands_list.append(record)
+                
+            connection.commit()
+            print(brands_list)
+    return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
+
 
 @app.route('/add_brand', methods = ['GET','POST'])
 def add_brand():
@@ -72,22 +97,22 @@ def add_brand():
             connection.commit()
 
         
-    return redirect(url_for('brands'))
+    return redirect(url_for('brands_db'))
 
 @app.route('/delete_brand', methods = ['GET','POST'])
 def delete_brand():
     now = datetime.datetime.now()
     if request.method =='POST':
-        brand_name = request.form['brand-name']
+        brand_id = request.form['brand_id']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()    
-            query = """DELETE FROM BRANDS WHERE Name = '""" +brand_name + """' """            
+            query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """            
             cursor.execute(query)
             connection.commit()
 
         
-    return redirect(url_for('brands'))
+    return redirect(url_for('brands_db'))
 
 @app.route('/about')
 def about():
@@ -174,6 +199,9 @@ def counter_page():
         connection.commit()
 
         cursor.execute("""SELECT N FROM COUNTER""")
+        
+        
+        
         count = cursor.fetchone()[0]
     return "This page was accessed %d times." % count
 

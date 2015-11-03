@@ -12,9 +12,89 @@ div.map-container{
 	margin: auto;
 }
 
+div.table{
+	width: auto;
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+}
+
+div.all-forms{
+	width: 1200px;
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
 img.map-image{
 	display: block;
 	vertical-align: middle;
 	width: auto;
 	margin: auto;
+}
+
+button#list-all{
+	display: block;
+	vertical-align: middle;
+	top: 50;
+	width: 200px;
+	height: 30px;
+}
+
+
+
+table#brands-table{
+	margin-top: 2px;
+	display: inline-block;
+	border-collapse: collapse;
+
+}
+
+
+th, tr, td{
+	vertical-align: middle;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+tr:hover{
+	background-color: rgba(255,0,0,0.4);	
+}
+
+th{
+	background-color: #d11;
+	text-decoration: blink;
+	color: white;
+}
+
+#id, #name, #year, #desc{
+	height: 30px;
+}
+
+#id{
+	width: 20px;
+}
+#name{
+	width: 200px;
+}
+#year{
+	width: 100px;
+}
+#desc{
+	width: 300px;
+}
+
+
+div #add-form, div #delete-form{
+	display: inline-block;
+	float: left;
+	width: 400px;
+	height: 250px;
+	margin: auto;
+	left: 0;
+	right: 0;
 }

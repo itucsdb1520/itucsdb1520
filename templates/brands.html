@@ -49,20 +49,8 @@
 	      </map>
 	    </div>
 	    
-	    <div>
-	      <form action="/add_brand" method="post" id="add-brand-form">
-		Brand Name: <input type="text" name="brand-name"><br>
-		Description: <input type="text" name="description"><br>
-		Foundation: <input type="text" name="foundation"><br>
-	      </form>
-	      
-	      <button type="submit" form="add-brand-form" value="Submit">Add</button>
-	    </div>
-	    <div>
-	      <form action="/delete_brand" method="post" id="delete-brand-form">
-		Brand Name: <input type="text" name="brand-name"><br>
-	      </form>
-	      
-	      <button type="submit" form="delete-brand-form" value="Submit">Delete</button>
+	    <button id="list-all" onclick="location.href = '{{ url_for('brands_db') }}'" id="myButton" class="float-left submit-button" >List All Brands</button>
+	    
+
 	    </div>
 	{% endblock %}

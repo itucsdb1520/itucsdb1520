@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} Brands {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/brands.css') }}" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+
+        
+	    <div class="table">
+		<table id="brands-table">
+		  <caption>List of All Brands</caption>
+			<tr>
+				<th id="id"> ID </th>
+				<th id="name"> Name</th>
+				<th id="year"> Foundation Year </th>
+				<th id="desc"> Description </th>
+	
+			</tr>
+			{% for id, name, description, year in brands_list %}
+			<tr>
+				<td>{{ id }} </td>
+				<td>{{ name }} </td>
+				<td>{{ year }} </td>
+				<td>{{ description }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		</br>
+	      <div class="all-forms">
+		<div id="add-form">
+		  <form action="/add_brand" method="post" id="add-brand-form">
+		    Brand Name: <input type="text" name="brand-name"><br>
+		    Description: <input type="text" name="description"><br>
+		    Foundation: <input type="text" name="foundation"><br>
+		  </form>
+		  
+		  <button type="submit" form="add-brand-form" value="Submit">Add</button>
+		</div>
+		<div id="delete-form">
+		  <form action="/delete_brand" method="post" id="delete-brand-form">
+		    Enter ID: <input type="text" name="brand_id"><br>
+		  </form>
+		  
+		  <button type="submit" form="delete-brand-form" value="Submit">Delete</button>
+		</div>
+	      </div>
+	    </div>
+	{% endblock %}
