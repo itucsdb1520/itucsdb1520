@@ -50,6 +50,56 @@ def pilots():
     now = datetime.datetime.now()
     return render_template('pilots.html', current_time=now.ctime())
 
+@app.route('/pilot_add_del')
+def pilot_add_del():
+    now = datetime.datetime.now()
+    pilots = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM PILOTS"""
+            print(query)
+            cursor.execute(query)
+
+            for pilot in cursor:
+                pilots.append(pilot)
+
+            connection.commit()
+            print(pilots)
+    return render_template('pilot_add_del.html', pilots=pilots, current_time=now.ctime())
+
+@app.route('/add_pilot', methods = ['GET','POST'])
+def add_pilot():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        name = request.form['name']
+        surname = request.form['surname']
+        age = request.form['age']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """INSERT INTO PILOTS (Name, Surname, Age) VALUES ('""" +name +"""', '"""+ surname + """', """+ age + """)"""
+            print(query)
+            cursor.execute(query)
+            connection.commit()
+
+
+    return redirect(url_for('pilot_add_del'))
+
+@app.route('/delete_pilot', methods = ['GET','POST'])
+def delete_pilot():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        id = request.form['id']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM PILOTS WHERE Id = '""" +id + """' """
+            cursor.execute(query)
+            connection.commit()
+
+
+    return redirect(url_for('pilot_add_del'))
+
 @app.route('/cars')
 def cars():
     now = datetime.datetime.now()
@@ -65,6 +115,7 @@ def cars():
             connection.commit()
             print(cars_list)
     return render_template('cars.html', cars_list=cars_list, current_time=now.ctime())
+
 
 @app.route('/tracks')
 def tracks():
@@ -188,6 +239,7 @@ def car_delete():
 
 
 
+
 #these are for testing will be edited later
 @app.route('/initdb')
 def initialize_database():
@@ -207,6 +259,14 @@ def initialize_database():
         #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""CREATE TABLE CARS (Id SERIAL PRIMARY KEY NOT NULL, Image_Link TEXT, Name CHAR(30),Engine_Name CHAR(30),Speed INTEGER, Zero_Hundred INTEGER,BRAND CHAR(50),PILOT CHAR(50) )""")
+
+        #database for the pilots
+        cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
+        cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER )""")
+
+
+
+
         connection.commit()
     return redirect(url_for('home'))
 

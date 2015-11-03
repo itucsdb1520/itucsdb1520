@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} plots {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="/static/css/about.css" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+	<div>	PILOTS PAGE		</div>
+
+	  <div >
+		<table>
+		  <caption>List of All Piots</caption>
+			<tr>
+				<th > ID </th>
+				<th > Name</th>
+				<th > Surname</th>
+				<th > Age </th>
+
+			</tr>
+			{% for id, name, surname, age in pilots %}
+			<tr>
+				<td>{{ id }} </td>
+				<td>{{ name }} </td>
+				<td>{{ surname }} </td>
+				<td>{{ age }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		</br>
+	      <div >
+		<div>
+		  <form action="/add_pilot" method="post" id="addpilot">
+		    Name: <input type="text" name="name"><br>
+		    Surname: <input type="text" name="surname"><br>
+		    Age: <input type="text" name="age"><br>
+		  </form>
+
+		  <button type="submit" form="addpilot" value="Submit">Add</button>
+		</div>
+		<div id="delete-form">
+		  <form action="/delete_pilot" method="post" id="deletepilot">
+		    Enter ID: <input type="text" name="id"><br>
+		  </form>
+
+		  <button type="submit" form="deletepilot" value="Submit">Delete</button>
+		</div>
+	      </div>
+	    </div>
+
+
+
+	{% endblock %}
+
