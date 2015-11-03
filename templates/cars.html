@@ -18,61 +18,39 @@
 
 	<div>
 
-	<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-table#t01 {
-    width: 100%;
-    background-color: #f1f1c1;
-}
-</style>
-            <table style="width:100%">
-  <tr>
-    <th></th>
 
-    <th>Name</th>
-    <th>Engine</th>
-    <th>Speed Limit</th>
-    <th>0-100 kmh</th>
-    <th>Brand </th>
-    <th>Pilot</th>
 
-  </tr>
-  <tr>
+	   <div class="table">
+		<table id="car-table">
+		  <caption>List of All Cars</caption>
+			<tr>
+				<th id="id"> ID </th>
+				<th id="image_link">Image</th>
+				<th id="car_name"> Car Name</th>
+				<th id="engine"> Engine </th>
+				<th id="speed_limit"> Max Speed </th>
+				<th id="kmh_0_100"> 0-100 Km/h  sec. </th>
+				<th id="brand_name"> Brand </th>
+				<th id="pilot_name"> Pilot </th>
 
-    <td><img src="https://metrouk2.files.wordpress.com/2014/01/ad125537369refile-updatin.jpg" style="width:300px;height:150px;"></td>
-    <td>F1</td>
-    <td>V1</td>
-    <td>320</td>
-    <td>5.3</td>
-    <td>Ferrari</td>
-    <td>Alonso</td>
+			</tr>
 
-  </tr>
-  <tr>
-    <td>xxx.jpg</td>
-    <td>F1</td>
-    <td>V1</td>
-    <td>320</td>
-    <td>5.3</td>
-    <td>Ferrari</td>
-    <td>Alonso</td>
-  </tr>
-  <tr>
-    <td>xxx.jpg</td>
-    <td>F1</td>
-    <td>V1</td>
-    <td>320</td>
-    <td>5.3</td>
-    <td>Ferrari</td>
-    <td>Alonso</td>
-  </tr>
-</table>
+			{% for id in cars_list %}
+			<tr>
+
+				<td>{{ id[0] }} </td>
+				<td> <img src={{ id[1] }} style="width:250px;height:125spx;"></td>
+				<td>{{ id[2] }} </td>
+				<td>{{ id[3] }} </td>
+				<td>{{ id[4] }} </td>
+				<td>{{ id[5] }} </td>
+				<td>{{ id[6] }} </td>
+				<td>{{ id[7] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
         </div>
+
 	{% endblock %}

@@ -20,6 +20,15 @@ class Brand:
         self.description = description
         self.year = year
 
+class Car:
+    def __init__(self, car_name, engine_name, speed_limit, zero_hundred, brand, pilot):
+        self.car_name = car_name
+        self.engine_name = engine_name
+        self.speed_limit = speed_limit
+        self.zero_hundred = zero_hundred
+        self.brand = brand
+        self.pilot = pilot
+
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
     parsed = json.loads(vcap_services)
@@ -44,8 +53,18 @@ def pilots():
 @app.route('/cars')
 def cars():
     now = datetime.datetime.now()
+    cars_list = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT * FROM CARS"""
 
-    return render_template('cars.html', current_time=now.ctime(),text1="ffff")
+            cursor.execute(query)
+
+            for record in cursor:
+                cars_list.append(record)
+            connection.commit()
+            print(cars_list)
+    return render_template('cars.html', cars_list=cars_list, current_time=now.ctime())
 
 @app.route('/tracks')
 def tracks():
@@ -68,14 +87,14 @@ def brands_db():
     now = datetime.datetime.now()
     brands_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()    
-            query = """SELECT * FROM BRANDS"""           
+            cursor = connection.cursor()
+            query = """SELECT * FROM BRANDS"""
             print(query)
             cursor.execute(query)
-            
+
             for record in cursor:
                 brands_list.append(record)
-                
+
             connection.commit()
             print(brands_list)
     return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
@@ -90,13 +109,13 @@ def add_brand():
         foundation = request.form['foundation']
 
         with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()    
-            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES ('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""              
+            cursor = connection.cursor()
+            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES ('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""
             print(query)
             cursor.execute(query)
             connection.commit()
 
-        
+
     return redirect(url_for('brands_db'))
 
 @app.route('/delete_brand', methods = ['GET','POST'])
@@ -106,12 +125,12 @@ def delete_brand():
         brand_id = request.form['brand_id']
 
         with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()    
-            query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """            
+            cursor = connection.cursor()
+            query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """
             cursor.execute(query)
             connection.commit()
 
-        
+
     return redirect(url_for('brands_db'))
 
 @app.route('/about')
@@ -185,7 +204,7 @@ def initialize_database():
         cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER)""")
 
 
-        #database for the brands
+        #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""CREATE TABLE CARS (Id SERIAL PRIMARY KEY NOT NULL, Image_Link TEXT, Name CHAR(30),Engine_Name CHAR(30),Speed INTEGER, Zero_Hundred INTEGER,BRAND CHAR(50),PILOT CHAR(50) )""")
         connection.commit()
@@ -199,9 +218,9 @@ def counter_page():
         connection.commit()
 
         cursor.execute("""SELECT N FROM COUNTER""")
-        
-        
-        
+
+
+
         count = cursor.fetchone()[0]
     return "This page was accessed %d times." % count
 
