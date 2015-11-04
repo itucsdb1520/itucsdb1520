@@ -1,0 +1,71 @@
+body{
+    margin: 0;
+}
+div.container{
+    min-width: 800px;
+    min-height: 400px;
+    
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-image:  url('/static/gallery/crash.jpg');
+    box-shadow: inset 0px 200px 200px 120px #fff;
+    -moz-box-shadow: inset 0px 200px 200px 120px #fff;
+    -webkit-box-shadow: inset 0px 200px 200px 120px #fff;
+    
+}
+
+div.err404{
+    font-size: 3em;
+    font-family: serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.stopsign{
+    font-size: 20em;
+    text-align: center;
+    background: -webkit-linear-gradient(#e54, rgb(255, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    
+}
+
+table.desc{
+    
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+
+
+table.desc tr td, table.desc tr th{
+    min-height: 100px;
+    min-width: 800px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+table.desc tr td{
+    font-size: 1.2em;
+    border-top: 4px;
+    background: rgba(255,255,255,0.5);
+    border-bottom-right-radius: 33px;
+    border-bottom-left-radius: 33px;
+    
+}
+table.desc tr th{
+    font-size: 2em;
+    color: white;
+    background: rgba(255,0,0,0.5);
+    border-bottom: 4px;
+    border-collapse: collapse;
+    border-top-right-radius: 33px;
+    border-top-left-radius: 33px;
+}
