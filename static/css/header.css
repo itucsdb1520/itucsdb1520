@@ -109,17 +109,21 @@ div.header-margin{
 	/* Created from colorzilla.com */
 }
 
-ul#buttons{
+ul#left-buttons, ul#right-buttons{
 	position: absolute;
 	list-style-type: none;
 	list-style: none;
 	top: 55px;
 	margin: auto;
-	margin-left: 150px;
 	
 }
-
-
+ul#left-buttons{
+	margin-left: 150px;
+}
+ul#right-buttons{
+	right: 0;
+	margin-right: 50px;
+}
 
 
 /* Button Styles */
@@ -129,39 +133,48 @@ ul#buttons{
 .border-top-right-radius{
 	border-top-right-radius: 30px;
 }
-ul#buttons a{
+ul#left-buttons{
+	float: left;
+	
+}
+
+ul#right-buttons{
+	float: right;
+}
+ul#left-buttons a, ul#right-buttons a{
 	margin-right: 1px;
 	width: 90px;
 	height: 40px;
 	float: left;
 	background-color: transparent;
 	background-clip: content-box;
+	border-bottom: 3px solid rgba(0,0,0,0);
 	font-family: 'Arial', 'Helvetica', 'sans';
 	font-size: 12pt;
 	transition: background-color 0.4s, bottom-bordor 0.4s, width 0.4s;
 }
-ul#buttons a:hover{
+ul#left-buttons a:hover, ul#right-buttons a:hover{
 	text-decoration: underline;
 	color: white !important;
-	border-bottom: 5px double red;
+	border-bottom: 3px solid red;
 	background-color: rgba(255,0,0,0.5);
 }
-ul#buttons a:link{
+ul#left-buttons a:link, ul#right-buttons a:link{
 	text-decoration: inherit !important;
 }
-ul#buttons a:visited{
+ul#left-buttons a:visited, ul#right-buttons a:visited{
 	text-decoration: inherit !important;
 }
 
-ul#buttons a li{
+ul#left-buttons a li, ul#right-buttons a li{
 	color: rgba(255,0,0,0.7);
 	transition: color 0.4s;
 }
-ul#buttons a li:hover{
+ul#left-buttons a li:hover, ul#right-buttons a li:hover{
 	color: white;
 }
 
-ul#buttons a li.current-page{
+ul#left-buttons a li.current-page, ul#right-buttons a li.current-page{
 	color: white;
 }
 
@@ -239,6 +252,7 @@ li.button{
 	transform-style: preserve-3d;
 	color: rgba(255,0,0,0.7);
 	position: relative;
+	cursor: pointer;
 }
 .flipper:hover{
 	color: white;

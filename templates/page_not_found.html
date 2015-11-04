@@ -2,11 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>F1DB - {% block title %}NOT FOUND{% endblock %}</title>
+	<title>F1DB - NOT FOUND</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="/static/css/icomoon.css" />
+        <link rel="stylesheet" href="/static/css/404.css" />
   </head>
   <body>
-    <div style='font-size: 25pt'> PAGE NOT FOUND</div><br>
-    
-    <div> Please go back</div>
+    <div class="container">
+      <div class="err404"> PAGE NOT FOUND</div><br>
+      <div class="stopsign"><span class="icon-stop stopsign"></span></div> 
+      
+      <table class="desc">
+        <tr>
+          <th>
+            404
+          </th>
+        </tr>
+        <tr>
+          <td>
+            Looks like the page you are looking for is not available or does not exist.
+            Please check the URL or go back.
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>
