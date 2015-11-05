@@ -44,7 +44,7 @@
 				<td>{{ imagelink }} </td>
 				<td>{{ description }} </td>
 				<td>
-				  <form action="/delete_brand " method="post">
+				  <form action="{{ url_for('brands_db', operation='delete') }}" method="post">
 				    <button class="edit_button blue" name="edit" value="{{id}}">
 				      <span class="icon-cog ">Edit</span>
 				    </button>
@@ -59,7 +59,7 @@
 			
 			
 			<tr id="add_row" class="hidden">
-			  <form action="/add_brand" method="post" id="add-brand-form">
+			  <form action="{{ url_for('brands_db', operation='add') }}" method="post" id="add-brand-form">
 			    <td id="name"><input type="text" name="brand-name" maxlength="25"></td>
 			    <td id="industry"><input type="text" name="industry" maxlength="20"></td>
 			    <td id="year"><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>

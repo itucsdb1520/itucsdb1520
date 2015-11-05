@@ -125,7 +125,6 @@ def tracks():
 @app.route('/brands')
 def brands():
     now = datetime.datetime.now()
-
     return render_template('brands.html', current_time=now.ctime())
 
 @app.route('/brand/<the_brand>')
@@ -133,59 +132,60 @@ def brand(the_brand):
     now = datetime.datetime.now()
     return render_template('brand.html', the_brand=the_brand, current_time=now.ctime())
 
-@app.route('/brands_db')
-def brands_db():
+@app.route('/brands_db/<operation>' , methods = ['GET','POST'])
+def brands_db(operation):
     now = datetime.datetime.now()
-    brands_list = []
-    with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-            query = """SELECT * FROM BRANDS"""
-            print(query)
-            cursor.execute(query)
-
-            for record in cursor:
-                brands_list.append(record)
-
-            connection.commit()
-            print(brands_list)
-    return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
-
-
-@app.route('/add_brand', methods = ['GET','POST'])
-def add_brand():
-    if request.method =='POST':
-        brand_name = request.form['brand-name']
-        description = request.form['description']
-        foundation = request.form['foundation']
-        imagelink = request.form['imagelink']
-        website = request.form['website']
-        industry = request.form['industry']
-        
-        with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-            query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('""" 
-            query = query + brand_name + """', '"""+ description + """', """+ foundation + """, '"""
-            query = query + imagelink + """' , '""" + industry + """' , '""" + website+ """')"""
-            cursor.execute(query)
-            connection.commit()
     
-
-    return redirect(url_for('brands_db'))
-
-@app.route('/delete_brand', methods = ['GET','POST'])
-def delete_brand():
-    now = datetime.datetime.now()
-    if request.method =='POST':
-        brand_id = request.form['delete']
-
+    if operation == "list":
+        #print("On the list")
+        brands_list = []
         with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-            query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """
-            cursor.execute(query)
-            connection.commit()
+                cursor = connection.cursor()
+                query = """SELECT * FROM BRANDS"""
+                print(query)
+                cursor.execute(query)
+    
+                for record in cursor:
+                    brands_list.append(record)
+    
+                connection.commit()
+                #print(brands_list)
+        return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
+    
+    elif operation == "add":
+        #print("On the add")
+        if request.method =='POST':
+            brand_name = request.form['brand-name']
+            description = request.form['description']
+            foundation = request.form['foundation']
+            imagelink = request.form['imagelink']
+            website = request.form['website']
+            industry = request.form['industry']
+            
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('""" 
+                query = query + brand_name + """', '"""+ description + """', """+ foundation + """, '"""
+                query = query + imagelink + """' , '""" + industry + """' , '""" + website+ """')"""
+                cursor.execute(query)
+                connection.commit()
+        
+    
+        return redirect(url_for('brands_db', operation = 'list'))
+
+    elif operation == "delete":
+        if request.method =='POST':
+            brand_id = request.form['delete']
+    
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """
+                cursor.execute(query)
+                connection.commit()
 
 
-    return redirect(url_for('brands_db'))
+    return redirect(url_for('brands_db', operation = 'list'))
+
 
 @app.route('/about')
 def about():
