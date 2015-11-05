@@ -153,19 +153,22 @@ def brands_db():
 
 @app.route('/add_brand', methods = ['GET','POST'])
 def add_brand():
-    now = datetime.datetime.now()
     if request.method =='POST':
         brand_name = request.form['brand-name']
         description = request.form['description']
         foundation = request.form['foundation']
-
+        imagelink = request.form['imagelink']
+        website = request.form['website']
+        industry = request.form['industry']
+        
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """INSERT INTO BRANDS (Name, Comment, Foundation) VALUES ('""" +brand_name +"""', '"""+ description + """', """+ foundation + """)"""
-            print(query)
+            query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('""" 
+            query = query + brand_name + """', '"""+ description + """', """+ foundation + """, '"""
+            query = query + imagelink + """' , '""" + industry + """' , '""" + website+ """')"""
             cursor.execute(query)
             connection.commit()
-
+    
 
     return redirect(url_for('brands_db'))
 
@@ -173,7 +176,7 @@ def add_brand():
 def delete_brand():
     now = datetime.datetime.now()
     if request.method =='POST':
-        brand_id = request.form['brand_id']
+        brand_id = request.form['delete']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
@@ -253,7 +256,7 @@ def initialize_database():
 
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
-        cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER)""")
+        cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25))""")
 
 
         #database for the cars

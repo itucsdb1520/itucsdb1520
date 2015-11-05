@@ -18,16 +18,10 @@ div.table{
 	margin-right: auto;
 	margin-top: 50px;
 	text-align: center;
-	width-max: 1200px;
+	max-width: 1200px;
 }
 }
 
-div.all-forms{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
 
 img.map-image{
 	display: block;
@@ -39,7 +33,7 @@ img.map-image{
 button#list-all{
 	display: block;
 	vertical-align: middle;
-	top: 50;
+	margin-top: 50;
 	width: 200px;
 	height: 30px;
 }
@@ -52,14 +46,7 @@ table#brands-table{
 	width: auto;
 
 }
-table.op-table{
-	margin-top: 20px;
-	display: inline-block;
-	border-collapse: collapse;
-	border: none;
-	width: auto;
 
-}
 
 
 
@@ -68,20 +55,22 @@ th, tr, td{
 	border: 1px solid gray;
 	border-collapse: collapse;
 	background-color: transparent;
+	height: 25px;
+	color: rgb(45,45,45);
 }
 
 table#brands-table tr:hover{
-	background-color: rgba(255,0,0,0.4);	
+	background-color: rgba(255,0,0,0.2);	
 }
 
 table.form{
 	border: none;
-	width: auto;
+	
 }
 
 table.form td{
 	border: none;
-	height: 25px;
+	
 }
 
 th{
@@ -90,37 +79,89 @@ th{
 	color: white;
 }
 
-table.form tr td.table-text{
-	width: 100px;
-}
-table.form tr td.table-input{
-	width: 210px;
+input{
+	display: inline-block;
+	width: inherit;
+	height: 20px;
+	margin: 0;
+	padding: 0;
 }
 
 #id, #name, #year, #desc{
 	height: 30px;
 }
 
-#id{
-	width: 20px;
-}
+
 #name{
+	width: 150px;
+}
+
+#industry{
 	width: 200px;
+}
+#website{
+	width: 200px;
+}
+#imagelink{
+	width: 150px;
 }
 #year{
 	width: 100px;
 }
-#desc{
+#description{
 	width: 300px;
 }
 
+button.submit-button{
+	margin-left: auto;
+	margin-right: auto;
+}
 
-div #add-form, div #delete-form{
-	display: inline-block;
+button.delete_button, button.edit_button,button.add_button{
+	height: 25px;
 	float: left;
-	width: 400px;
-	height: 250px;
-	margin: auto;
-	left: 0;
-	right: 0;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+button.delete_button:hover, button.edit_button:hover,button.add_button:hover{
+	border: inset 2px rgba(255,255,255, 0.9);
+}
+	button.edit_button{
+		width: 70px;	
+	}
+	button.delete_button{
+		width: 30px;
+	}
+	button.add_button{
+		width: 100px;
+	
+	}
+
+
+button#add_row_btn{
+	margin-top: 0;
+	display: block;
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+
+.blue span{
+	color: rgb(25, 25, 255);
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+.green span{
+	color: rgb(66, 200, 35);
+}
+.red span{
+	color: rgb(255, 25, 25);
 }

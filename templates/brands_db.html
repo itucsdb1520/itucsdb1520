@@ -11,6 +11,8 @@
 	<!-- Add specific css, js etc. for this page only!-->
 	{% block specific_links%}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/brands.css') }}" />
+	<script src="/static/js/brands_db.js" type="text/javascript"></script>
+	<script src="/static/js/jquery-2.1.4.min.js" type="text/javascript"></script>
 	{% endblock %}
 
 	<!-- Content for this page -->
@@ -22,53 +24,59 @@
 		<table id="brands-table">
 		  <caption>List of All Brands</caption>
 			<tr>
-				<th id="id"> ID </th>
+				
 				<th id="name"> Name</th>
+				<th id="industry"> Industry </th>
 				<th id="year"> Foundation Year </th>
+				<th id="website"> Website </th>
+				<th id="imagelink">Image Link</th>
 				<th id="desc"> Description </th>
+				<th> Operation </th>
 	
 			</tr>
-			{% for id, name, description, year in brands_list %}
+			{% for id, name, description, year, imagelink, industry, website in brands_list %}
 			<tr>
-				<td>{{ id }} </td>
+			
 				<td>{{ name }} </td>
+				<td>{{ industry }} </td>
 				<td>{{ year }} </td>
+				<td>{{ website }} </td>
+				<td>{{ imagelink }} </td>
 				<td>{{ description }} </td>
+				<td>
+				  <form action="/delete_brand " method="post">
+				    <button class="edit_button blue" name="edit" value="{{id}}">
+				      <span class="icon-cog ">Edit</span>
+				    </button>
+				    <button class="delete_button red" name="delete" value="{{id}}">
+				      <span class="icon-minus "></span>
+				    </button>
+				  </form>
+				</td>
 			</tr>
 			{% endfor %}
+			
+			
+			
+			<tr id="add_row" class="hidden">
+			  <form action="/add_brand" method="post" id="add-brand-form">
+			    <td id="name"><input type="text" name="brand-name" maxlength="25"></td>
+			    <td id="industry"><input type="text" name="industry" maxlength="20"></td>
+			    <td id="year"><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>
+			    <td id="website"><input type="text" name="website" maxlength="25"></td>
+			    <td id="imagelink"><input type="text" name="imagelink" maxlength="50"></td>
+			    <td id="description"><input type="text" name="description" maxlength="75"></td>
+			  </form>
+			<td>
+			  <button class="add_button green" type="submit" form="add-brand-form" value="Submit">
+			    <span class="icon-checkmark "><span class="black">ADD</span></span>
+			  </button>
+			</td>
+
+		</tr>
 		</table>
-		
+		<button id="add_row_btn" onclick="make_visible()"><span class="icon-plus"> Open Add Form</span></button>
 		</br>
 	
-	    <table class="op-table">
-	    	<tr>
-	    	<td>
-			<table class="form">
-			<tr>  <b>ADD FORM </b></tr>
-			  <form action="/add_brand" method="post" id="add-brand-form">
-			    <tr><td class="table-text">Brand Name: </td> <td class="table-input"><input type="text" name="brand-name"></td></tr>
-			    <tr><td class="table-text">Description: </td> <td class="table-input"><input type="text" name="description"></td></tr>
-			    <tr><td class="table-text">Foundation: </td> <td class="table-input"><input type="text" name="foundation"></td></tr>
-			  </form>
-			  
-			  <tr><td></td><td><button type="submit" form="add-brand-form" value="Submit">Add</button></td></tr>
-			</table>
-			</td>
-			<td>
-			
-			<table class="form">
-				<tr> <b>DELETE FORM</b> </tr>
-			  <form action="/delete_brand" method="post" id="delete-brand-form">
-			    <tr><td class="table-text"></td><td></td></tr>
-			    <tr><td class="table-text"></td><td></td></tr>
-			    <tr><td class="table-text">Enter ID:</td><td class="table-input"> <input type="text" name="brand_id"></td></tr>
-			  	
-			  </form>
-			
-			<tr><td></td><td><button type="submit" form="delete-brand-form" value="Submit">Delete</button></td></tr>
-			</table>
-			</td>
-			</tr>
-	    </table>
 	    </div>
 	{% endblock %}
