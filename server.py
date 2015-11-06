@@ -174,16 +174,40 @@ def brands_db(operation):
         return redirect(url_for('brands_db', operation = 'list'))
 
     elif operation == "delete":
-        if request.method =='POST':
+        #print("On delete")
+        if request.method == 'POST':
             brand_id = request.form['delete']
-    
+            #print(brand_id)
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """
                 cursor.execute(query)
                 connection.commit()
 
+    elif operation == "edit":
+        print("EDIT")
+        if request.method == 'POST':
+            new_name = request.form['brand-name']
+            new_description = request.form['description']
+            new_foundation = request.form['foundation']
+            new_imagelink = request.form['imagelink']
+            new_website = request.form['website']
+            new_industry = request.form['industry']
+            edit = request.form['edit']
 
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """UPDATE BRANDS SET Name = ' """ + new_name + """' ,"""
+                query = query + """ Comment = ' """ + new_description + """' ,"""
+                query =  query + """ Foundation = """ + new_foundation + """ ,"""
+                query =  query + """ Image = '""" + new_imagelink + """' ,"""
+                query =  query + """ Industry = '""" + new_industry + """' ,"""
+                query =  query + """ Website = '""" + new_website + """'"""
+                query =  query + """ WHERE ID = """ + edit
+                print(query)
+                cursor.execute(query)
+                connection.commit()
+                
     return redirect(url_for('brands_db', operation = 'list'))
 
 

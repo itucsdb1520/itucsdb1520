@@ -30,12 +30,12 @@
 				<th id="year"> Foundation Year </th>
 				<th id="website"> Website </th>
 				<th id="imagelink">Image Link</th>
-				<th id="desc"> Description </th>
+				<th id="description"> Description </th>
 				<th> Operation </th>
 	
 			</tr>
 			{% for id, name, description, year, imagelink, industry, website in brands_list %}
-			<tr>
+			<tr id="table_{{id}}">
 			
 				<td>{{ name }} </td>
 				<td>{{ industry }} </td>
@@ -44,14 +44,23 @@
 				<td>{{ imagelink }} </td>
 				<td>{{ description }} </td>
 				<td>
+				  
+				  
+				  
+				  <form action='{{ url_for('brands_db', operation='edit') }}' method='post' id="edit_{{id}}">
+				  </form>
+				  
+				  <div class="edit_delete_forms_{{id}}">
+      
+				  <button class="edit_button blue" onclick="edit_fields({{id}})">
+				    <span class="icon-cog ">Edit</span>
+				  </button>
 				  <form action="{{ url_for('brands_db', operation='delete') }}" method="post">
-				    <button class="edit_button blue" name="edit" value="{{id}}">
-				      <span class="icon-cog ">Edit</span>
-				    </button>
-				    <button class="delete_button red" name="delete" value="{{id}}">
+				    <button class="delete_button red" name="delete" value="{{id}}" type="submit">
 				      <span class="icon-minus "></span>
 				    </button>
 				  </form>
+				  </div>
 				</td>
 			</tr>
 			{% endfor %}
@@ -60,12 +69,12 @@
 			
 			<tr id="add_row" class="hidden">
 			  <form action="{{ url_for('brands_db', operation='add') }}" method="post" id="add-brand-form">
-			    <td id="name"><input type="text" name="brand-name" maxlength="25"></td>
-			    <td id="industry"><input type="text" name="industry" maxlength="20"></td>
-			    <td id="year"><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>
-			    <td id="website"><input type="text" name="website" maxlength="25"></td>
-			    <td id="imagelink"><input type="text" name="imagelink" maxlength="50"></td>
-			    <td id="description"><input type="text" name="description" maxlength="75"></td>
+			    <td ><input type="text" name="brand-name" maxlength="25"></td>
+			    <td ><input type="text" name="industry" maxlength="20"></td>
+			    <td ><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>
+			    <td ><input type="text" name="website" maxlength="25"></td>
+			    <td ><input type="text" name="imagelink" maxlength="50"></td>
+			    <td ><input type="text" name="description" maxlength="75"></td>
 			  </form>
 			<td>
 			  <button class="add_button green" type="submit" form="add-brand-form" value="Submit">
