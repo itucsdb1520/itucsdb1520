@@ -87,13 +87,20 @@ input{
 	padding: 0;
 }
 
-#id, #name, #year, #desc{
+#id, #name, #year, #description,#industry,#imagelink,#website{
 	height: 30px;
+	cursor: pointer;
+}
+#id:hover, #name:hover, #year:hover, #description:hover,#industry:hover,#imagelink:hover,#website:hover{
+	height: 30px;
+	background-color: rgba(255, 0,0, 0.4);
+	cursor: pointer;
 }
 
 
 #name{
 	width: 150px;
+	cursor: pointer;
 }
 
 #industry{

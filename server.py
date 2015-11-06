@@ -135,13 +135,41 @@ def brand(the_brand):
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
     now = datetime.datetime.now()
+    splitted = operation.split('-', 1)
+    operation = splitted[0]
+    
+    print(splitted)
+    try:
+        sub_operation = splitted[1]
+        make_sub_operation = True
+    except:
+        print("Single String, not splitted")
+        make_sub_operation = False
     
     if operation == "list":
         #print("On the list")
         brands_list = []
+        if make_sub_operation == True:
+            if sub_operation == 'name':
+                sort = "Name"
+            elif sub_operation == 'industry':
+                sort = "Industry"
+            elif sub_operation == 'year':
+                sort = "Foundation"
+            elif sub_operation == 'website':
+                sort = "Website"
+            elif sub_operation == 'image':
+                sort = "Image"
+            elif sub_operation == 'comment':
+                sort = "Comment"
+            else:
+                sort = "Id"
+            
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
+                if make_sub_operation == True:
+                    query = query + """ ORDER BY """ +sort
                 print(query)
                 cursor.execute(query)
     
@@ -187,6 +215,7 @@ def brands_db(operation):
     elif operation == "edit":
         print("EDIT")
         if request.method == 'POST':
+            
             new_name = request.form['brand-name']
             new_description = request.form['description']
             new_foundation = request.form['foundation']

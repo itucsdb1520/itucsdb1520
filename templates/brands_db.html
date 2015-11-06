@@ -25,12 +25,12 @@
 		  <caption>List of All Brands</caption>
 			<tr>
 				
-				<th id="name"> Name</th>
-				<th id="industry"> Industry </th>
-				<th id="year"> Foundation Year </th>
-				<th id="website"> Website </th>
-				<th id="imagelink">Image Link</th>
-				<th id="description"> Description </th>
+				<th id="name" onclick="location.href = '{{ url_for('brands_db', operation='list-name') }}'"> Name</th>
+				<th id="industry" onclick="location.href = '{{ url_for('brands_db', operation='list-industry') }}'"> Industry </th>
+				<th id="year" onclick="location.href = '{{ url_for('brands_db', operation='list-year') }}'"> Foundation Year </th>
+				<th id="website" onclick="location.href = '{{ url_for('brands_db', operation='list-website') }}'"> Website </th>
+				<th id="imagelink" onclick="location.href = '{{ url_for('brands_db', operation='list-image') }}'">Image Link</th>
+				<th id="description" onclick="location.href = '{{ url_for('brands_db', operation='list-comment') }}'"> Description </th>
 				<th> Operation </th>
 	
 			</tr>
