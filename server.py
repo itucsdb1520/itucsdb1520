@@ -140,11 +140,8 @@ def brand(the_brand):
         brand_info = None
         
         for record in cursor:
-            print(record)
+            #print(record)
             brand_info = record
-            
-        
-
         
     return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
 
