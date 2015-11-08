@@ -139,9 +139,8 @@ def brand(the_brand):
         
         brand_info = []
         
-        for record in cursor:
-            print(record)
-            brand_info = record
+        brand_info = cursor.fetchone()
+        print(brand_info)
         
         if not brand_info:   
             name = "NONAME"
