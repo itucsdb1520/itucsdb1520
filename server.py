@@ -143,10 +143,10 @@ def brand(the_brand):
             print(record)
             brand_info = record
             
-        
+        image_link = url_for('static', filename='gallery/brands/logos/' + brand_info[4].strip())
 
         
-    return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
+    return render_template('brand.html', image_link = image_link, brand_info=brand_info, current_time=now.ctime())
 
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
