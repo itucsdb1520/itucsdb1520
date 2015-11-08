@@ -18,24 +18,24 @@
 
 	  <!-- After Implementing the Database, "the_brand" Will Be Used to Fetch Corresponding Brand's Info -->
            
-	   <h2> {{ brand_info[1].strip() }}</h2>
-	   <div id="brand_image"><img width="200px" height="200px" src="/static/gallery/brands/logos/{{ brand_info[4].strip() }}"></div>
+	   <h2> {{ name }}</h2>
+	   <div id="brand_image"><img width="200px" height="200px" src="/static/gallery/brands/logos/{{image_link}}"></div>
 	   <table>
 	    <tr>
 	      <th>Foundation Year: </td>
-	      <td>{{ brand_info[3]}}</td>
+	      <td>{{ year}}</td>
 	    </tr>
 	    <tr>
 	      <th>Industry: </td>
-	      <td>{{ brand_info[5].strip() }}</td>
+	      <td>{{ industry }}</td>
 	    </tr>
 	    <tr>
 	      <th> Short Description:</td>
-	      <td>{{ brand_info[2].strip() }}</td>
+	      <td>{{ description}}</td>
 	    </tr>
 	    <tr>
 	      <th> Website:</td>
-	      <td><a href="https://{{brand_info[6]}}" >{{ brand_info[6].strip() }}</a></td>
+	      <td><a href="https://{{website}}" >{{website}}</a></td>
 	    </tr>
 	   </table>
 	   

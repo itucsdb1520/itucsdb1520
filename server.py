@@ -137,15 +137,28 @@ def brand(the_brand):
         cursor.execute(query)
         connection.commit()
         
-        brand_info = None
+        brand_info = []
         
         for record in cursor:
             print(record)
             brand_info = record
-            
-
         
-    return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
+        if not brand_info:   
+            name = "NONAME"
+            description = "NO DESCRIPTION"
+            year = 1800
+            image_link = "no_logo.svg"
+            industry = "NO INDUSTRY"
+            website = "itucsdb1520.mybluemix.net"
+        else:
+            name = brand_info[1].strip()
+            description = brand_info[2].strip()
+            year = brand_info[3]
+            image_link = brand_info[4].strip()
+            industry = brand_info[5].strip()
+            website = brand_info[6].strip()
+        
+    return render_template('brand.html', name=name, description=description, year=year, image_link=image_link, industry=industry, website=website, current_time=now.ctime())
 
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
