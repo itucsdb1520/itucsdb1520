@@ -140,8 +140,14 @@ def brand(the_brand):
         brand_info = None
         
         for record in cursor:
-            #print(record)
+            print(record)
             brand_info = record
+            
+        
+        #this is a small test
+        brandsFile = open("requirements.txt")
+        print(brandsFile.readline())
+        print(brandsFile.readline())
         
     return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
 
@@ -182,7 +188,7 @@ def brands_db(operation):
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
                 if make_sub_operation == True:
-                    query = query + """ ORDER BY """ +sort
+                    query = query + """ ORDER BY """ + sort
                 print(query)
                 cursor.execute(query)
     
