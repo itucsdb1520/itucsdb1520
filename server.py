@@ -130,7 +130,26 @@ def brands():
 @app.route('/brand/<the_brand>')
 def brand(the_brand):
     now = datetime.datetime.now()
-    return render_template('brand.html', the_brand=the_brand, current_time=now.ctime())
+
+    with dbapi2.connect(app.config['dsn']) as connection:
+        cursor = connection.cursor()
+        query = """SELECT * FROM BRANDS WHERE Name = '""" + the_brand + """' """
+        cursor.execute(query)
+        connection.commit()
+        
+        brand_info = None
+        
+        for record in cursor:
+            print(record)
+            brand_info = record
+            
+        
+        #this is a small test
+        brandsFile = open("requirements.txt")
+        print(brandsFile.readline())
+        print(brandsFile.readline())
+        
+    return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
 
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
@@ -226,8 +245,8 @@ def brands_db(operation):
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """UPDATE BRANDS SET Name = ' """ + new_name + """' ,"""
-                query = query + """ Comment = ' """ + new_description + """' ,"""
+                query = """UPDATE BRANDS SET Name = '""" + new_name + """' ,"""
+                query = query + """ Comment = '""" + new_description + """' ,"""
                 query =  query + """ Foundation = """ + new_foundation + """ ,"""
                 query =  query + """ Image = '""" + new_imagelink + """' ,"""
                 query =  query + """ Industry = '""" + new_industry + """' ,"""
