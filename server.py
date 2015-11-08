@@ -137,6 +137,7 @@ def brand(the_brand):
         cursor.execute(query)
         connection.commit()
         
+        """
         brand_info = []
         
         brand_info = cursor.fetchone()
@@ -156,9 +157,9 @@ def brand(the_brand):
             image_link = brand_info[4].strip()
             industry = brand_info[5].strip()
             website = brand_info[6].strip()
-        
-    return render_template('brand.html', name=name, description=description, year=year, image_link=image_link, industry=industry, website=website, current_time=now.ctime())
-
+        """
+    #return render_template('brand.html', name=name, description=description, year=year, image_link=image_link, industry=industry, website=website, current_time=now.ctime())
+    return render_template('brand.html',current_time=now.ctime())
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
     now = datetime.datetime.now()
