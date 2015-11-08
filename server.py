@@ -144,10 +144,7 @@ def brand(the_brand):
             brand_info = record
             
         
-        #this is a small test
-        brandsFile = open("requirements.txt")
-        print(brandsFile.readline())
-        print(brandsFile.readline())
+
         
     return render_template('brand.html', brand_info=brand_info, current_time=now.ctime())
 
