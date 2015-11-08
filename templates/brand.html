@@ -19,7 +19,7 @@
 	  <!-- After Implementing the Database, "the_brand" Will Be Used to Fetch Corresponding Brand's Info -->
            
 	   <h2> {{ brand_info[1].strip() }}</h2>
-	   <div id="brand_image"><img width="200px" height="200px" src="{{ url_for('static', filename='gallery/brands/logos/shell_logo.svg')}}"></div>
+	   <div id="brand_image"><img width="200px" height="200px" src="/static/gallery/brands/logos/{{ brand_info[4].strip() }}"></div>
 	   <table>
 	    <tr>
 	      <th>Foundation Year: </td>
