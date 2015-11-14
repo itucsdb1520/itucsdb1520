@@ -16,14 +16,56 @@
 	<!-- Content for this page -->
 	{% block body_content %}
 
-	<div>	PILOTS PAGE		</div>
-
-
-	<button type="button" onclick="location.href = '{{ url_for('pilot_add_del') }}'">Add Pilot</button>
+<div>	PILOTS PAGE		</div>
 
 
 
-	<button type="button" onclick="alert('it doesnt work')">Delete</button>
+ <div >
+		<table>
+
+			<tr>
+				<th > ID </th>
+				<th > Name</th>
+				<th > Surname</th>
+				<th > Age </th>
+
+			</tr>
+			{% for id, name, surname, age in pilots %}
+			<tr>
+				<td>{{ id }} </td>
+				<td>{{ name }} </td>
+				<td>{{ surname }} </td>
+				<td>{{ age }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		</br>
+	      <div >
+		<div>
+		  <form action="/add_pilot" method="post" id="addpilot">
+		    Name: <input type="text" name="name"><br>
+		    Surname: <input type="text" name="surname"><br>
+		    Age: <input type="text" name="age"><br>
+		  </form>
+
+		  <button type="submit" form="addpilot" value="Submit">Add</button>
+		</div>
+		<div id="delete-form">
+		  <form action="/delete_pilot" method="post" id="deletepilot">
+		    Enter ID: <input type="text" name="id"><br>
+		  </form>
+
+		  <button type="submit" form="deletepilot" value="Submit">Delete</button>
+		</div>
+	      </div>
+	    </div>
+
+
+
+
+
+
+
 
 
 	{% endblock %}

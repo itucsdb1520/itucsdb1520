@@ -48,11 +48,6 @@ def home():
 @app.route('/pilots')
 def pilots():
     now = datetime.datetime.now()
-    return render_template('pilots.html', current_time=now.ctime())
-
-@app.route('/pilot_add_del')
-def pilot_add_del():
-    now = datetime.datetime.now()
     pilots = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
@@ -65,7 +60,11 @@ def pilot_add_del():
 
             connection.commit()
             print(pilots)
-    return render_template('pilot_add_del.html', pilots=pilots, current_time=now.ctime())
+    return render_template('pilots.html', pilots=pilots, current_time=now.ctime())
+
+
+
+
 
 @app.route('/add_pilot', methods = ['GET','POST'])
 def add_pilot():
@@ -83,7 +82,7 @@ def add_pilot():
             connection.commit()
 
 
-    return redirect(url_for('pilot_add_del'))
+    return redirect(url_for('pilots'))
 
 @app.route('/delete_pilot', methods = ['GET','POST'])
 def delete_pilot():
@@ -98,7 +97,7 @@ def delete_pilot():
             connection.commit()
 
 
-    return redirect(url_for('pilot_add_del'))
+    return redirect(url_for('pilots'))
 
 @app.route('/cars')
 def cars():
@@ -136,13 +135,13 @@ def brand(the_brand):
         query = """SELECT * FROM BRANDS WHERE Name = '""" + the_brand + """' """
         cursor.execute(query)
         connection.commit()
-        
+
         brand_info = []
-        
+
         brand_info = cursor.fetchone()
         print(brand_info)
-        
-        if not brand_info:   
+
+        if not brand_info:
             name = "NONAME"
             description = "NO DESCRIPTION"
             year = 1800
@@ -156,7 +155,7 @@ def brand(the_brand):
             image_link = brand_info[4].strip()
             industry = brand_info[5].strip()
             website = brand_info[6].strip()
-        
+
     return render_template('brand.html', name=name, description=description, year=year, image_link=image_link, industry=industry, website=website, current_time=now.ctime())
 
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
@@ -164,7 +163,7 @@ def brands_db(operation):
     now = datetime.datetime.now()
     splitted = operation.split('-', 1)
     operation = splitted[0]
-    
+
     print(splitted)
     try:
         sub_operation = splitted[1]
@@ -172,7 +171,7 @@ def brands_db(operation):
     except:
         print("Single String, not splitted")
         make_sub_operation = False
-    
+
     if operation == "list":
         #print("On the list")
         brands_list = []
@@ -191,7 +190,7 @@ def brands_db(operation):
                 sort = "Comment"
             else:
                 sort = "Id"
-            
+
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
@@ -199,14 +198,14 @@ def brands_db(operation):
                     query = query + """ ORDER BY """ + sort
                 print(query)
                 cursor.execute(query)
-    
+
                 for record in cursor:
                     brands_list.append(record)
-    
+
                 connection.commit()
                 #print(brands_list)
         return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
-    
+
     elif operation == "add":
         #print("On the add")
         if request.method =='POST':
@@ -216,16 +215,16 @@ def brands_db(operation):
             imagelink = request.form['imagelink']
             website = request.form['website']
             industry = request.form['industry']
-            
+
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('""" 
+                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('"""
                 query = query + brand_name + """', '"""+ description + """', """+ foundation + """, '"""
                 query = query + imagelink + """' , '""" + industry + """' , '""" + website+ """')"""
                 cursor.execute(query)
                 connection.commit()
-        
-    
+
+
         return redirect(url_for('brands_db', operation = 'list'))
 
     elif operation == "delete":
@@ -242,7 +241,7 @@ def brands_db(operation):
     elif operation == "edit":
         print("EDIT")
         if request.method == 'POST':
-            
+
             new_name = request.form['brand-name']
             new_description = request.form['description']
             new_foundation = request.form['foundation']
@@ -263,7 +262,7 @@ def brands_db(operation):
                 print(query)
                 cursor.execute(query)
                 connection.commit()
-                
+
     return redirect(url_for('brands_db', operation = 'list'))
 
 
