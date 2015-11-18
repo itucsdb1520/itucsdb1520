@@ -218,10 +218,8 @@ def brands_db(operation):
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES ('"""
-                query = query + brand_name + """', '"""+ description + """', """+ foundation + """, '"""
-                query = query + imagelink + """' , '""" + industry + """' , '""" + website+ """')"""
-                cursor.execute(query)
+                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES (%s, %s, %s, %s, %s, %s);"""
+                cursor.execute(query, (brand_name,description,foundation,imagelink,industry,website))
                 connection.commit()
 
 
@@ -234,8 +232,8 @@ def brands_db(operation):
             #print(brand_id)
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """DELETE FROM BRANDS WHERE Id = '""" +brand_id + """' """
-                cursor.execute(query)
+                query = """DELETE FROM BRANDS WHERE Id = %s """
+                cursor.execute(query, (brand_id))
                 connection.commit()
 
     elif operation == "edit":
@@ -252,15 +250,9 @@ def brands_db(operation):
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """UPDATE BRANDS SET Name = '""" + new_name + """' ,"""
-                query = query + """ Comment = '""" + new_description + """' ,"""
-                query =  query + """ Foundation = """ + new_foundation + """ ,"""
-                query =  query + """ Image = '""" + new_imagelink + """' ,"""
-                query =  query + """ Industry = '""" + new_industry + """' ,"""
-                query =  query + """ Website = '""" + new_website + """'"""
-                query =  query + """ WHERE ID = """ + edit
+                query = """UPDATE BRANDS SET (Name, Comment, Foundation,  Image, Industry, Website) = (%s,%s,%s,%s,%s,%s) WHERE ID = %s;"""
                 print(query)
-                cursor.execute(query)
+                cursor.execute(query, (new_name, new_description, new_foundation, new_imagelink, new_industry, new_website, edit))
                 connection.commit()
 
     return redirect(url_for('brands_db', operation = 'list'))
