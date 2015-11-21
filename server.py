@@ -11,6 +11,9 @@ from flask import url_for
 from flask import redirect
 from flask import request
 
+import mimetypes
+
+mimetypes.add_type('image/svg+xml', '.svg')
 
 app = Flask(__name__)
 
