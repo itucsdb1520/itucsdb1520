@@ -24,7 +24,6 @@
 		<table>
 
 			<tr>
-				<th > ID </th>
 				<th > Name</th>
 				<th > Surname</th>
 				<th > Age </th>
@@ -32,7 +31,6 @@
 			</tr>
 			{% for id, name, surname, age in pilots %}
 			<tr>
-				<td>{{ id }} </td>
 				<td>{{ name }} </td>
 				<td>{{ surname }} </td>
 				<td>{{ age }} </td>
@@ -50,6 +48,7 @@
 
 		  <button type="submit" form="addpilot" value="Submit">Add</button>
 		</div>
+
 		<div id="delete-form">
 		  <form action="/delete_pilot" method="post" id="deletepilot">
 		    Enter ID: <input type="text" name="id"><br>
@@ -57,8 +56,21 @@
 
 		  <button type="submit" form="deletepilot" value="Submit">Delete</button>
 		</div>
-	      </div>
-	    </div>
+
+		<div>
+		  <form action="/update_pilot" method="post" id="updatepilot">
+		    ID: <input type="text" name="id"><br>
+		    New Name: <input type="text" name="N_name"><br>
+		    New Surname: <input type="text" name="N_surname"><br>
+		    New Age: <input type="text" name="N_age"><br>
+		  </form>
+
+		  <button type="submit" form="updatepilot" value="Submit">update</button>
+		</div>
+
+
+		</div>
+</div>
 
 
 
