@@ -93,6 +93,25 @@ def add_pilot():
 
     return redirect(url_for('pilots'))
 
+
+def add_countries():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        countries = request.form['countries']
+        ForeignKey = request.form['ForeignKey']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """INSERT INTO PILOTS (Countries, ForeignKey) VALUES ('""" +Countries +"""', """+ ForeignKey + """)"""
+            cursor.execute(query)
+            connection.commit()
+
+
+    return redirect(url_for('pilots'))
+
+
+
+
 @app.route('/delete_pilot', methods = ['GET','POST'])
 def delete_pilot():
     now = datetime.datetime.now()
