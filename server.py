@@ -18,10 +18,13 @@ mimetypes.add_type('image/svg+xml', '.svg')
 app = Flask(__name__)
 
 class Brand:
-    def __init__(self, name, description, year):
+    def __init__(self, name, description, year, image_link, website, industry):
         self.name = name
         self.description = description
         self.year = year
+        self.image_link = image_link
+        self.website = website
+        self.industry = industry
 
 class Car:
     def __init__(self, car_name, engine_name, speed_limit, zero_hundred, brand, pilot):
@@ -31,6 +34,8 @@ class Car:
         self.zero_hundred = zero_hundred
         self.brand = brand
         self.pilot = pilot
+
+
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
