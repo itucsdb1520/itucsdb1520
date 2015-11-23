@@ -505,6 +505,7 @@ def initialize_database():
 
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
+        cursor.execute("""DROP TABLE IF EXISTS FOUNDERS""")
         cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25))""")
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('Shell', 'One of the biggest petrochemistry companies in the world', 1907, 'shell_logo.svg', 'Oil Distribution', 'www.shell.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('Kaspersky', 'An Antivirus Company founded in Moskov', 1997, 'Kaspersky_lab_logo.svg', 'Computer Security', 'www.kaspersky.com') """)
@@ -522,8 +523,8 @@ def initialize_database():
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('Magneti Marelli', 'A company which deals with development and manufacturing of systems', 1919, 'Marelli_logo.png', 'Automotive', 'www.magnetimarelli.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('SKF', 'A leading bearing and seals manufacturing company', 1907, 'SKF_logo.svg', 'Manufacturing', 'www.skf.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('HAAS', 'A machine and CNC tools manufacturer founded in California', 1983, 'Haas_logo.jpg', 'Manufacturing', 'www.haascnc.com') """)
-
-
+        cursor.execute("""CREATE TABLE FOUNDER (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25))""")
+        
         #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
