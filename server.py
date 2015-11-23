@@ -587,9 +587,9 @@ def initialize_database():
 
 
         #database for the pilots
+        cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
         cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
         cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER )""")
-        cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
         cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id ))""")
 
 
