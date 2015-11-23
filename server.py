@@ -367,33 +367,33 @@ def search():
         area = request.form['search_area']
         #print(search)
         #print(area)
-
+        
         query_list = []
-
+        
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             if area == '0':
                 #Search all
                 query = """ """
-
+                
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 0)
             elif area == '1':
                 #search cars
                 query = """ """
-
+                
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 1)
             elif area == '2':
                 #search pilots
                 query = """ """
-
+                
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 2)
             elif area == '3':
                 #search tracks
                 query = """ """
-
+                
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 3)
             elif area == '4':
@@ -401,13 +401,24 @@ def search():
                 search = "%" + search + "%"
                 query = """SELECT * FROM BRANDS WHERE Name LIKE %s"""
                 cursor.execute(query, ([search]))
-
+                for record in cursor:
+                    query_list.append(record)
+                
+                query = """SELECT * FROM BRANDS WHERE Industry LIKE %s"""
+                cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
+                query = """SELECT * FROM BRANDS WHERE Comment LIKE %s"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query_list = list(set(query_list))
+                #remove duplicate elements in the list
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 4)
-
+                        
             else:
                 query = """ """
                 connection.commit()
