@@ -94,7 +94,7 @@ def add_pilot():
 
     return redirect(url_for('pilots'))
 
-
+@app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
     now = datetime.datetime.now()
     if request.method =='POST':
@@ -520,7 +520,7 @@ def initialize_database():
 
 
         #database for the brands
-        
+
         cursor.execute("""DROP TABLE IF EXISTS FOUNDERS""")
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
         cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25))""")
@@ -564,7 +564,7 @@ def initialize_database():
         cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
         cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER )""")
         cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
-        cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey references PILOTS(Id )""")
+        cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id )""")
 
 
 
