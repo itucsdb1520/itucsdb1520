@@ -174,7 +174,7 @@ def tracks():
     now = datetime.datetime.now()
     return render_template('tracks.html', current_time=now.ctime())
 
-        #database for tracks
+        #database for tracks ebru
 
 @app.route('/brands')
 def brands():
