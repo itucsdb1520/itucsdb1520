@@ -312,8 +312,6 @@ def car_delete():
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query =  """DELETE FROM CARS WHERE Id="""+id+""""""
-
-
             cursor.execute(query)
             connection.commit()
         return redirect(url_for('home'))
@@ -329,26 +327,53 @@ def search():
     if request.method == 'POST':
         search = request.form['input_text']
         area = request.form['search_area']
-        print(search)
-        print(area)
+        #print(search)
+        #print(area)
+        
+        query_list = []
+        
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            if search == 'All':
+            if area == '0':
                 #Search all
                 query = """ """
-            elif search == 'Cars':
+                
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 0)
+            elif area == '1':
                 #search cars
                 query = """ """
-            elif search == 'Tracks':
+                
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 1)
+            elif area == '2':
+                #search pilots
+                query = """ """
+                
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 2)
+            elif area == '3':
                 #search tracks
                 query = """ """
-            elif search == 'Brands':
+                
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 3)
+            elif area == '4':
                 #search brands
-                query = """ """
+                search = "%" + search + "%"
+                query = """SELECT * FROM BRANDS WHERE Name LIKE %s"""
+                cursor.execute(query, ([search]))
+                
+                for record in cursor:
+                    query_list.append(record)
+                    
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 4)
+                        
             else:
                 query = """ """
-            connection.commit()
-    return render_template('search.html', current_time= now.ctime())
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = [])
 
 #these are for testing will be edited later
 @app.route('/initdb')

@@ -1,0 +1,43 @@
+div.table{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	text-align: center;
+	max-width: 1200px;
+}
+
+th, tr, td{
+	vertical-align: middle;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	background-color: transparent;
+	height: 25px;
+        padding-left: 8px;
+        padding-right: 8px;
+	color: rgb(45,45,45);
+}
+
+table#search-table{
+	margin-top: 2px;
+	display: inline-block;
+	border-collapse: collapse;
+	width: auto;
+
+}
+
+td.brand_link{
+    width: 50px;
+}
+td.brand_name,
+td.brand_industry,
+td.brand_year{
+    width: 120px;
+}
+td.brand_web,
+td.brand_image{
+    width: 200px;
+}
+td.brand_description{
+    width: 400px;
+}
