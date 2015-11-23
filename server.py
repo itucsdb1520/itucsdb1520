@@ -127,6 +127,24 @@ def delete_pilot():
 
     return redirect(url_for('pilots'))
 
+
+@app.route('/delete_countries', methods = ['GET','POST'])
+def delete_countries():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        id = request.form['id']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM COUNTRIES WHERE Id = '""" +id + """' """
+            cursor.execute(query)
+            connection.commit()
+
+
+    return redirect(url_for('pilots'))
+
+
+
 @app.route('/cars')
 def cars():
     now = datetime.datetime.now()
