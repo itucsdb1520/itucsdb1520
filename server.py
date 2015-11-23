@@ -329,10 +329,10 @@ def login():
 
 
 #Sign in page
-@app.route('/signIn')
-def signIn():
+@app.route('/signUp')
+def signUp():
     now = datetime.datetime.now()
-    return render_template('signIn.html', current_time=now.ctime())
+    return render_template('signUp.html', current_time=now.ctime())
 
 
 #statistics page may be implemented in future
