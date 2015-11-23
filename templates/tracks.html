@@ -17,6 +17,45 @@
 	{% block body_content %}
 
 	<div>
-            TRACKS PAGE
-        </div>
+             <div class="table">
+		<table id="track-table">
+		  <caption>List of All Circuits</caption>
+			<tr>
+				<th id="name"> Circuit </th>
+				<th id="map_link"> Map </th>
+				<th id="type"> Type </th>
+				<th id="direction"> Direction </th>
+				<th id="location"> Location </th>
+				<th id="current_length"> Current Length </th>
+				<th id="grands_prix"> Grands Prix </th>
+				<th id="Grands_prix_held"> Grands Prix Held </th>
+
+			</tr>
+
+			{% for id in tracks_list %}
+			<tr>
+
+				<td>{{ id[0] }} </td>
+				<td> <img src={{ id[1] }} style="width:250px;height:125spx;"></td>
+				<td>{{ id[2] }} </td>
+				<td>{{ id[3] }} </td>
+				<td>{{ id[4] }} </td>
+				<td>{{ id[5] }} </td>
+				<td>{{ id[6] }} </td>
+				<td>{{ id[7] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
+
+
+
+
+
+
+
+
+    </div>
+
 	{% endblock %}
