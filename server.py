@@ -319,6 +319,22 @@ def about():
     now = datetime.datetime.now()
     return render_template('about.html', current_time=now.ctime())
 
+
+
+#Login page
+@app.route('/login')
+def login():
+    now = datetime.datetime.now()
+    return render_template('login.html', current_time=now.ctime())
+
+
+#Sign in page
+@app.route('/signIn')
+def signIn():
+    now = datetime.datetime.now()
+    return render_template('signIn.html', current_time=now.ctime())
+
+
 #statistics page may be implemented in future
 @app.route('/statistics')
 def statistics():
@@ -425,24 +441,24 @@ def search():
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
-                
+
                 query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.PILOT LIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
-                    
+
                 query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.BRAND LIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
-                    
+
                 query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (ENGINES.Engine_Name LIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
                 query_list = list(set(query_list))
-                
+
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 1)
             elif area == '2':
@@ -524,7 +540,7 @@ def initialize_database():
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('SKF', 'A leading bearing and seals manufacturing company', 1907, 'SKF_logo.svg', 'Manufacturing', 'www.skf.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('HAAS', 'A machine and CNC tools manufacturer founded in California', 1983, 'Haas_logo.jpg', 'Manufacturing', 'www.haascnc.com') """)
         cursor.execute("""CREATE TABLE FOUNDER (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25))""")
-        
+
         #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
