@@ -593,6 +593,10 @@ def initialize_database():
         cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id ))""")
 
 
+        #database for the tracks
+        cursor.execute("""DROP TABLE IF EXISTS TRACKS""")
+        cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GrandsPrixHeld INTEGER)""")
+        cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 'Istanbul, Turkey', '5.338 km', 7)""")
 
 
 
