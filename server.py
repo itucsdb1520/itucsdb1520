@@ -470,6 +470,16 @@ def search():
 def initialize_database():
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
+
+        #Database for the admins
+
+
+
+        #Database for the users
+
+
+
+
         #Database for the counter
         cursor.execute("""DROP TABLE IF EXISTS COUNTER""")
         cursor.execute("""CREATE TABLE COUNTER (N INTEGER)""")
