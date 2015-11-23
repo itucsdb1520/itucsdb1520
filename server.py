@@ -115,7 +115,8 @@ def cars():
     engine_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT * FROM CARS"""
+            query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id )"""
+
 
             cursor.execute(query)
 
@@ -446,9 +447,22 @@ def initialize_database():
 
         #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
-        cursor.execute("""CREATE TABLE CARS (Id SERIAL PRIMARY KEY NOT NULL, Image_Link TEXT, Name CHAR(30),Engine_ID INTEGER,Speed CHAR(30),BRAND CHAR(50),PILOT CHAR(50) )""")
         cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
+
         cursor.execute("""CREATE TABLE ENGINES(Id SERIAL PRIMARY KEY,Engine_Name CHAR(30), HorsePower CHAR(30)) """)
+        cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id),Speed CHAR(30),BRAND CHAR(50),PILOT CHAR(50) )""")
+
+        cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('R13','300')""")
+        cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('H15','320')""")
+        cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('T15','350')""")
+
+        cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.parrola.com/wp-content/uploads/2013/01/mclaren-mercedes-formula-1.jpg','V13',1,'300','Mercedes','Fernando Alonso')""")
+        cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.f1fanatic.co.uk/wp-content/uploads/2008/01/ferrari_f2008_launch_4.jpg','MH13',2,'320','Ferrari','James Hamilton' )""")
+        cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.autoguide.com/auto-news/wp-content/uploads/2013/07/honda-f1.jpg','V15',1,'330','Honda','Torro Rosso')""")
+        cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.sport-wall.com/wp-content/uploads/2015/03/Formula-1-Renault-F1-Car-680x425.jpg','RT3',3,'350','Renault','Jason Button')""")
+
+
+
         #database for the pilots
         cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
         cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER )""")
