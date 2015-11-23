@@ -476,6 +476,13 @@ def initialize_database():
         cursor.execute("""INSERT INTO COUNTER (N) VALUES (0)""")
 
 
+        #Database for the admins
+
+
+
+        #Database for the users
+
+
         #database for the brands
         cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
         cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25))""")
