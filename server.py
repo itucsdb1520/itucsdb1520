@@ -58,6 +58,7 @@ def home():
 def pilots():
     now = datetime.datetime.now()
     pilots = []
+    countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query = """SELECT * FROM PILOTS"""
