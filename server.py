@@ -566,16 +566,16 @@ def initialize_database():
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('Magneti Marelli', 'A company which deals with development and manufacturing of systems', 1919, 'Marelli_logo.png', 'Automotive', 'www.magnetimarelli.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('SKF', 'A leading bearing and seals manufacturing company', 1907, 'SKF_logo.svg', 'Manufacturing', 'www.skf.com') """)
         cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website) VALUES ('HAAS', 'A machine and CNC tools manufacturer founded in California', 1983, 'Haas_logo.jpg', 'Manufacturing', 'www.haascnc.com') """)
-        cursor.execute("""CREATE TABLE FOUNDERS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Brand_Id INTEGER references BRANDS(Id))""")
+        cursor.execute("""CREATE TABLE FOUNDERS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Brand_Id INTEGER references BRANDS(Id) ON DELETE CASCADE)""")
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Marcus', 'Samuel', 1) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Yevgeni', 'Kasperski', 2) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Giovanni Battista', 'Pirelli', 3) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('James E.', 'Casey', 4) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Jose Antonio', 'Alvarez', 5) """)
-        cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Alexandre', 'Darracq', 6) """) #more than one
+        cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Alexandre', 'Darracq', 6) """) #more than one will be implemented later
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Carlo', 'Crocco', 7) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Tan', 'Xuguang', 8) """)
-        cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Marco', 'Righi', 9) """)
+        cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Marco', 'Righi', 9) """)  #more than one, will be implemented later
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Ernst', 'Mahle', 10) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('America', 'Movil', 11) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Emilio', 'Bombassei', 12) """)
@@ -583,7 +583,7 @@ def initialize_database():
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Ercole', 'Marelli', 14) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Sven', 'Wingqvist', 15) """)
         cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Gene Francis', 'Haas', 16) """)
-        
+
         #database for the cars
         cursor.execute("""DROP TABLE IF EXISTS CARS""")
         cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
