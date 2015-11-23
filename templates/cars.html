@@ -24,12 +24,11 @@
 		<table id="car-table">
 		  <caption>List of All Cars</caption>
 			<tr>
-				<th id="id"> ID </th>
+
 				<th id="image_link">Image</th>
 				<th id="car_name"> Car Name</th>
 				<th id="engine"> Engine </th>
 				<th id="speed_limit"> Max Speed </th>
-				<th id="kmh_0_100"> 0-100 Km/h  sec. </th>
 				<th id="brand_name"> Brand </th>
 				<th id="pilot_name"> Pilot </th>
 
@@ -38,14 +37,30 @@
 			{% for id in cars_list %}
 			<tr>
 
-				<td>{{ id[0] }} </td>
+
 				<td> <img src={{ id[1] }} style="width:250px;height:125spx;"></td>
 				<td>{{ id[2] }} </td>
 				<td>{{ id[3] }} </td>
 				<td>{{ id[4] }} </td>
 				<td>{{ id[5] }} </td>
 				<td>{{ id[6] }} </td>
-				<td>{{ id[7] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
+		<table id="engine-table">
+		  <caption>List of All Engines</caption>
+			<tr>
+
+				<th id="engine_namek">Engine Name</th>
+				<th id="horsepower"> Horsepower</th>
+			</tr>
+
+			{% for id in engine_list %}
+			<tr>
+				<td>{{ id[0] }} </td>
+				<td>{{ id[1] }} </td>
 
 			</tr>
 			{% endfor %}
