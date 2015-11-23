@@ -123,21 +123,23 @@
 	      </div> 
 	    </li>
 	  </a>
-	  <div id="search-field">
-	    <li class="button">
-	    <form action="action_page.php">
-	      <input type="text" name="firstname" value="Mickey">
-	      <select>
-		<option>All</option>
-		<option>Cars</option>
-		<option>Pilots</option>
-		<option>Tracks</option>
-		<option>Brands</option>
+	  
+
+	  <li id="search_form">
+	    <form id="search" action="{{ url_for('search') }}" method="post">
+	      <input name="input_text" id="search_text" type="text" name="search_text" placeholder="Enter Search Text...">
+		
+	      <select name="search_area" id="search_area">
+		<option value="0">All</option>
+		<option value="1">Cars</option>
+		<option value="2">Pilots</option>
+		<option value="3">Tracks</option>
+		<option value="4">Brands</option>
 	      </select>
-	      <input type="submit" value="Submit">
+	      
+	     <input id="search_button" type="submit" value="SEARCH" form="search">
 	    </form>
 	  </li>
-	  </div>
 	  
 	  
 	</ul>

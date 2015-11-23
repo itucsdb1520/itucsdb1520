@@ -17,6 +17,7 @@ mimetypes.add_type('image/svg+xml', '.svg')
 
 app = Flask(__name__)
 
+
 class Brand:
     def __init__(self, name, description, year, image_link, website, industry):
         self.name = name
@@ -166,6 +167,7 @@ def brand(the_brand):
 
     return render_template('brand.html', name=name, description=description, year=year, image_link=image_link, industry=industry, website=website, current_time=now.ctime())
 
+#listing of brands
 @app.route('/brands_db/<operation>' , methods = ['GET','POST'])
 def brands_db(operation):
     now = datetime.datetime.now()
@@ -246,7 +248,6 @@ def brands_db(operation):
     elif operation == "edit":
         print("EDIT")
         if request.method == 'POST':
-
             new_name = request.form['brand-name']
             new_description = request.form['description']
             new_foundation = request.form['foundation']
@@ -264,11 +265,14 @@ def brands_db(operation):
     return redirect(url_for('brands_db', operation = 'list'))
 
 
+
+#about page
 @app.route('/about')
 def about():
     now = datetime.datetime.now()
     return render_template('about.html', current_time=now.ctime())
 
+#statistics page may be implemented in future
 @app.route('/statistics')
 def statistics():
     now = datetime.datetime.now()
@@ -318,7 +322,33 @@ def car_delete():
          return render_template('car_delete.html')
 
 
-
+#the search method
+@app.route('/search', methods = ['GET','POST'])
+def search():
+    now = datetime.datetime.now()
+    if request.method == 'POST':
+        search = request.form['input_text']
+        area = request.form['search_area']
+        print(search)
+        print(area)
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            if search == 'All':
+                #Search all
+                query = """ """
+            elif search == 'Cars':
+                #search cars
+                query = """ """
+            elif search == 'Tracks':
+                #search tracks
+                query = """ """
+            elif search == 'Brands':
+                #search brands
+                query = """ """
+            else:
+                query = """ """
+            connection.commit()
+    return render_template('search.html', current_time= now.ctime())
 
 #these are for testing will be edited later
 @app.route('/initdb')
