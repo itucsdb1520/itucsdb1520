@@ -22,43 +22,48 @@
 
             {% if table == 0%}
                 {% for x in query_list %}
-    
+
                     <tr>
                         <td>{{ x }} </td>
                     </tr>
-                
+
                 {% endfor %}
-            
-            {% elif table == 1%}
+
+             {% elif table == 1%}
                 {% for x in query_list %}
-    
-                    <tr>
-                        <td>{{ x }} </td>
+
+                        <tr>
+                        <td class="brand_name">{{ x[1] }} </td>
+                        <td class="brand_industry">{{ x[2] }} </td>
+                        <td class="brand_year">{{ x[3] }} </td>
+                        <td class="brand_web">{{ x[4] }} </td>
+                        <td class="brand_image">{{ x[5] }} </td>
+                        <td class="brand_description">{{ x[6] }} </td>
                     </tr>
-                
+
                 {% endfor %}
-            
+
             {% elif table == 2%}
                 {% for x in query_list %}
-    
+
                     <tr>
                         <td>{{ x }} </td>
                     </tr>
-                
-                {% endfor %}  
-            
+
+                {% endfor %}
+
             {% elif table == 3%}
                 {% for x in query_list %}
-    
+
                     <tr>
                         <td>{{ x }} </td>
                     </tr>
-                
+
                 {% endfor %}
-                
+
             {% elif table == 4%}
                 {% for id, name, description, year, imagelink, industry, website in query_list %}
-                    
+
                     <tr>
                         <td class="brand_link"><a href="{{ url_for('brand', the_brand = name.strip()) }}">Link</a></td>
                         <td class="brand_name">{{ name }} </td>
@@ -68,16 +73,16 @@
                         <td class="brand_image">{{ imagelink }} </td>
                         <td class="brand_description">{{ description }} </td>
                     </tr>
-                    
+
                 {% endfor %}
-                
-            
+
+
             {% else %}
                 <tr>
                     <td> OH NO! THERE WAS AN ERROR! <td>
                 </tr>
             {% endif %}
-            
+
             </table>
-	    </div>	
+	    </div>
 	{% endblock %}

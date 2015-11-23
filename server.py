@@ -421,11 +421,28 @@ def search():
             elif area == '1':
                 #search cars
                 search = "%" +search + "%"
-                query = """ SELECT * FROM CARS WHERE Name LIKE %s"""
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Name LIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+                
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.PILOT LIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+                    
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.BRAND LIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+                    
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (ENGINES.Engine_Name LIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
+                query_list = list(set(query_list))
+                
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 1)
             elif area == '2':
