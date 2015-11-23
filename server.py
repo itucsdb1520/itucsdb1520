@@ -414,6 +414,32 @@ def engine_delete():
          now = datetime.datetime.now()
          return render_template('car_delete.html')
 
+
+@app.route('/car_update',methods = ['GET','POST'])
+def car_update():
+    if request.method =='POST':
+        car_name_up =request.form['car_name_up']
+        image_link = request.form['image_link']
+        car_name = request.form['car_name']
+        engine_id = request.form['engine_id']
+        speed_limit = request.form['speed_limit']
+        brand = request.form['brand']
+        pilot = request.form['pilot']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """UPDATE CARS SET (Image_Link, Name, Engine_ID,Speed, BRAND, PILOT) = (%s,%s,%s,%s,%s,%s) WHERE Name=%s"""
+            #print(query)
+
+            cursor.execute(query,(image_link,car_name,engine_id,speed_limit,brand,pilot,car_name_up))
+
+            connection.commit()
+
+        return redirect(url_for('home'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_add.html')
+
 #the search method
 @app.route('/search', methods = ['GET','POST'])
 def search():
