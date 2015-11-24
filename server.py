@@ -519,6 +519,7 @@ def statistics():
 @app.route('/car_add',methods = ['GET','POST'])
 def car_add():
     engine_list = []
+    name_list = []
     if request.method =='POST':
         image_link = request.form['image_link']
         car_name = request.form['car_name']
@@ -535,17 +536,18 @@ def car_add():
 
             for record in cursor:
                 engine_list.append(record)
-
-            if len(engine_list) == 0:
+            
+            
+            if len(engine_list) == 0 or engine_id =='':
                 return redirect(url_for('home'))
 
             query = """SELECT Name FROM CARS WHERE Name=%s"""
             cursor.execute(query,([car_name]))
 
             for record in cursor:
-                engine_list.append(record)
+                name_list.append(record)
 
-            if len(engine_list) != 0:
+            if len(name_list) != 0:
                 return redirect(url_for('home'))
 
             query =  """INSERT INTO CARS (Image_Link, Name, Engine_ID,Speed, BRAND, PILOT) VALUES (%s,%s,%s,%s,%s,%s)"""
