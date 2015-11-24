@@ -13,15 +13,16 @@ def initialize_db_function(cursor):
 
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('aliercccan','pass')""")
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('ebru','pass')""")
-
+    cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('fatih','pass')""")
+    
     #Database for the admins
 
     cursor.execute("""DROP TABLE IF EXISTS ADMINS""")
-    cursor.execute("""CREATE TABLE ADMINS(Username CHAR(30) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(30) )""")
+    cursor.execute("""CREATE TABLE ADMINS(Username CHAR(20) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(20) )""")
 
     cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('aliercccan','pass')""")
     cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('ebru','pass')""")
-
+    cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('fatih','pass')""")
 
     #database for the brands
 
