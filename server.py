@@ -362,9 +362,22 @@ def brands_db(operation):
                 connection.commit()
 
 
-    return redirect(url_for('brands_db', operation = 'listbrands'))
+        return redirect(url_for('brands_db', operation = 'listbrands'))
+
+    elif operation == "edit_founder":
+        if request.method == 'POST':
+            new_name = request.form['founder-name']
+            new_surname = request.form['founder-surname']
+            edit = request.form['edit'] #id
+
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """UPDATE FOUNDERS SET (Name, Surname) = (%s,%s) WHERE ID = %s;"""
+                cursor.execute(query, (new_name, new_surname, edit))
+                connection.commit()
 
 
+        return redirect(url_for('brands_db', operation = 'listfounders'))
 
 #about page
 @app.route('/about')

@@ -20,3 +20,17 @@ function edit_fields(id){
    
     
 }
+
+function edit_fields_founder(id){
+    table = document.getElementById("table_" + id);
+    
+    table.cells[0].innerHTML = "<input form='edit_" + id + "' type='text' name='founder-name' placeholder='Name' maxlength='25' value='" + table.cells[0].innerHTML.trim() + "'>";
+    table.cells[1].innerHTML = "<input form='edit_" + id + "' type='text' name='founder-surname' placeholder='Surname' maxlength='20' value='" + table.cells[1].innerHTML.trim() + "'>";
+
+    $(document.getElementsByClassName("edit_delete_forms_" + id)).html("<button form='edit_" + id + "' class='edit_finalize_button green' name='edit' value='" +id+"' type='submit'>" +
+	    "<span class='icon-checkmark'>Update</span>" +
+	"</button>" +
+    "</form>");
+   
+    
+}
