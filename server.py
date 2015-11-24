@@ -225,9 +225,19 @@ def cars():
 @app.route('/tracks')
 def tracks():
     now = datetime.datetime.now()
-    return render_template('tracks.html', current_time=now.ctime())
+    tracks_list = []
 
-        #database for tracks ebru
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, TRACKS.GrandsPrixHeld FROM TRACKS"""
+
+            cursor.execute(query)
+
+            for record in cursor:
+                tracks_list.append(record)
+
+
+    return render_template('tracks.html', tracks_list = tracks_list, current_time=now.ctime())
 
 @app.route('/brands')
 def brands():
