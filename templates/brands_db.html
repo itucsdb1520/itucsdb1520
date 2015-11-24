@@ -48,7 +48,7 @@
 				  
 				  
 				  
-				  <form action='{{ url_for('brands_db', operation='edit') }}' method='post' id="edit_{{id}}">
+				  <form action="{{ url_for('brands_db', operation='edit_brand') }}" method='post' id="edit_{{id}}">
 				  </form>
 				  
 				  <div class="edit_delete_forms_{{id}}">
@@ -56,7 +56,7 @@
 				  <button class="edit_button blue" onclick="edit_fields({{id}})">
 				    <span class="icon-cog ">Edit</span>
 				  </button>
-				  <form action="{{ url_for('brands_db', operation='delete') }}" method="post">
+				  <form action="{{ url_for('brands_db', operation='delete_brand') }}" method="post">
 				    <button class="delete_button red" name="delete" value="{{id}}" type="submit">
 				      <span class="icon-minus "></span>
 				    </button>
@@ -69,7 +69,7 @@
 			
 			
 			<tr id="add_row" class="hidden">
-			  <form action="{{ url_for('brands_db', operation='add') }}" method="post" id="add-brand-form">
+			  <form action="{{ url_for('brands_db', operation='add_brand') }}" method="post" id="add-brand-form">
 			    <td ><input type="text" name="brand-name" maxlength="25"></td>
 			    <td ><input type="text" name="industry" maxlength="20"></td>
 			    <td ><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>
@@ -79,6 +79,62 @@
 			  </form>
 			<td>
 			  <button class="add_button green" type="submit" form="add-brand-form" value="Submit">
+			    <span class="icon-checkmark "><span class="black">ADD</span></span>
+			  </button>
+			</td>
+
+		</tr>
+		</table>
+		<button id="add_row_btn" onclick="make_visible()"><span class="icon-plus"> Open Add Form</span></button>
+		</br>
+	    {%elif table == 1%}
+	    <table id="founders-table">
+		  <caption>List of All Founders</caption>
+			<tr>
+				
+				<th id="name" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-name') }}'"> Name</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-surname') }}'"> Surname </th>
+				<th id="operation"> Operation </th>
+	
+			</tr>
+			
+			{% for id, name, surname, brand_id in founders_list %}
+			<tr id="table_{{id}}">
+			
+				<td>{{ name }} </td>
+				<td>{{ surname }} </td>
+				<td>
+				  
+				  
+				  
+				  <form action='{{ url_for('brands_db', operation='edit_founder') }}' method='post' id="edit_{{id}}">
+				  </form>
+				  
+				  <div class="edit_delete_forms_{{id}}">
+      
+				  <button class="edit_button blue" onclick="edit_fields({{id}})">
+				    <span class="icon-cog ">Edit</span>
+				  </button>
+				  <form action="{{ url_for('brands_db', operation='delete_founder') }}" method="post">
+				    <button class="delete_button red" name="delete" value="{{id}}" type="submit">
+				      <span class="icon-minus "></span>
+				    </button>
+				  </form>
+				  </div>
+				</td>
+			</tr>
+			{% endfor %}
+			
+			
+			
+			<tr id="add_row" class="hidden">
+			  <form action="{{ url_for('brands_db', operation='add_founder') }}" method="post" id="add-founder-form">
+			    <td ><input type="text" name="founder-name" maxlength="25"></td>
+			    <td ><input type="text" name="founder-surname" maxlength="20"></td>
+			    <td ><input id="add-input" type="number" name="brand-id" placeholder="Brand ID" min="0"></td>
+			  </form>
+			<td>
+			  <button class="add_button green" type="submit" form="add-founder-form" value="Submit">
 			    <span class="icon-checkmark "><span class="black">ADD</span></span>
 			  </button>
 			</td>

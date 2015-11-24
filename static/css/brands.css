@@ -60,7 +60,7 @@ div.button-container{
 	margin-right: auto;
 }
 
-table#brands-table{
+table#brands-table, table#founders-table{
 	margin-top: 2px;
 	display: inline-block;
 	border-collapse: collapse;
@@ -107,7 +107,11 @@ input{
 	padding: 0;
 }
 
-#id, #name, #year, #description,#industry,#imagelink,#website{
+input#add-input{
+	width: 90px;
+}
+
+#id, #name, #year, #description,#industry,#imagelink,#website, #surname, #operation{
 	height: 30px;
 	cursor: pointer;
 }
@@ -120,7 +124,6 @@ input{
 
 #name{
 	width: 150px;
-	cursor: pointer;
 }
 
 #industry{
@@ -138,7 +141,9 @@ input{
 #description{
 	width: 300px;
 }
-
+th#operation{
+	width: 100px;
+}
 button.submit-button{
 	margin-left: auto;
 	margin-right: auto;

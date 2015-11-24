@@ -247,7 +247,7 @@ def brands_db(operation):
                 sort = "Comment"
             else:
                 sort = "Id"
-
+                
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
@@ -261,7 +261,7 @@ def brands_db(operation):
 
                 connection.commit()
         return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime(), table = 0)
-
+                
     elif operation == "listfounders":
         founders_list = []
         if make_sub_operation == True:
@@ -271,7 +271,7 @@ def brands_db(operation):
                 sort = "Surname"
             else:
                 sort = "Id"
-
+        
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM FOUNDERS"""
@@ -284,10 +284,10 @@ def brands_db(operation):
                     founders_list.append(record)
 
                 connection.commit()
-
+                print(founders_list)
         return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
 
-    elif operation == "add":
+    elif operation == "add_brand":
         #print("On the add")
         if request.method =='POST':
             brand_name = request.form['brand-name']
@@ -304,9 +304,25 @@ def brands_db(operation):
                 connection.commit()
 
 
-        return redirect(url_for('brands_db', operation = 'list'))
+        return redirect(url_for('brands_db', operation = 'listbrands'))
 
-    elif operation == "delete":
+    elif operation == "add_founder":
+        #print("On the add")
+        if request.method =='POST':
+            founder_name = request.form['founder-name']
+            founder_surname = request.form['founder-surname']
+            brand_id = request.form['brand-id']
+
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES (%s, %s, %s);"""
+                cursor.execute(query, (founder_name,founder_surname,brand_id))
+                connection.commit()
+
+
+        return redirect(url_for('brands_db', operation = 'listfounders'))
+    
+    elif operation == "delete_brand":
         #print("On delete")
         if request.method == 'POST':
             brand_id = request.form['delete']
@@ -315,9 +331,21 @@ def brands_db(operation):
                 cursor = connection.cursor()
                 cursor.execute("DELETE FROM BRANDS WHERE Id = %s ", ([brand_id]))
                 connection.commit()
-
-    elif operation == "edit":
-        print("EDIT")
+         
+        return redirect(url_for('brands_db', operation = 'listbrands'))
+    
+    elif operation == "delete_founder":
+        #print("On delete")
+        if request.method == 'POST':
+            founder_id = request.form['delete']
+            
+            with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                cursor.execute("DELETE FROM FOUNDERS WHERE Id = %s ", ([founder_id]))
+                connection.commit()
+        return redirect(url_for('brands_db', operation = 'listfounders'))
+    
+    elif operation == "edit_brands":
         if request.method == 'POST':
             new_name = request.form['brand-name']
             new_description = request.form['description']
@@ -333,7 +361,8 @@ def brands_db(operation):
                 cursor.execute(query, (new_name, new_description, new_foundation, new_imagelink, new_industry, new_website, edit))
                 connection.commit()
 
-    return redirect(url_for('brands_db', operation = 'list'))
+
+    return redirect(url_for('brands_db', operation = 'listbrands'))
 
 
 
