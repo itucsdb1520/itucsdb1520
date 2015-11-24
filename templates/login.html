@@ -19,4 +19,15 @@
 	<div>
             LOGIN PAGE
         </div>
+
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="Kullanıcı Adı"></h:outputText>
+                <h:inputText value="#{loginBean.name}"></h:inputText>
+                <h:outputText value="Şifre"></h:outputText>
+                <h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+            </h:panelGrid>
+            <h:commandButton value="Giriş" action="listed"></h:commandButton>
+        </h:form>
+
 	{% endblock %}
