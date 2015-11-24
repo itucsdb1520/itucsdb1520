@@ -752,12 +752,12 @@ def search():
             elif area == '7':
                 #search founders
                 search = "%" + search + "%"
-                query = """SELECT * FROM FOUNDERS WHERE Name LIKE %s"""
+                query = """SELECT * FROM FOUNDERS WHERE Name ILIKE %s"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT * FROM FOUNDERS WHERE Surname LIKE %s"""
+                query = """SELECT * FROM FOUNDERS WHERE Surname ILIKE %s"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
