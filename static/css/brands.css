@@ -80,7 +80,7 @@ th, tr, td{
 	color: rgb(45,45,45);
 }
 
-table#brands-table tr:hover{
+table#brands-table tr:hover, table#founders-table tr:hover, table#joint-table tr:hover{
 	background-color: rgba(255,0,0,0.2);	
 }
 
@@ -111,11 +111,11 @@ input#add-input{
 	width: 90px;
 }
 
-#id, #name, #year, #description,#industry,#imagelink,#website, #surname, #operation{
+#id, #name, #year, #description,#industry,#imagelink,#website, #surname, #operation, #founder-name, #brand-name{
 	height: 30px;
 	cursor: pointer;
 }
-#id:hover, #name:hover, #year:hover, #description:hover,#industry:hover,#imagelink:hover,#website:hover{
+#id:hover, #name:hover, #year:hover, #description:hover,#industry:hover,#imagelink:hover,#website:hover, #surname:hover, #founder-name:hover, #brand-name:hover{
 	height: 30px;
 	background-color: rgba(255, 0,0, 0.4);
 	cursor: pointer;

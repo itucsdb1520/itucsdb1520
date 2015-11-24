@@ -323,12 +323,22 @@ def brands_db(operation):
     elif operation == "listjoint":
         joint_list = []
         if make_sub_operation == True:
-            if sub_operation == 'name':
-                sort = "Name"
+            if sub_operation == 'fname':
+                sort = "FOUNDERS.Name"
             elif sub_operation == 'surname':
-                sort = "Surname"
+                sort = "FOUNDERS.Surname"
+            elif sub_operation == 'bname':
+                sort = "BRANDS.Name"
+            elif sub_operation == 'year':
+                sort = "BRANDS.Foundation"
+            elif sub_operation == 'industry':
+                sort = "BRANDS.Industry"
+            elif sub_operation == 'website':
+                sort = "BRANDS.Website"
+            elif sub_operation == 'description':
+                sort = "BRANDS.Comment"
             else:
-                sort = "Id"
+                sort = "FOUNDERS.Id"
 
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
