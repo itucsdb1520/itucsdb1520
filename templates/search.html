@@ -76,7 +76,15 @@
 
                 {% endfor %}
 
+            {% elif table == 7%}
+                {% for id, name, surname, brand_id in query_list %}
 
+                    <tr>
+                        <td class="founder_name">{{ name }} </td>
+                        <td class="founder_surname">{{ surname }} </td>
+                    </tr>
+
+                {% endfor %}
             {% else %}
                 <tr>
                     <td> OH NO! THERE WAS AN ERROR! <td>

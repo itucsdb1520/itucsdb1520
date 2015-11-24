@@ -691,6 +691,26 @@ def search():
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 4)
 
+            elif area == '7':
+                #search founders
+                search = "%" + search + "%"
+                query = """SELECT * FROM FOUNDERS WHERE Name LIKE %s"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query = """SELECT * FROM FOUNDERS WHERE Surname LIKE %s"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+
+                query_list = list(set(query_list))
+                #remove duplicate elements in the list
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 7)
+
+
             else:
                 query = """ """
                 connection.commit()
