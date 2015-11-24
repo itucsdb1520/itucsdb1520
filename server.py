@@ -287,6 +287,31 @@ def brands_db(operation):
                 print(founders_list)
         return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
 
+    elif operation == "listjoint":
+        joint_list = []
+        if make_sub_operation == True:
+            if sub_operation == 'name':
+                sort = "Name"
+            elif sub_operation == 'surname':
+                sort = "Surname"
+            else:
+                sort = "Id"
+        
+        with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """SELECT * FROM FOUNDERS"""
+                if make_sub_operation == True:
+                    query = query + """ ORDER BY """ + sort
+                print(query)
+                cursor.execute(query)
+
+                for record in cursor:
+                    founders_list.append(record)
+
+                connection.commit()
+                print(founders_list)
+        return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
+
     elif operation == "add_brand":
         #print("On the add")
         if request.method =='POST':
