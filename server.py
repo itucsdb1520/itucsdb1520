@@ -529,8 +529,7 @@ def car_add():
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
 
-            if len(engine_id) == 0:
-                return redirect(url_for('home'))
+
             query = """SELECT Id FROM ENGINES WHERE Id=%s"""
             cursor.execute(query,(engine_id))
 
