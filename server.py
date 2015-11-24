@@ -239,6 +239,13 @@ def tracks():
 
     return render_template('tracks.html', tracks_list = tracks_list, current_time=now.ctime())
 
+@app.route('/tracks_add')
+def tracks_add():
+    now = datetime.datetime.now()
+    return render_template('tracks_add.html', current_time=now.ctime())
+
+
+
 @app.route('/brands')
 def brands():
     now = datetime.datetime.now()
