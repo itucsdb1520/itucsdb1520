@@ -247,7 +247,7 @@ def brands_db(operation):
                 sort = "Comment"
             else:
                 sort = "Id"
-                
+
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
@@ -261,7 +261,7 @@ def brands_db(operation):
 
                 connection.commit()
         return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime(), table = 0)
-                
+
     elif operation == "listfounders":
         founders_list = []
         if make_sub_operation == True:
@@ -271,7 +271,7 @@ def brands_db(operation):
                 sort = "Surname"
             else:
                 sort = "Id"
-        
+
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM FOUNDERS"""
@@ -284,7 +284,7 @@ def brands_db(operation):
                     founders_list.append(record)
 
                 connection.commit()
-                
+
         return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
 
     elif operation == "add":
@@ -367,6 +367,7 @@ def statistics():
 
 @app.route('/car_add',methods = ['GET','POST'])
 def car_add():
+    engine_list = []
     if request.method =='POST':
         image_link = request.form['image_link']
         car_name = request.form['car_name']
@@ -376,6 +377,26 @@ def car_add():
         pilot = request.form['pilot']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
+
+            if len(engine_id) == 0:
+                return redirect(url_for('home'))
+            query = """SELECT Id FROM ENGINES WHERE Id=%s"""
+            cursor.execute(query,(engine_id))
+
+            for record in cursor:
+                engine_list.append(record)
+
+            if len(engine_list) == 0:
+                return redirect(url_for('home'))
+
+            query = """SELECT Name FROM CARS WHERE Name=%s"""
+            cursor.execute(query,([car_name]))
+
+            for record in cursor:
+                engine_list.append(record)
+
+            if len(engine_list) != 0:
+                return redirect(url_for('home'))
 
             query =  """INSERT INTO CARS (Image_Link, Name, Engine_ID,Speed, BRAND, PILOT) VALUES (%s,%s,%s,%s,%s,%s)"""
             print(query)
@@ -387,6 +408,7 @@ def car_add():
     else:
          now = datetime.datetime.now()
          return render_template('car_add.html')
+
 
 
 @app.route('/engine_add',methods = ['GET','POST'])
@@ -613,7 +635,7 @@ def initialize_database():
         cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
 
         cursor.execute("""CREATE TABLE ENGINES(Id SERIAL PRIMARY KEY,Engine_Name CHAR(30), HorsePower CHAR(30)) """)
-        cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id),Speed CHAR(30),BRAND CHAR(50),PILOT CHAR(50) )""")
+        cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id) ON DELETE CASCADE,Speed CHAR(30),BRAND CHAR(50),PILOT CHAR(50) )""")
 
         cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('R13','300')""")
         cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('H15','320')""")
