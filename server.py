@@ -237,11 +237,10 @@ def brands():
 @app.route('/brand/<the_brand>')
 def brand(the_brand):
     now = datetime.datetime.now()
-
     with dbapi2.connect(app.config['dsn']) as connection:
         cursor = connection.cursor()
-        query = """SELECT * FROM BRANDS WHERE Name = '""" + the_brand + """' """
-        cursor.execute(query)
+        query = """SELECT * FROM BRANDS WHERE Name = %s"""
+        cursor.execute(query, ([the_brand]))
         connection.commit()
 
         brand_info = []
