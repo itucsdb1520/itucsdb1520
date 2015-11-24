@@ -320,18 +320,18 @@ def brands_db(operation):
 
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """SELECT * FROM FOUNDERS"""
+                query = """SELECT * FROM FOUNDERS INNER JOIN BRANDS ON BRAND.Id = FOUNDER.Brand_Id"""
                 if make_sub_operation == True:
                     query = query + """ ORDER BY """ + sort
                 print(query)
                 cursor.execute(query)
 
                 for record in cursor:
-                    founders_list.append(record)
+                    joint_list.append(record)
 
                 connection.commit()
-                print(founders_list)
-        return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
+                print(joint_list)
+        return render_template('brands_db.html', joint_list=joint_list, current_time=now.ctime(), table = 1)
 
     elif operation == "add_brand":
         #print("On the add")

@@ -144,7 +144,25 @@
 		<button id="add_row_btn" onclick="make_visible()"><span class="icon-plus"> Open Add Form</span></button>
 		</br>
 	    {%elif table == 2%}
-	    
+		<table id="founders-table">
+		  <caption>List of All Founders</caption>
+			<tr>
+				
+				<th id="name" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-name') }}'"> Name</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-surname') }}'"> Surname </th>
+				<th id="operation"> Operation </th>
+	
+			</tr>
+			
+			{% for id, name, surname, brand_id in founders_list %}
+			<tr id="table_{{id}}">
+			
+				<td>{{ name }} </td>
+				<td>{{ surname }} </td>
+				
+			</tr>
+			{% endfor %}
+		</table>
 	    {%endif%}
 	    </div>
 	{% endblock %}
