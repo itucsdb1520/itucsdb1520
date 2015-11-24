@@ -98,7 +98,7 @@ def add_pilot():
 def add_countries():
     now = datetime.datetime.now()
     if request.method =='POST':
-        countries = request.form['countries']
+        countries = request.form['Countries']
         ForeignKey = request.form['ForeignKey']
 
         with dbapi2.connect(app.config['dsn']) as connection:
