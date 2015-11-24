@@ -229,7 +229,7 @@ def brands_db(operation):
         print("Single String, not splitted")
         make_sub_operation = False
 
-    if operation == "list":
+    if operation == "listbrands":
         #print("On the list")
         brands_list = []
         if make_sub_operation == True:
@@ -247,7 +247,7 @@ def brands_db(operation):
                 sort = "Comment"
             else:
                 sort = "Id"
-
+                
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
                 query = """SELECT * FROM BRANDS"""
@@ -260,8 +260,32 @@ def brands_db(operation):
                     brands_list.append(record)
 
                 connection.commit()
-                #print(brands_list)
-        return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime())
+        return render_template('brands_db.html', brands_list=brands_list, current_time=now.ctime(), table = 0)
+                
+    elif operation == "listfounders":
+        founders_list = []
+        if make_sub_operation == True:
+            if sub_operation == 'name':
+                sort = "Name"
+            elif sub_operation == 'surname':
+                sort = "Surname"
+            else:
+                sort = "Id"
+        
+        with dbapi2.connect(app.config['dsn']) as connection:
+                cursor = connection.cursor()
+                query = """SELECT * FROM FOUNDERS"""
+                if make_sub_operation == True:
+                    query = query + """ ORDER BY """ + sort
+                print(query)
+                cursor.execute(query)
+
+                for record in cursor:
+                    founders_list.append(record)
+
+                connection.commit()
+                
+        return render_template('brands_db.html', founders_list=founders_list, current_time=now.ctime(), table = 1)
 
     elif operation == "add":
         #print("On the add")

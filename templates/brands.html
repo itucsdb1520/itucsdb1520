@@ -45,9 +45,11 @@
 		<area shape="rect" coords="584,141,635,153 " href="{{ url_for('brand', the_brand = 'Hublot') }}" alt="Hublot">
 	      </map>
 	    </div>
-	    
-	   <button id="list-all" onclick="location.href = '{{ url_for('brands_db', operation='list#id') }}'" class="float-left submit-button" >List All Brands</button>
-	    
-
+	  
+	  <div class="button-container">
+	    <button id="list-brn" onclick="location.href = '{{ url_for('brands_db', operation='listbrands') }}'" class="float-left submit-button" >List Brands</button>
+	    <button id="list-fnd" onclick="location.href = '{{ url_for('brands_db', operation='listfounders') }}'" class="float-left submit-button" >List Founders</button>
+	    <button id="list-all" onclick="location.href = '{{ url_for('brands_db', operation='listjoint') }}'" class="float-left submit-button" >List Both</button>
+	  </div>
 	    </div>
 	{% endblock %}
