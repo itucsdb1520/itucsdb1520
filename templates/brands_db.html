@@ -70,12 +70,12 @@
 			
 			<tr id="add_row" class="hidden">
 			  <form action="{{ url_for('brands_db', operation='add_brand') }}" method="post" id="add-brand-form">
-			    <td ><input type="text" name="brand-name" maxlength="25"></td>
-			    <td ><input type="text" name="industry" maxlength="20"></td>
-			    <td ><input type="number" name="foundation" placeholder="Year" min="1800" max="2015"></td>
-			    <td ><input type="text" name="website" maxlength="25"></td>
-			    <td ><input type="text" name="imagelink" maxlength="50"></td>
-			    <td ><input type="text" name="description" maxlength="75"></td>
+			    <td ><input type="text" placeholder="Name" name="brand-name" maxlength="25"></td>
+			    <td ><input type="text" placeholder="Industry" name="industry" maxlength="20"></td>
+			    <td ><input type="number" placeholder="Foundation" name="foundation" placeholder="Year" min="1800" max="2015"></td>
+			    <td ><input type="text" placeholder="Website" name="website" maxlength="25"></td>
+			    <td ><input type="text" placeholder="Image Link" name="imagelink" maxlength="50"></td>
+			    <td ><input type="text" placeholder="Description" name="description" maxlength="75"></td>
 			  </form>
 			<td>
 			  <button class="add_button green" type="submit" form="add-brand-form" value="Submit">
@@ -129,8 +129,8 @@
 			
 			<tr id="add_row" class="hidden">
 			  <form action="{{ url_for('brands_db', operation='add_founder') }}" method="post" id="add-founder-form">
-			    <td ><input type="text" name="founder-name" maxlength="25"></td>
-			    <td ><input type="text" name="founder-surname" maxlength="20"></td>
+			    <td ><input type="text" placeholder="Name" name="founder-name" maxlength="25"></td>
+			    <td ><input type="text" placeholder="Surname" name="founder-surname" maxlength="20"></td>
 			    <td ><input id="add-input" type="number" name="brand-id" placeholder="Brand ID" min="0"></td>
 			  </form>
 			<td>
@@ -143,6 +143,8 @@
 		</table>
 		<button id="add_row_btn" onclick="make_visible()"><span class="icon-plus"> Open Add Form</span></button>
 		</br>
+	    {%elif table == 2%}
+	    
 	    {%endif%}
 	    </div>
 	{% endblock %}
