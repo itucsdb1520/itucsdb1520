@@ -490,10 +490,23 @@ def car_delete():
 
 @app.route('/engine_delete',methods = ['GET','POST'])
 def engine_delete():
+    engine_list =[]
     if request.method =='POST':
         engine_name = request.form['engine_name']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
+            query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND ENGINES.Engine_Name=%s"""
+
+            cursor.execute(query,([engine_name]))
+
+            for record in cursor:
+                engine_list.append(record)
+
+            if len(engine_list) != 0:
+                return redirect(url_for('home'))
+
+
+
             query =  """DELETE FROM ENGINES WHERE Engine_Name=%s"""
             cursor.execute(query,([engine_name]))
             connection.commit()
