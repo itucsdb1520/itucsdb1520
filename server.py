@@ -111,8 +111,12 @@ def add_countries():
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """INSERT INTO PILOTS (Countries, ForeignKey) VALUES ('""" +Countries +"""', """+ ForeignKey + """)"""
-            cursor.execute(query)
+
+
+            query =  """INSERT INTO COUNTRIES ( Countries, ForeignKey) VALUES (%s,%s)"""
+
+
+            cursor.execute(query,(Countries,ForeignKey))
             connection.commit()
 
 
