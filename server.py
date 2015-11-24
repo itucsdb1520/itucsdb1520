@@ -676,8 +676,25 @@ def search():
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 1)
             elif area == '2':
                 #search pilots
-                query = """ """
+                search = "%" + search +"%"
+                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (PILOTS.Name LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                cursor.execute(query, ([search]))
+                for klm in cursor:
+                    query_list.append(klm)
 
+                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (PILOTS.Surname LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                cursor.execute(query, ([search]))
+                for klm in cursor:
+                    query_list.append(klm)
+
+                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (COUNTRIES.Countries LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                cursor.execute(query, ([search]))
+                for klm in cursor:
+                    query_list.append(klm)
+
+
+                query_list = list(set(query_list))
+                print(query_list)
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 2)
             elif area == '3':
@@ -813,7 +830,7 @@ def initialize_database():
         cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
         cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
         cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER )""")
-        cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id ))""")
+        cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id ) ON DELETE CASCADE)""")
 
 
         #database for the tracks
