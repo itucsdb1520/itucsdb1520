@@ -729,17 +729,17 @@ def search():
             elif area == '4':
                 #search brands
                 search = "%" + search + "%"
-                query = """SELECT * FROM BRANDS WHERE Name LIKE %s"""
+                query = """SELECT * FROM BRANDS WHERE Name ILIKE %s"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT * FROM BRANDS WHERE Industry LIKE %s"""
+                query = """SELECT * FROM BRANDS WHERE Industry ILIKE %s"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT * FROM BRANDS WHERE Comment LIKE %s"""
+                query = """SELECT * FROM BRANDS WHERE Comment ILIKE %s"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
