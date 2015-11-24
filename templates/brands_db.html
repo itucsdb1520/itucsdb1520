@@ -145,20 +145,33 @@
 		</br>
 	    {%elif table == 2%}
 		<table id="founders-table">
-		  <caption>List of All Founders</caption>
+		  <caption>List of Brands with Founders</caption>
+			<tr>
+			  <th colspan="2"> Founder </th>
+			  <th colspan="5"> Brand</th>
+			</tr>
 			<tr>
 				
-				<th id="name" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-name') }}'"> Name</th>
-				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listfounders-surname') }}'"> Surname </th>
-				<th id="operation"> Operation </th>
+				<th id="founder-name" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-fname') }}'"> Name</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-surname') }}'"> Surname </th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-bname') }}'"> Name </th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-year') }}'"> Year</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-industry') }}'"> Industry</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-website') }}'"> Website</th>
+				<th id="surname" onclick="location.href = '{{ url_for('brands_db', operation='listjoint-description') }}'"> Description </th>
 	
 			</tr>
 			
-			{% for id, name, surname, brand_id in founders_list %}
+			{% for fname, surname, bname, year, industry, website, description in joint_list %}
 			<tr id="table_{{id}}">
 			
-				<td>{{ name }} </td>
+				<td>{{ fname }} </td>
 				<td>{{ surname }} </td>
+				<td>{{ bname }} </td>
+				<td>{{ year }} </td>
+				<td>{{ industry }} </td>
+				<td>{{ website }} </td>
+				<td>{{ description }} </td>
 				
 			</tr>
 			{% endfor %}
