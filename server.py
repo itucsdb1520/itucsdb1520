@@ -767,11 +767,7 @@ def counter_page():
         cursor = connection.cursor()
         cursor.execute("""UPDATE COUNTER SET N = N + 1""")
         connection.commit()
-
         cursor.execute("""SELECT N FROM COUNTER""")
-
-
-
         count = cursor.fetchone()[0]
     return "This page was accessed %d times." % count
 
@@ -780,11 +776,6 @@ def counter_page():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
-
-#with app.test_request_context():
-    #print(url_for('about'))
-    #print(url_for('brand', the_brand = 'Shell'))
-    #print(url_for('brands', next='/'))
 
 
 if __name__ == '__main__':
