@@ -1,16 +1,26 @@
 def initialize_db_function(cursor):
-    
+
     #Database for the counter
     cursor.execute("""DROP TABLE IF EXISTS COUNTER""")
     cursor.execute("""CREATE TABLE COUNTER (N INTEGER)""")
     cursor.execute("""INSERT INTO COUNTER (N) VALUES (0)""")
 
 
+    #Database for the users
+
+    cursor.execute("""DROP TABLE IF EXISTS USERS""")
+    cursor.execute("""CREATE TABLE USERS (Username CHAR(20) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(20) )""")
+
+    cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('aliercccan','pass')""")
+    cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('ebru','pass')""")
+
     #Database for the admins
 
+    cursor.execute("""DROP TABLE IF EXISTS ADMINS""")
+    cursor.execute("""CREATE TABLE ADMINS(Username CHAR(30) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(30) )""")
 
-
-    #Database for the users
+    cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('aliercccan','pass')""")
+    cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('ebru','pass')""")
 
 
     #database for the brands
