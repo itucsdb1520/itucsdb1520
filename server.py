@@ -69,8 +69,16 @@ def pilots():
                 pilots.append(pilot)
 
             connection.commit()
-            print(pilots)
-    return render_template('pilots.html', pilots=pilots, current_time=now.ctime())
+
+            query = """ SELECT * FROM COUNTRIES """
+            cursor.execute(query)
+
+            for country in cursor:
+                countries.append(country)
+
+
+
+    return render_template('pilots.html', pilots=pilots, countries = countries, current_time=now.ctime())
 
 
 
@@ -98,8 +106,8 @@ def add_pilot():
 def add_countries():
     now = datetime.datetime.now()
     if request.method =='POST':
-        countries = request.form['Countries']
-        ForeignKey = request.form['ForeignKey']
+        Countries = request.form['Countries']
+        ForeignKey = request.form['Pilot']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()

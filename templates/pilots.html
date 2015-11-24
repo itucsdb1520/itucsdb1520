@@ -87,7 +87,7 @@
 				<th > Pilot </th>
 
 			</tr>
-			{% for id, name, surname, age in countries %}
+			{% for id, Countries, ForeignKey in countries %}
 			<tr>
 				<td>{{ id }} </td>
 				<td>{{ Countries }} </td>
@@ -99,7 +99,8 @@
 
 	<div>
 		  <form action="/add_countries" method="post" id="addcountries">
-		    Countries: <input type="text" name="Countries"><br>
+		    Country: <input type="text" name="Countries"><br>
+		    Pilot: <input type="text" name="Pilot"><br>
 		  </form>
 
 		  <button type="submit" form="addcountries" value="Submit">Add</button>
