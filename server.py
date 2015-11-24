@@ -226,7 +226,7 @@ def cars():
 def tracks():
     now = datetime.datetime.now()
     tracks_list = []
-
+    seasons_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, TRACKS.GrandsPrixHeld FROM TRACKS"""
@@ -235,9 +235,15 @@ def tracks():
 
             for record in cursor:
                 tracks_list.append(record)
+            connection.commit()
+
+            query = """SELECT Circuit_Name, Season FROM SEASONS"""
+            cursor.execute(query)
+            for record in cursor:
+                seasons_list.append(record)
 
 
-    return render_template('tracks.html', tracks_list = tracks_list, current_time=now.ctime())
+    return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, current_time=now.ctime())
 
 @app.route('/tracks_add')
 def tracks_add():
