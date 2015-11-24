@@ -19,12 +19,24 @@
 	<div>
             LOGIN PAGE..
         </div>
-<form method="post" action="home">
-        <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
-        <p><input type="password" name="password" value="" placeholder="Password"></p>
 
-        <p class="submit"><input type="submit" name="commit" value="Login"></p>
-      </form>
+<div>
 
+  <form method="post"  class="login">
+    <p>
+      <label for="login">Username:</label>
+      <input type="text" name="login" id="login" value="" placeholder="Username" >
+    </p>
+
+    <p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" value="" placeholder="*******">
+    </p>
+
+    <p class="login-submit">
+      <button type="submit"  a href="#">Login</button>
+  </form>
+
+</div>
 
 	{% endblock %}
