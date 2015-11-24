@@ -176,6 +176,24 @@ def update_pilot():
     return redirect(url_for('pilots'))
 
 
+@app.route('/update_country', methods = ['GET','POST'])
+def update_countries():
+    now = datetime.datetime.now()
+    if request.method =='POST':
+        Id = request.form['id']
+        new_country = request.form['N_country']
+        new_pilot = request.form['N_pilot']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE COUNTRIES SET( Countries, ForeignKey) = ( %s, %s) WHERE Id = %s"""
+
+            cursor.execute(query, (new_country, new_pilot, Id))
+            connection.commit()
+
+
+    return redirect(url_for('pilots'))
+
 
 
 
