@@ -667,6 +667,7 @@ def search():
             cursor = connection.cursor()
             if area == '0':
                 #Search all
+                #coming up next
                 query = """ """
 
                 connection.commit()
