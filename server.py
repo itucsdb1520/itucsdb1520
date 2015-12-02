@@ -769,7 +769,6 @@ def search():
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 7)
 
-
             else:
                 query = """ """
                 connection.commit()
