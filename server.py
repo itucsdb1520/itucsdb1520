@@ -229,7 +229,7 @@ def tracks():
     seasons_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, TRACKS.GrandsPrixHeld FROM TRACKS"""
+            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, SEASONS.Season, TRACKS.GrandsPrixHeld FROM TRACKS, SEASONS WHERE (TRACKS.Circuit = SEASONS.Circuit_Name)"""
 
             cursor.execute(query)
 
@@ -241,6 +241,7 @@ def tracks():
             cursor.execute(query)
             for record in cursor:
                 seasons_list.append(record)
+                
 
 
     return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, current_time=now.ctime())
@@ -536,8 +537,8 @@ def car_add():
 
             for record in cursor:
                 engine_list.append(record)
-            
-            
+
+
             if len(engine_list) == 0 or engine_id =='':
                 return redirect(url_for('home'))
 
@@ -668,7 +669,7 @@ def search():
             if area == '0':
                 #Search all
                 #coming up next
-                
+
                 query = """ """
 
                 connection.commit()
