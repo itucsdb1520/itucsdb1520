@@ -88,14 +88,19 @@ def initialize_db_function(cursor):
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25),ForeignKey INTEGER references PILOTS(Id ))""")
 
 
-    #database for the tracks
-    cursor.execute("""DROP TABLE IF EXISTS SEASONS""")
+
+  #database for the tracks
+    cursor.execute("""DROP TABLE IF EXISTS COUPLING_T_GP""")
     cursor.execute("""DROP TABLE IF EXISTS GRANDS_PRIX""")
+    cursor.execute("""DROP TABLE IF EXISTS SEASONS""")
     cursor.execute("""DROP TABLE IF EXISTS TRACKS""")
+
 
     cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GrandsPrixHeld INTEGER)""")
     cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
-    cursor.execute("""CREATE TABLE GRANDS_PRIX ( Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, GrandsPrix CHAR(30))""")
+    cursor.execute("""CREATE TABLE GRANDS_PRIX (Id INTEGER PRIMARY KEY, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
+    cursor.execute("""CREATE TABLE COUPLING_T_GP ( Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE)""")
+
 
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Adelaide Street Circuit','https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Adelaide_%28long_route%29.svg/225px-Adelaide_%28long_route%29.svg.png', 'Street Circuit', 'Clockwise', 'Adelaide, Australia', '3.780 km', 11)""")
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Ain-Diab Circuit', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ain-Diab.svg/225px-Ain-Diab.svg.png', 'Road circuit', 'Clockwise', 'Casablanca, Morocco', '7.618 km ', 1)""")
@@ -109,7 +114,6 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Nurburgring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Circuit_N%C3%BCrburgring-2002-GP.svg/225px-Circuit_N%C3%BCrburgring-2002-GP.svg.png', 'Race circuit', 'Clockwise', 'Nurburg, Germany', '5.148 km', 40)""")
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Red Bull Ring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Circuit_Red_Bull_Ring.svg/225px-Circuit_Red_Bull_Ring.svg.png', 'Race circuit', 'Clockwise', 'Zeltweg, Austria', '4.326 km', 27)""")
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Sepang International Circuit', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Sepang.svg/225px-Sepang.svg.png', 'Race circuit', 'Clockwise', 'Kuala Lumpur, Malaysia', '5.543 km', 17)""")
-
 
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Ain-Diab Circuit', '1958')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Aintree', '1955')""")
@@ -141,19 +145,35 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Red Bull Ring', '2014-2015')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Sepang International Circuit', '1999-2015')""")
 
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Adelaide Street Circuit', 'Australian Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Ain-Diab Circuit', 'Moroccan Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Aintree', 'British Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Albert Park', 'Australian Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Brands Hatch', 'British Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Brands Hatch', 'European Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Circuit de Barcelona-Catalunya', 'Spanish Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Circuit de Monaco', 'Monaco Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Dijon-Prenois', 'French Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Dijon-Prenois', 'Swiss Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Istanbul Park', 'Turkish Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Nurburgring', 'German Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Nurburgring', 'European Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Nurburgring', 'Luxembourg Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Red Bull Ring', 'Austrian Grand Prix')""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX (Circuit_Name, GrandsPrix ) VALUES ('Sepang International Circuit', 'Malaysian Grand Prix')""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (1, 'Abu Dhabi Grand Prix', 7)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (2, 'Argentine Grand Prix', 20)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (3, 'Australian Grand Prix', 31)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (4, 'Austrian Grand Prix', 28)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (5, 'European Grand Prix', 22)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (6, 'French Grand Prix', 58)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (7, 'German Grand Prix', 61)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (8, 'British Grand Prix', 66)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (9, 'Luxembourg Grand Prix', 2)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (10, 'Malaysian Grand Prix', 17)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (11, 'Monaco Grand Prix', 62)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (12, 'Moroccan Grand Prix', 1)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (13, 'Spanish Grand Prix', 45)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (14, 'Swiss Grand Prix', 6)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (15, 'Turkish Grand Prix', 7)""")
+
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Adelaide Street Circuit', 3)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Ain-Diab Circuit', 12)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Aintree', 8)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Albert Park', 3)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Brands Hatch', 8)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Brands Hatch', 5)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Circuit de Barcelona-Catalunya', 13)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Circuit de Monaco', 11)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Dijon-Prenois', 6)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Dijon-Prenois', 14)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Istanbul Park', 15)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 7)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 5)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 9)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Red Bull Ring', 4)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Sepang International Circuit', 10)""")

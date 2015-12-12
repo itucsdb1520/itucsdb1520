@@ -227,31 +227,78 @@ def tracks():
     now = datetime.datetime.now()
     tracks_list = []
     seasons_list = []
+    grandsprix_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, SEASONS.Season, TRACKS.GrandsPrixHeld FROM TRACKS, SEASONS WHERE (TRACKS.Circuit = SEASONS.Circuit_Name)"""
+            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, TRACKS.GrandsPrixHeld FROM TRACKS"""
 
             cursor.execute(query)
 
             for record in cursor:
                 tracks_list.append(record)
-            connection.commit()
 
             query = """SELECT Circuit_Name, Season FROM SEASONS"""
             cursor.execute(query)
             for record in cursor:
                 seasons_list.append(record)
-                
 
+            query = """SELECT GrandsPrix, No_of_Races FROM GRANDS_PRIX"""
+            cursor.execute(query)
+            for record in cursor:
+                grandsprix_list.append(record)
 
-    return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, current_time=now.ctime())
+    return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, grandsprix_list = grandsprix_list, current_time=now.ctime())
 
-@app.route('/tracks_add')
+@app.route('/tracks_add', methods = ['GET', 'POST'])
 def tracks_add():
-    now = datetime.datetime.now()
-    return render_template('tracks_add.html', current_time=now.ctime())
 
+    tracks_list = []
+    seasons_list = []
+    if request.method =='POST':
+        name = request.form['name']
+        map_link = request.form['map_link']
+        type = request.form['type']
+        direction = request.form['direction']
+        location = request.form['location']
+        current_length = request.form['current_length']
 
+        Grands_prix_held = request.form['Grands_prix_held']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """SELECT Circuit FROM TRACKS WHERE Circuit=%s"""
+            cursor.execute(query,([name]))
+
+            for record in cursor:
+                tracks_list.append(record)
+
+            if len(tracks_list) != 0:
+                return redirect(url_for('tracks'))
+
+            query = """INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            print(query)
+
+            cursor.execute(query,(name, map_link, type, direction, location, current_length, Grands_prix_held))
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('tracks_add.html')
+
+@app.route('/track_delete',methods = ['GET','POST'])
+def track_delete():
+    if request.method =='POST':
+        circuit_name = request.form['circuit_name']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """DELETE FROM TRACKS WHERE Circuit=%s"""
+            cursor.execute(query,([circuit_name]))
+            connection.commit()
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('tracks_add.html')
 
 @app.route('/brands')
 def brands():

@@ -19,7 +19,7 @@
 
 <br>
 <br>
-<button id="add" onclick="location.href = '{{ url_for('tracks_add') }}'" class="float-left submit-button" >Add a new Track</button>
+<button id="add" onclick="location.href = '{{ url_for('tracks_add') }}'" class="float-left submit-button" >Add Delete Operations</button>
 
 		<div>
              <div class="table">
@@ -52,8 +52,9 @@
 			</tr>
 			{% endfor %}
 		</table>
-<br>
-<br>
+
+<br><br><br><br>
+
 		<table id="season-table">
 		  <caption>List of All Seasons</caption>
 			<tr>
@@ -70,6 +71,27 @@
 			</tr>
 			{% endfor %}
 		</table>
+
+<br><br><br><br>
+
+		<table id="grandsprix-table">
+		  <caption>List of All Grands Prix</caption>
+			<tr>
+
+				<th id="gp_name">Grands Prix</th>
+				<th id="races"> Number Of Races</th>
+			</tr>
+
+			{% for id in grandsprix_list %}
+			<tr>
+				<td>{{ id[0] }} </td>
+				<td>{{ id[1] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
+
 
     	</div>
 
