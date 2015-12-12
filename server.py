@@ -261,7 +261,6 @@ def tracks_add():
         direction = request.form['direction']
         location = request.form['location']
         current_length = request.form['current_length']
-
         Grands_prix_held = request.form['Grands_prix_held']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
@@ -299,6 +298,92 @@ def track_delete():
     else:
         now = datetime.datetime.now()
         return render_template('tracks_add.html')
+
+@app.route('/track_update',methods = ['GET','POST'])
+def track_update():
+    if request.method =='POST':
+        oldname = request.form['oldname']
+        name = request.form['name']
+        map_link = request.form['map_link']
+        type = request.form['type']
+        direction = request.form['direction']
+        location = request.form['location']
+        current_length = request.form['current_length']
+        Grands_prix_held = request.form['Grands_prix_held']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE TRACKS SET (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) = (%s,%s,%s,%s,%s,%s,%s) WHERE Circuit=%s"""
+            #print(query)
+
+            cursor.execute(query,(name, map_link, type, direction, location, current_length, Grands_prix_held, oldname))
+
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('tracks_add.html')
+
+
+@app.route('/grandsprix_add',methods = ['GET','POST'])
+def grandsprix_add():
+    if request.method =='POST':
+        gpname = request.form['gpname']
+        no_of_races = request.form['no_of_races']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES (%s,%s)"""
+            print(query)
+
+            cursor.execute(query,(gpname, no_of_races))
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('tracks_add.html')
+
+@app.route('/grandsprix_delete',methods = ['GET','POST'])
+def grandsprix_delete():
+    if request.method =='POST':
+        gpname = request.form['gpname']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """DELETE FROM GRANDS_PRIX WHERE GrandsPrix=%s"""
+            cursor.execute(query,([gpname]))
+            connection.commit()
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('tracks_add.html')
+
+@app.route('/grandsprix_update',methods = ['GET','POST'])
+def grandsprix_update():
+    if request.method =='POST':
+        oldname = request.form['oldname']
+        gpname = request.form['gpname']
+        no_of_races = request.form['no_of_races']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE GRANDS_PRIX SET ( GrandsPrix, No_of_Races) = (%s,%s) WHERE GrandsPrix=%s"""
+            #print(query)
+
+            cursor.execute(query,(gpname, no_of_races, oldname))
+
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('tracks_add.html')
+
+
+
+
 
 @app.route('/brands')
 def brands():

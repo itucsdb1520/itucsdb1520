@@ -98,7 +98,7 @@ def initialize_db_function(cursor):
 
     cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GrandsPrixHeld INTEGER)""")
     cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
-    cursor.execute("""CREATE TABLE GRANDS_PRIX (Id INTEGER PRIMARY KEY, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
+    cursor.execute("""CREATE TABLE GRANDS_PRIX (Id SERIAL PRIMARY KEY, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
     cursor.execute("""CREATE TABLE COUPLING_T_GP ( Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE)""")
 
     cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 'Istanbul, Turkey', '5.338 km', 7)""")
@@ -109,11 +109,9 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '1995-2007')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '2013')""")
 
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('German Grand Prix', 61)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Turkish Grand Prix', 7)""")
 
 
-    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (7, 'German Grand Prix', 61)""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX ( Id, GrandsPrix, No_of_Races) VALUES (15, 'Turkish Grand Prix', 7)""")
-
-
-    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Istanbul Park', 15)""")
-    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 7)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Istanbul Park', 2)""")
+    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 1)""")
