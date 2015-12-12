@@ -91,27 +91,26 @@ def initialize_db_function(cursor):
 
   #database for the tracks
     cursor.execute("""DROP TABLE IF EXISTS COUPLING_T_GP""")
-    cursor.execute("""DROP TABLE IF EXISTS GRANDS_PRIX""")
     cursor.execute("""DROP TABLE IF EXISTS SEASONS""")
     cursor.execute("""DROP TABLE IF EXISTS TRACKS""")
+    cursor.execute("""DROP TABLE IF EXISTS GRANDS_PRIX""")
 
-
-    cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GrandsPrixHeld INTEGER)""")
-    cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
     cursor.execute("""CREATE TABLE GRANDS_PRIX (Id SERIAL PRIMARY KEY, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
-    cursor.execute("""CREATE TABLE COUPLING_T_GP ( Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE)""")
+    cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE, GrandsPrixHeld INTEGER)""")
+    cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
 
-    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 'Istanbul, Turkey', '5.338 km', 7)""")
-    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES ('Nurburgring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Circuit_N%C3%BCrburgring-2002-GP.svg/225px-Circuit_N%C3%BCrburgring-2002-GP.svg.png', 'Race circuit', 'Clockwise', 'Nurburg, Germany', '5.148 km', 40)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('German Grand Prix', 61)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Turkish Grand Prix', 7)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Austrian Grand Prix', 28)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('European Grand Prix', 22)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('French Grand Prix', 58)""")
+
+
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 'Istanbul, Turkey', '5.338 km', 2, 7)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) VALUES ('Nurburgring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Circuit_N%C3%BCrburgring-2002-GP.svg/225px-Circuit_N%C3%BCrburgring-2002-GP.svg.png', 'Race circuit', 'Clockwise', 'Nurburg, Germany', '5.148 km', 1, 40)""")
 
 
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Istanbul Park', '2005-2011')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '1995-2007')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '2013')""")
 
-    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('German Grand Prix', 61)""")
-    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Turkish Grand Prix', 7)""")
-
-
-    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Istanbul Park', 2)""")
-    cursor.execute("""INSERT INTO COUPLING_T_GP (Circuit_Name, GP_Id ) VALUES ('Nurburgring', 1)""")

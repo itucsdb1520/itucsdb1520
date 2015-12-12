@@ -19,7 +19,7 @@
 
 <br>
 <br>
-<button id="add" onclick="location.href = '{{ url_for('tracks_add') }}'" class="float-left submit-button" >Add Delete Operations</button>
+<button id="add" onclick="location.href = '{{ url_for('tracks_add') }}'" class="float-left submit-button" > CRUD Operations</button>
 
 		<div>
              <div class="table">
@@ -32,6 +32,7 @@
 				<th id="direction"> Direction </th>
 				<th id="location"> Location </th>
 				<th id="current_length"> Current Length </th>
+				<th id="gp_id"> Grands Prix name </th>
 				<th id="Grands_prix_held"> Grands Prix Held </th>
 
 			</tr>
@@ -46,6 +47,7 @@
 				<td>{{ id[4] }} </td>
 				<td>{{ id[5] }} </td>
 				<td>{{ id[6] }} </td>
+				<td>{{ id[7] }} </td>
 
 			</tr>
 			{% endfor %}

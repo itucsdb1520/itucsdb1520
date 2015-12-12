@@ -53,10 +53,16 @@
                 {% endfor %}
 
             {% elif table == 3%}
-                {% for x in query_list %}
+                {% for name, type, direction, location, current_length, gp_id, Grands_prix_held in query_list %}
 
                     <tr>
-                        <td>{{ x }} </td>
+                        <td class="name">{{ name }} </td>
+                        <td class="type">{{ type }} </td>
+                        <td class="direction">{{ direction }} </td>
+                        <td class="location">{{ location }} </td>
+                        <td class="current_length">{{ current_length }} </td>
+                        <td class="gp_id">{{ gp_id }} </td>
+                        <td class="Grands_prix_held">{{ Grands_prix_held }} </td>
                     </tr>
 
                 {% endfor %}
@@ -85,6 +91,17 @@
                     </tr>
 
                 {% endfor %}
+
+            {% elif table == 8%}
+                {% for gpname, no_of_races in query_list %}
+
+                    <tr>
+                        <td class="gpname">{{ gpname }} </td>
+                        <td class="no_of_races">{{ no_of_races }} </td>
+                    </tr>
+
+                {% endfor %}
+
             {% else %}
                 <tr>
                     <td> OH NO! THERE WAS AN ERROR! <td>

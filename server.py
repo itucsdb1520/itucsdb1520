@@ -230,12 +230,13 @@ def tracks():
     grandsprix_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, TRACKS.GrandsPrixHeld FROM TRACKS"""
+            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id)"""
 
             cursor.execute(query)
 
             for record in cursor:
                 tracks_list.append(record)
+            connection.commit()
 
             query = """SELECT Circuit_Name, Season FROM SEASONS"""
             cursor.execute(query)
@@ -254,6 +255,8 @@ def tracks_add():
 
     tracks_list = []
     seasons_list = []
+    grandsprix_list = []
+
     if request.method =='POST':
         name = request.form['name']
         map_link = request.form['map_link']
@@ -261,11 +264,21 @@ def tracks_add():
         direction = request.form['direction']
         location = request.form['location']
         current_length = request.form['current_length']
+        gp_id = request.form['gp_id']
         Grands_prix_held = request.form['Grands_prix_held']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
 
-            query = """SELECT Circuit FROM TRACKS WHERE Circuit=%s"""
+            query = """SELECT Id FROM GRANDS_PRIX WHERE Id=%s"""
+            cursor.execute(query,(gp_id))
+
+            for record in cursor:
+                grandsprix_list.append(record)
+
+            if len(grandsprix_list) == 0 or gp_id == '':
+                return redirect(url_for('tracks'))
+
+            query = """SELECT Circuit FROM TRACKS WHERE circuit=%s"""
             cursor.execute(query,([name]))
 
             for record in cursor:
@@ -274,10 +287,10 @@ def tracks_add():
             if len(tracks_list) != 0:
                 return redirect(url_for('tracks'))
 
-            query = """INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            query = """INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
             print(query)
 
-            cursor.execute(query,(name, map_link, type, direction, location, current_length, Grands_prix_held))
+            cursor.execute(query,(name, map_link, type, direction, location, current_length, gp_id, Grands_prix_held))
             connection.commit()
 
         return redirect(url_for('tracks'))
@@ -309,14 +322,15 @@ def track_update():
         direction = request.form['direction']
         location = request.form['location']
         current_length = request.form['current_length']
+        gp_id = request.form['gp_id']
         Grands_prix_held = request.form['Grands_prix_held']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
 
-            query = """UPDATE TRACKS SET (Circuit, Map, Type, Direction, Location, Length, GrandsPrixHeld) = (%s,%s,%s,%s,%s,%s,%s) WHERE Circuit=%s"""
+            query = """UPDATE TRACKS SET (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) = (%s,%s,%s,%s,%s,%s,%s,%s) WHERE Circuit=%s"""
             #print(query)
 
-            cursor.execute(query,(name, map_link, type, direction, location, current_length, Grands_prix_held, oldname))
+            cursor.execute(query,(name, map_link, type, direction, location, current_length, gp_id, Grands_prix_held, oldname))
 
             connection.commit()
 
@@ -858,10 +872,33 @@ def search():
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 2)
             elif area == '3':
                 #search tracks
-                query = """ """
+                search = "%" +search + "%"
+                query = """SELECT TRACKS.Circuit, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id) AND (TRACKS.Circuit LIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query = """SELECT TRACKS.Circuit, TRACKS.Type, TRACKS.Direction, TRACKS.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id) AND (TRACKS.Location LIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query_list = list(set(query_list))
 
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 3)
+            elif area == '8':
+                #search grands_prix
+                search = "%" +search + "%"
+                query = """SELECT GrandsPrix, No_of_Races FROM GRANDS_PRIX WHERE GrandsPrix ILIKE %s"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query_list = list(set(query_list))
+
+                connection.commit()
+                return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 8)
             elif area == '4':
                 #search brands
                 search = "%" + search + "%"
