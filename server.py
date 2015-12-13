@@ -135,6 +135,32 @@ def add_countries():
 
 
     return render_template('add_country.html',countries = countries, current_time=now.ctime())
+@app.route('/delete_countries', methods = ['GET','POST'])
+def delete_countries():
+    now = datetime.datetime.now()
+
+    countries = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT COUNTRIES.Id, COUNTRIES.Countries FROM  COUNTRIES"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                countries.append(pilot)
+
+            connection.commit()
+
+    if request.method =='POST':
+        Country = request.form['N_country']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM COUNTRIES WHERE COUNTRIES.Id = %s """
+            cursor.execute(query, ([Country]))
+
+
+        return render_template('add_country.html',countries = countries, current_time=now.ctime())
 
 
 @app.route('/add_team', methods = ['GET','POST'])
@@ -163,6 +189,32 @@ def add_team():
 
     return render_template('add_team.html',teams = teams, current_time=now.ctime())
 
+@app.route('/delete_teams', methods = ['GET','POST'])
+def delete_teams():
+    now = datetime.datetime.now()
+
+    teams = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT TEAMS.Id, TEAMS.Teams FROM  TEAMS"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                teams.append(pilot)
+
+            connection.commit()
+
+    if request.method =='POST':
+        Team = request.form['team']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM TEAMS WHERE TEAMS.Id = %s """
+            cursor.execute(query, ([Team]))
+
+
+        return render_template('add_team.html',teams = teams, current_time=now.ctime())
 
 
 
