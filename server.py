@@ -62,7 +62,7 @@ def pilots():
     countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT Pilots.Name, Pilots.Surname, Pilots.Age, Pilots.Team, Countries.Countries FROM PILOTS INNER JOIN COUNTRIES ON Pilots.ForeignKey=Countries.Id;"""
+            query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, PILOTS.Team, COUNTRIES.Countries FROM PILOTS INNER JOIN COUNTRIES ON PILOTS.ForeignKey=COUNTRIES.Id;"""
 
             cursor.execute(query)
 
@@ -71,14 +71,7 @@ def pilots():
 
             connection.commit()
 
-            cursor = connection.cursor()
-            query = """SELECT * FROM COUNTRIES """
 
-
-            for country in cursor:
-                countries.append(country)
-
-            connection.commit()
 
     return render_template('pilots.html', pilots=pilots, countries = countries, current_time=now.ctime())
 

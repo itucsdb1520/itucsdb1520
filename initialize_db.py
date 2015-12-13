@@ -27,33 +27,15 @@ def initialize_db_function(cursor):
     #database for the pilots
     cursor.execute("""DROP TABLE IF EXISTS FOUNDERS""")
     cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
-    cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
     cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
+    cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
+
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team CHAR(25),ForeignKey INTEGER references COUNTRIES(Id) )""")
 
 
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Lewis','Hamilton', 30, 'MERCEDES')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Nico','Rosberg', 30, 'MERCEDES')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Sebastian','Vettel', 28, 'FERRARI')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Kimi','Raikkonen', 36, 'FERRARI')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Valtteri','Bottas', 26, 'WILLIAMS')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Felipe','Massa', 24, 'WILLIAMS')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Daniil','Kvyat', 21, 'RED BULL RACING')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Daniel','Ricciardo', 26, 'RED BULL RACING')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Sergio','Perez', 25, 'FORCE INDIA')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Nico','Hulkenberg', 28, 'FORCE INDIA')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Romain','Grosjean', 29, 'LOTUS')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Max','Verstappen', 18, 'TORO ROSSO')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Felipe','Nasr', 23, 'SAUBER')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Pastor','Maldonado', 30, 'LOTUS')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Carlos','Sainz', 21, 'TORO ROSSO')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Jenson','Button', 35, 'MCLAREN')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Fernando','Alonso', 34, 'MCLAREN')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Marcus','Ericsson', 25, 'SAUBER')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Roberto','Merhi', 24, 'MARUSSIA')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Alexander','Rossi', 24, 'MARUSSIA')""")
-    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Will','Stevens', 24, 'MARUSSIA')""")
+
+
 
     cursor.execute("""INSERT INTO COUNTRIES ( Countries) VALUES ('Great Britain')""")
     cursor.execute("""INSERT INTO COUNTRIES ( Countries) VALUES ('Germany')""")
@@ -72,6 +54,30 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO COUNTRIES ( Countries) VALUES ('Italy')""")
     cursor.execute("""INSERT INTO COUNTRIES ( Countries) VALUES ('Switzerland')""")
     cursor.execute("""INSERT INTO COUNTRIES ( Countries) VALUES ('China')""")
+
+
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Lewis','Hamilton', 30, 'MERCEDES', 1)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Nico','Rosberg', 30, 'MERCEDES', 2)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Sebastian','Vettel', 28, 'FERRARI', 2)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Kimi','Raikkonen', 36, 'FERRARI', 3)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Valtteri','Bottas', 26, 'WILLIAMS', 3)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Felipe','Massa', 24, 'WILLIAMS', 4)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Daniil','Kvyat', 21, 'RED BULL RACING', 5)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Daniel','Ricciardo', 26, 'RED BULL RACING', 6)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Sergio','Perez', 25, 'FORCE INDIA', 7)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Nico','Hulkenberg', 28, 'FORCE INDIA', 2)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Romain','Grosjean', 29, 'LOTUS', 8)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Max','Verstappen', 18, 'TORO ROSSO', 9)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Felipe','Nasr', 23, 'SAUBER', 4)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Pastor','Maldonado', 30, 'LOTUS', 10)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Carlos','Sainz', 21, 'TORO ROSSO', 11)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Jenson','Button', 35, 'MCLAREN', 1)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Fernando','Alonso', 34, 'MCLAREN', 11)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Marcus','Ericsson', 25, 'SAUBER', 12)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Roberto','Merhi', 24, 'MARUSSIA', 11)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Alexander','Rossi', 24, 'MARUSSIA', 13)""")
+    cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team, ForeignKey) VALUES ('Will','Stevens', 24, 'MARUSSIA', 1)""")
+
 
 
 
