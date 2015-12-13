@@ -12,6 +12,7 @@ function edit_fields(id){
     table.cells[3].innerHTML = "<input form='edit_" + id + "' type='text' name='website' placeholder='Website' maxlength='25' value='" + table.cells[3].innerHTML.trim() + "'>";
     table.cells[4].innerHTML = "<input form='edit_" + id + "' type='text' name='imagelink' placeholder='Image Link' maxlength='50' value='" + table.cells[4].innerHTML.trim() + "'>";
     table.cells[5].innerHTML = "<input form='edit_" + id + "' type='text' name='description' placeholder='Description' maxlength='75' value='" + table.cells[5].innerHTML.trim() + "'>";
+    table.cells[6].innerHTML = "<input form='edit_" + id + "' type='text' name='country' placeholder='Country' maxlength='15' value='" + table.cells[6].innerHTML.trim() + "'>";
     
     $(document.getElementsByClassName("edit_delete_forms_" + id)).html("<button form='edit_" + id + "' class='edit_finalize_button green' name='edit' value='" +id+"' type='submit'>" +
 	    "<span class='icon-checkmark'>Update</span>" +

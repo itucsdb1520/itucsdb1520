@@ -31,11 +31,12 @@
 				<th id="website" onclick="location.href = '{{ url_for('brands_db', operation='listbrands-website') }}'"> Website </th>
 				<th id="imagelink" onclick="location.href = '{{ url_for('brands_db', operation='listbrands-image') }}'">Image Link</th>
 				<th id="description" onclick="location.href = '{{ url_for('brands_db', operation='listbrands-comment') }}'"> Description </th>
+				<th id="country" onclick="location.href = '{{ url_for('brands_db', operation='listbrands-country') }}'"> Country </th>
 				<th> Operation </th>
 	
 			</tr>
 			
-			{% for id, name, description, year, imagelink, industry, website in brands_list %}
+			{% for id, name, description, year, imagelink, industry, website, country in brands_list %}
 			<tr id="table_{{id}}">
 			
 				<td>{{ name }} </td>
@@ -44,6 +45,7 @@
 				<td>{{ website }} </td>
 				<td>{{ imagelink }} </td>
 				<td>{{ description }} </td>
+				<td>{{ country }} </td>
 				<td>
 				  
 				  
@@ -76,6 +78,7 @@
 			    <td ><input type="text" placeholder="Website" name="website" maxlength="25"></td>
 			    <td ><input type="text" placeholder="Image Link" name="imagelink" maxlength="50"></td>
 			    <td ><input type="text" placeholder="Description" name="description" maxlength="75"></td>
+			    <td ><input type="text" placeholder="Country" name="country" maxlength="15"></td>
 			  </form>
 			<td>
 			  <button class="add_button green" type="submit" form="add-brand-form" value="Submit">

@@ -19,7 +19,7 @@ div.table{
 	margin-right: auto;
 	margin-top: 50px;
 	text-align: center;
-	max-width: 1200px;
+	max-width: 1400px;
 }
 }
 
@@ -111,11 +111,12 @@ input#add-input{
 	width: 90px;
 }
 
-#id, #name, #year, #description,#industry,#imagelink,#website, #surname, #operation, #founder-name, #brand-name{
+#id, #name, #year, #description,#industry,#imagelink,#website, #surname, #operation, #founder-name, #brand-name, #country{
 	height: 30px;
+	width: 100px;
 	cursor: pointer;
 }
-#id:hover, #name:hover, #year:hover, #description:hover,#industry:hover,#imagelink:hover,#website:hover, #surname:hover, #founder-name:hover, #brand-name:hover{
+#id:hover, #name:hover, #year:hover, #description:hover,#industry:hover,#imagelink:hover,#website:hover, #surname:hover, #founder-name:hover, #brand-name:hover, #country:hover{
 	height: 30px;
 	background-color: rgba(255, 0,0, 0.4);
 	cursor: pointer;
@@ -136,10 +137,13 @@ input#add-input{
 	width: 150px;
 }
 #year{
-	width: 100px;
+	width: 70px;
 }
 #description{
-	width: 300px;
+	width: 200px;
+}
+#country{
+	width: 90px;
 }
 th#operation{
 	width: 100px;

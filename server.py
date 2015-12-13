@@ -464,12 +464,14 @@ def brands_db(operation):
                 sort = "Image"
             elif sub_operation == 'comment':
                 sort = "Comment"
+            elif sub_operation == 'country':
+                sort = "COUNTRIES.Countries"
             else:
                 sort = "Id"
 
         with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """SELECT * FROM BRANDS"""
+                query = """SELECT BRANDS.Id, BRANDS.Name, BRANDS.Comment, BRANDS.Foundation, BRANDS.Image,  BRANDS.Industry, BRANDS.Website, COUNTRIES.Countries FROM COUNTRIES INNER JOIN BRANDS ON BRANDS.CountryId = COUNTRIES.Id """
                 if make_sub_operation == True:
                     query = query + """ ORDER BY """ + sort
                 print(query)
@@ -550,11 +552,21 @@ def brands_db(operation):
             imagelink = request.form['imagelink']
             website = request.form['website']
             industry = request.form['industry']
+            country = request.form['country']
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website) VALUES (%s, %s, %s, %s, %s, %s);"""
-                cursor.execute(query, (brand_name,description,foundation,imagelink,industry,website))
+                
+                query = """SELECT Id FROM COUNTRIES WHERE COUNTRIES.countries = '""" + country + """'"""
+                cursor.execute(query)
+                
+                countryid = None
+                for record in cursor:
+                    countryid = record
+                    
+                print(countryid[0])
+                query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website, CountryId) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
+                cursor.execute(query, (brand_name,description,foundation,imagelink,industry,website, countryid[0]))
                 connection.commit()
 
 
@@ -599,7 +611,7 @@ def brands_db(operation):
                 connection.commit()
         return redirect(url_for('brands_db', operation = 'listfounders'))
 
-    elif operation == "edit_brands":
+    elif operation == "edit_brand":
         if request.method == 'POST':
             new_name = request.form['brand-name']
             new_description = request.form['description']
@@ -607,12 +619,23 @@ def brands_db(operation):
             new_imagelink = request.form['imagelink']
             new_website = request.form['website']
             new_industry = request.form['industry']
+            new_country = request.form['country']
             edit = request.form['edit']
+            print(new_country)
+            
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                query = """UPDATE BRANDS SET (Name, Comment, Foundation,  Image, Industry, Website) = (%s,%s,%s,%s,%s,%s) WHERE ID = %s;"""
-                cursor.execute(query, (new_name, new_description, new_foundation, new_imagelink, new_industry, new_website, edit))
+                
+                query = """SELECT Id FROM COUNTRIES WHERE COUNTRIES.countries = '""" + new_country + """'"""
+                cursor.execute(query)
+                
+                countryid = None
+                for record in cursor:
+                    countryid = record
+                print(countryid[0])
+                query = """UPDATE BRANDS SET (Name, Comment, Foundation,  Image, Industry, Website, CountryId) = (%s, %s,%s,%s,%s,%s,%s) WHERE ID = %s;"""
+                cursor.execute(query, (new_name, new_description, new_foundation, new_imagelink, new_industry, new_website, countryid[0], edit))
                 connection.commit()
 
 
