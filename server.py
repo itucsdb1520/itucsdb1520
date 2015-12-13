@@ -59,7 +59,6 @@ def home():
 def pilots():
     now = datetime.datetime.now()
     pilots = []
-    countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
@@ -73,7 +72,7 @@ def pilots():
 
 
 
-    return render_template('pilots.html', pilots=pilots, countries = countries, current_time=now.ctime())
+    return render_template('pilots.html', pilots=pilots,  current_time=now.ctime())
 
 
 
@@ -82,7 +81,17 @@ def pilots():
 @app.route('/add_pilot', methods = ['GET','POST'])
 def add_pilot():
     now = datetime.datetime.now()
+    pilots = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT PILOTS.Id, PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
 
+            cursor.execute(query)
+
+            for pilot in cursor:
+                pilots.append(pilot)
+
+            connection.commit()
 
 
     if request.method =='POST':
@@ -99,11 +108,22 @@ def add_pilot():
             connection.commit()
 
 
-    return render_template('add_pilot.html', current_time=now.ctime())
+    return render_template('add_pilot.html', pilots=pilots, current_time=now.ctime())
 
 @app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
     now = datetime.datetime.now()
+    countries = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT COUNTRIES.Id, COUNTRIES.Countries FROM  COUNTRIES"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                countries.append(pilot)
+
+            connection.commit()
     if request.method =='POST':
         Country = request.form['country']
 
@@ -114,12 +134,23 @@ def add_countries():
             connection.commit()
 
 
-    return render_template('add_country.html', current_time=now.ctime())
+    return render_template('add_country.html',countries = countries, current_time=now.ctime())
 
 
 @app.route('/add_team', methods = ['GET','POST'])
 def add_team():
     now = datetime.datetime.now()
+    teams = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT TEAMS.Id, TEAMS.Teams FROM  TEAMS"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                teams.append(pilot)
+
+            connection.commit()
     if request.method =='POST':
         Team = request.form['team']
 
@@ -130,7 +161,7 @@ def add_team():
             connection.commit()
 
 
-    return render_template('add_team.html', current_time=now.ctime())
+    return render_template('add_team.html',teams = teams, current_time=now.ctime())
 
 
 
@@ -138,6 +169,17 @@ def add_team():
 @app.route('/delete_pilot', methods = ['GET','POST'])
 def delete_pilot():
     now = datetime.datetime.now()
+    pilots = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT PILOTS.Id, PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                pilots.append(pilot)
+
+            connection.commit()
     if request.method =='POST':
         id = request.form['id']
 
@@ -148,7 +190,7 @@ def delete_pilot():
             connection.commit()
 
 
-    return render_template('add_pilot.html', current_time=now.ctime())
+    return render_template('add_pilot.html', pilots=pilots, current_time=now.ctime())
 
 
 
@@ -156,6 +198,18 @@ def delete_pilot():
 @app.route('/update_pilot', methods = ['GET','POST'])
 def update_pilot():
     now = datetime.datetime.now()
+    pilots = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT PILOTS.Id, PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                pilots.append(pilot)
+
+            connection.commit()
+
     if request.method =='POST':
         Id = request.form['id']
         new_name = request.form['N_name']
@@ -172,12 +226,24 @@ def update_pilot():
             connection.commit()
 
 
-    return render_template('add_pilot.html', current_time=now.ctime())
+    return render_template('add_pilot.html', pilots=pilots, current_time=now.ctime())
 
 
 @app.route('/update_countries', methods = ['GET','POST'])
 def update_countries():
     now = datetime.datetime.now()
+    countries = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT COUNTRIES.Id, COUNTRIES.Countries FROM  COUNTRIES"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                countries.append(pilot)
+
+            connection.commit()
+
     if request.method =='POST':
         Id = request.form['id']
         new_country = request.form['N_country']
@@ -190,13 +256,24 @@ def update_countries():
             connection.commit()
 
 
-    return render_template('add_country.html', current_time=now.ctime())
+    return render_template('add_country.html',countries = countries, current_time=now.ctime())
 
 
 
 @app.route('/update_teams', methods = ['GET','POST'])
 def update_teams():
     now = datetime.datetime.now()
+    teams = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT TEAMS.Id, TEAMS.Teams FROM  TEAMS"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                teams.append(pilot)
+
+            connection.commit()
     if request.method =='POST':
         Id = request.form['id']
         new_team = request.form['N_team']
@@ -209,7 +286,7 @@ def update_teams():
             connection.commit()
 
 
-    return render_template('add_team.html', current_time=now.ctime())
+    return render_template('add_team.html',teams = teams, current_time=now.ctime())
 
 
 
