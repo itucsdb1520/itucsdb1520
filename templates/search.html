@@ -68,7 +68,7 @@
                 {% endfor %}
 
             {% elif table == 4%}
-                {% for id, name, description, year, imagelink, industry, website in query_list %}
+                {% for id, name, description, year, imagelink, industry, website, country in query_list %}
 
                     <tr>
                         <td class="brand_link"><a href="{{ url_for('brand', the_brand = name.strip()) }}">Link</a></td>
@@ -78,6 +78,7 @@
                         <td class="brand_web">{{ website }} </td>
                         <td class="brand_image">{{ imagelink }} </td>
                         <td class="brand_description">{{ description }} </td>
+			
                     </tr>
 
                 {% endfor %}

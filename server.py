@@ -922,6 +922,7 @@ def search():
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 8)
             elif area == '4':
                 #search brands
+                print(search)
                 search = "%" + search + "%"
                 query = """SELECT * FROM BRANDS WHERE Name ILIKE %s"""
                 cursor.execute(query, ([search]))
@@ -941,6 +942,7 @@ def search():
                 query_list = list(set(query_list))
                 #remove duplicate elements in the list
                 connection.commit()
+                print(query_list)
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 4)
 
             elif area == '7':
