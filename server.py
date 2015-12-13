@@ -63,7 +63,7 @@ def pilots():
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query = """SELECT * FROM PILOTS"""
-            print(query)
+
             cursor.execute(query)
 
             for pilot in cursor:
@@ -92,12 +92,14 @@ def add_pilot():
         name = request.form['name']
         surname = request.form['surname']
         age = request.form['age']
+        team = request.form['team']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """INSERT INTO PILOTS (Name, Surname, Age) VALUES ('""" +name +"""', '"""+ surname + """', """+ age + """)"""
+            query = """INSERT INTO PILOTS (Name, Surname, Age, Team) VALUES (%s, %s, %s, %s)"""
             print(query)
-            cursor.execute(query)
+            cursor.execute(query, (name, surname, age, team))
+
             connection.commit()
 
 

@@ -31,12 +31,13 @@
 				<th>  TEAM </th>
 
 			</tr>
-			{% for id, name, surname, age in pilots %}
+			{% for id, name, surname, age, team in pilots %}
 			<tr>
 				<td>{{ id }} </td>
 				<td>{{ name }} </td>
 				<td>{{ surname }} </td>
 				<td>{{ age }} </td>
+				<td>{{ team }} </td>
 			</tr>
 			{% endfor %}
 		</table>
