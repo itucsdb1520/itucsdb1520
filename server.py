@@ -104,10 +104,6 @@ def add_pilot():
 @app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
     now = datetime.datetime.now()
-
-
-
-
     if request.method =='POST':
         Country = request.form['country']
 
@@ -124,10 +120,6 @@ def add_countries():
 @app.route('/add_team', methods = ['GET','POST'])
 def add_team():
     now = datetime.datetime.now()
-
-
-
-
     if request.method =='POST':
         Team = request.form['team']
 
