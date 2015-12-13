@@ -20,15 +20,18 @@
 
 
 
+
+
+
  <div >
 		<table>
 
 			<tr>
-				<th > ID</th>
 				<th > NAME</th>
 				<th > SURNAME</th>
 				<th > AGE </th>
 				<th>  TEAM </th>
+				<th > COUNTRY</th>
 
 			</tr>
 			{% for id, name, surname, age, team in pilots %}
@@ -47,29 +50,14 @@
 
 <br>
 
-		<table>
-
-			<tr>
-				<th > ID</th>
-				<th > COUNTRY</th>
-				<th > PILOT </th>
-
-			</tr>
-			{% for id, Countries, ForeignKey in countries %}
-			<tr>
-				<td>{{ id }} </td>
-				<td>{{ Countries }} </td>
-				<td>{{ ForeignKey }} </td>
-			</tr>
-			{% endfor %}
-		</table>
 
 
 
 
 
 
-</div>
+
+
 
 
 
