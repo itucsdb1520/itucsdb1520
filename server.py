@@ -1075,11 +1075,6 @@ def search():
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT TRACKS.Circuit, TRACKS.Type, TRACKS.Direction, LOCATION.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX, LOCATION WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id AND TRACKS.Location_Id = LOCATION.Id) AND (TRACKS.Location LIKE %s)"""
-                cursor.execute(query, ([search]))
-                for record in cursor:
-                    query_list.append(record)
-
                 query_list = list(set(query_list))
 
                 connection.commit()
