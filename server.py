@@ -71,9 +71,14 @@ def pilots():
 
             connection.commit()
 
+            cursor = connection.cursor()
+            query = """SELECT * FROM COUNTRIES """
 
 
+            for country in cursor:
+                countries.append(country)
 
+            connection.commit()
 
     return render_template('pilots.html', pilots=pilots, countries = countries, current_time=now.ctime())
 
@@ -92,14 +97,14 @@ def add_pilot():
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """INSERT INTO PILOTS (Name, Surname, Age, Team) VALUES (%s, %s, %s, %s)"""
+            query = """INSERT INTO PILOTS (Name, Surname, Age, Team, ForeignKey) VALUES (%s, %s, %s, %s, %s)"""
             print(query)
-            cursor.execute(query, (name, surname, age, team))
+            cursor.execute(query, (name, surname, age, team, foreignKey))
 
             connection.commit()
 
 
-    return render_template('pilot_add.html', current_time=now.ctime())
+    return render_template('add_pilot.html', current_time=now.ctime())
 
 @app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
@@ -112,10 +117,10 @@ def add_countries():
             cursor = connection.cursor()
 
 
-            query =  """INSERT INTO COUNTRIES ( Countries, ForeignKey) VALUES (%s,%s)"""
+            query =  """INSERT INTO COUNTRIES ( Countries) VALUES (%s)"""
 
 
-            cursor.execute(query,(Countries,ForeignKey))
+            cursor.execute(query,(Countries))
             connection.commit()
 
 
