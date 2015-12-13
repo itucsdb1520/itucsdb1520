@@ -24,8 +24,8 @@ def initialize_db_function(cursor):
 
     #database for the pilots
     cursor.execute("""DROP TABLE IF EXISTS FOUNDERS, BRANDS""")
-    cursor.execute("""DROP TABLE IF EXISTS PILOTS, COUNTRIES""")
-    cursor.execute("""DROP TABLE IF EXISTS TEAMS""")
+    cursor.execute("""DROP TABLE IF EXISTS PILOTS, COUNTRIES CASCADE""")
+    cursor.execute("""DROP TABLE IF EXISTS TEAMS CASCADE""")
 
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE TEAMS (Id SERIAL PRIMARY KEY NOT NULL, Teams CHAR(25) Unique)""")

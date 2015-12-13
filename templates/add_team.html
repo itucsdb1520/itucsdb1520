@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} plots {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="/static/css/about.css" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+
+
+
+
+<div >
+		<table>
+
+			<tr>
+				<th > ID</th>
+				<th > TEAM</th>
+			</tr>
+			{% for id, teams in teams %}
+			<tr>
+				<td>{{ id }} </td>
+				<td>{{ teams }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		</br>
+	      <div >
+		<div>
+		  <form action="/add_team" method="post" id="addteam">
+		    Team: <input type="text" name="team"><br>
+		  </form>
+
+		  <button type="submit" form="addteam" value="Submit">Add</button>
+		</div>
+
+
+		<div>
+		  <form action="/delete_teams" method="post" id="deleteteam">
+		    Country: <input type="text" name="team"><br>
+		  </form>
+
+		  <button type="submit" form="deleteteam" value="Submit">delete</button>
+		</div>
+
+
+
+
+		<div>
+		  <form action="/update_teams" method="post" id="updateteam">
+		    ID: <input type="text" name="id"><br>
+		    New Team: <input type="text" name="N_team"><br>
+		  </form>
+
+		  <button type="submit" form="updateteam" value="Submit">update</button>
+		</div>
+
+
+		</div>
+
+
+
+
+
+
+
+	{% endblock %}

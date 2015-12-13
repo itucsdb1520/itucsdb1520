@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} plots {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="/static/css/about.css" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+
+
+
+
+<div >
+		<table>
+
+			<tr>
+				<th > ID</th>
+				<th > COUNTRY</th>
+			</tr>
+			{% for id, countries in countries %}
+			<tr>
+				<td>{{ id }} </td>
+				<td>{{ countries }} </td>
+			</tr>
+			{% endfor %}
+		</table>
+		</br>
+	      <div >
+		<div>
+		  <form action="/add_countries" method="post" id="addcountry">
+		    Country: <input type="text" name="country"><br>
+		  </form>
+
+		  <button type="submit" form="addcountry" value="Submit">Add</button>
+		</div>
+
+
+		<div>
+		  <form action="/update_countries" method="post" id="updatecountry">
+		    ID: <input type="text" name="id"><br>
+		    New Country: <input type="text" name="N_country"><br>
+		  </form>
+
+		  <button type="submit" form="updatecountry" value="Submit">update</button>
+		</div>
+<div>
+		  <form action="/delete_countries" method="post" id="deletecountry">
+		    Country: <input type="text" name="N_country"><br>
+		  </form>
+
+		  <button type="submit" form="deletecountry" value="Submit">delete</button>
+		</div>
+
+		</div>
+
+
+
+
+
+
+
+	{% endblock %}
