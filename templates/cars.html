@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<style>
+table, tr,th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -33,6 +39,7 @@
 				<th id="image_link">Image</th>
 				<th id="car_name"> Car Name</th>
 				<th id="engine_name"> Engine Name </th>
+				<th id="creator_name"> Creator Name </th>
 				<th id="horsepower"> HorsePower </th>
 				<th id="speed_limit"> Max Speed </th>
 				<th id="brand_name"> Brand </th>
@@ -51,6 +58,7 @@
 				<td>{{ id[4] }} </td>
 				<td>{{ id[5] }} </td>
 				<td>{{ id[6] }} </td>
+				<td>{{ id[7]+id[8] }} </td>
 
 			</tr>
 			{% endfor %}
@@ -60,7 +68,7 @@
 		  <caption>List of All Engines</caption>
 			<tr>
 
-				<th id="engine_namek">Engine Name</th>
+				<th id="engine_name">Engine Name</th>
 				<th id="horsepower"> Horsepower</th>
 			</tr>
 
@@ -68,6 +76,23 @@
 			<tr>
 				<td>{{ id[0] }} </td>
 				<td>{{ id[1] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
+		<table id="creator-table">
+		  <caption>List of All Creators</caption>
+			<tr>
+
+				<th id="engine_name">Creators Name</th>
+
+			</tr>
+
+			{% for id in creator_list %}
+			<tr>
+				<td>{{ id[0] }} </td>
+
 
 			</tr>
 			{% endfor %}

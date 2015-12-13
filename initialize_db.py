@@ -123,19 +123,26 @@ def initialize_db_function(cursor):
     #database for the cars
     cursor.execute("""DROP TABLE IF EXISTS CARS""")
     cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
+    cursor.execute("""DROP TABLE IF EXISTS CREATORS""")
+
 
     cursor.execute("""CREATE TABLE ENGINES(Id SERIAL PRIMARY KEY,Engine_Name CHAR(30), HorsePower CHAR(30)) """)
-    cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id) ON DELETE CASCADE,Speed CHAR(30),BRAND CHAR(50),PILOT CHAR(50) )""")
+    cursor.execute("""CREATE TABLE CREATORS(Id SERIAL PRIMARY KEY,Name CHAR(30)) """)
+    cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id) ON DELETE CASCADE,Creator_ID INTEGER references CREATORS(Id) ON DELETE CASCADE,Speed CHAR(30),BRAND_ID INTEGER references PILOTS(Id) ON DELETE CASCADE,PILOT_ID INTEGER references TEAMS(Id) ON DELETE CASCADE)""")
+
 
     cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('R13','300')""")
     cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('H15','320')""")
     cursor.execute("""INSERT INTO ENGINES (Engine_Name , HorsePower) VALUES ('T15','350')""")
 
-    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.parrola.com/wp-content/uploads/2013/01/mclaren-mercedes-formula-1.jpg','V13',1,'300','Mercedes','Fernando Alonso')""")
-    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.f1fanatic.co.uk/wp-content/uploads/2008/01/ferrari_f2008_launch_4.jpg','MH13',2,'320','Ferrari','James Hamilton' )""")
-    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.autoguide.com/auto-news/wp-content/uploads/2013/07/honda-f1.jpg','V15',1,'330','Honda','Torro Rosso')""")
-    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Speed,BRAND,PILOT) VALUES ('http://www.sport-wall.com/wp-content/uploads/2015/03/Formula-1-Renault-F1-Car-680x425.jpg','RT3',3,'350','Renault','Jason Button')""")
 
+    cursor.execute("""INSERT INTO CREATORS (Name) VALUES ('John Wick')""")
+    cursor.execute("""INSERT INTO CREATORS (Name) VALUES ('Xio Hua')""")
+    cursor.execute("""INSERT INTO CREATORS (Name) VALUES ('Alfred Long')""")
+
+    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Creator_ID,Speed,BRAND_ID,PILOT_ID) VALUES ('http://www.f1fanatic.co.uk/wp-content/uploads/2008/01/ferrari_f2008_launch_4.jpg','MH13',2,2,'300',2,1)""")
+    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Creator_ID,Speed,BRAND_ID,PILOT_ID) VALUES ('http://www.autoguide.com/auto-news/wp-content/uploads/2013/07/honda-f1.jpg','V15',3,1,'300',3,2)""")
+    cursor.execute("""INSERT INTO CARS (Image_Link,Name,Engine_ID,Creator_ID,Speed,BRAND_ID,PILOT_ID) VALUES ('http://www.sport-wall.com/wp-content/uploads/2015/03/Formula-1-Renault-F1-Car-680x425.jpg','RT3',3,1,'300',3,2)""")
 
 
 

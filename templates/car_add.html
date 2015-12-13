@@ -17,20 +17,23 @@
 	{% block body_content %}
 
 	<br><br><br><br>
+	<br><br><br><br>
+
 
    <form action="/car_add" method="post">
 <h1> Car Adding </h1>
 <div>  <label for='image_link'>image link : </label> <input type="text" name="image_link"></input></div>
   <div><label for='car name'>car name :</label> <input type="text" name="car_name"></input></div>
-  <div><label for='engine_id'>engine:</label> <input type="number" name="engine_id"></input></div>
+  <div><label for='engine_id'>engine id:</label> <input type="number" name="engine_id"></input></div>
+  <div><label for='creator_id'>creator id:</label> <input type="number" name="creator_id"></input></div>
   <div><label for='speed_limit'>speed limit :</label> <input type="text" name="speed_limit"></input></div>
-  <div><label for='brand_name'>brand name :</label> <input type="text" name="brand"></input></div>
-  <div><label for='pilot_name '>pilot name :</label> <input type="text" name="pilot"></input></div>
+  <div><label for='brand_name'>brand id :</label> <input type="number" name="brand"></input></div>
+  <div><label for='pilot_name '>pilot id :</label> <input type="number" name="pilot"></input></div>
 
   <div class =button""><input type="submit" value="Add"></input></div>
 
 </form>
-
+<br><br>
 <form action="/engine_add" method="post">
 <br><br>
 <h1> Engine Adding </h1>
@@ -40,19 +43,52 @@
   <div class =button""><input type="submit" value="Add"></input></div>
 
 </form>
+<br><br>
+<form action="/creator_add" method="post">
+<br><br>
+<h1> Creator Adding </h1>
+<div>  <label for='creator_name'>Creator Name : </label> <input type="text" name="creator_name"></input></div>
+  <div class =button""><input type="submit" value="Add"></input></div>
+
+</form>
+<br><br>
 
 <form action="/car_update" method="post">
-<br><br>
+
 <h1> For Car Update Enter the Name of the Car then New Values</h1>
 <div>  <label for='car_name_up'>Car Name  for Updating: </label> <input type="text" name="car_name_up"></input></div>
 
   <div><label for='image_link'>image link : </label> <input type="text" name="image_link"></input></div>
   <div><label for='car name'>car name :</label> <input type="text" name="car_name"></input></div>
-  <div><label for='engine_id'>engine:</label> <input type="number" name="engine_id"></input></div>
+  <div><label for='engine_id'>engine id:</label> <input type="number" name="engine_id"></input></div>
+  <div><label for='creator_id'>creator id:</label> <input type="number" name="creator_id"></input></div>
   <div><label for='speed_limit'>speed limit :</label> <input type="text" name="speed_limit"></input></div>
-  <div><label for='brand_name'>brand name :</label> <input type="text" name="brand"></input></div>
-  <div><label for='pilot_name '>pilot name :</label> <input type="text" name="pilot"></input></div>
+  <div><label for='brand_name'>brand id :</label> <input type="number" name="brand"></input></div>
+  <div><label for='pilot_name '>pilot id :</label> <input type="number" name="pilot"></input></div>
 
+
+  <div class =button""><input type="submit" value="Update"></input></div>
+
+</form>
+<br><br>
+<form action="/engine_update" method="post">
+<br><br>
+<h1> For Engine Update Enter the Name of the Engine then New Values</h1>
+<div>  <label for='engine_name_up'>Engine Name  for Updating: </label> <input type="text" name="engine_name_up"></input></div>
+
+  <div><label for='engine_name '>Engine Name :</label> <input type=""text"" name="engine_name"></input></div>
+  <div><label for='horse_power '>Horse Power :</label> <input type=""text"" name="horse_power"></input></div>
+
+  <div class =button""><input type="submit" value="Update"></input></div>
+
+</form>
+<br><br>
+<form action="/creator_update" method="post">
+<br><br>
+<h1> For  Update Creator Enter the Name of the Creator then New Values</h1>
+<div>  <label for='creator_name_up'>Creator Name  for Updating: </label> <input type="text" name="creator_name_up"></input></div>
+
+  <div><label for='creator_name '>Creator Name :</label> <input type="text" name="creator_name"></input></div>
 
   <div class =button""><input type="submit" value="Update"></input></div>
 

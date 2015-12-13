@@ -350,9 +350,10 @@ def cars():
     now = datetime.datetime.now()
     cars_list = []
     engine_list = []
+    creator_list = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id )"""
+            query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id)"""
 
 
             cursor.execute(query)
@@ -366,7 +367,11 @@ def cars():
             for record in cursor:
                 engine_list.append(record)
 
-    return render_template('cars.html', engine_list = engine_list, cars_list=cars_list, current_time=now.ctime())
+            query = """SELECT Name FROM CREATORS"""
+            cursor.execute(query)
+            for record in cursor:
+                creator_list.append(record)
+    return render_template('cars.html', creator_list = creator_list , engine_list = engine_list, cars_list=cars_list, current_time=now.ctime())
 
 
 
@@ -862,6 +867,7 @@ def car_add():
         image_link = request.form['image_link']
         car_name = request.form['car_name']
         engine_id = request.form['engine_id']
+        creator_id = request.form['creator_id']
         speed_limit = request.form['speed_limit']
         brand = request.form['brand']
         pilot = request.form['pilot']
@@ -888,10 +894,10 @@ def car_add():
             if len(name_list) != 0:
                 return redirect(url_for('home'))
 
-            query =  """INSERT INTO CARS (Image_Link, Name, Engine_ID,Speed, BRAND, PILOT) VALUES (%s,%s,%s,%s,%s,%s)"""
+            query =  """INSERT INTO CARS (Image_Link, Name, Engine_ID,Creator_ID,Speed, BRAND_ID, PILOT_ID) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
             print(query)
 
-            cursor.execute(query,(image_link,car_name,engine_id,speed_limit,brand,pilot))
+            cursor.execute(query,(image_link,car_name,engine_id,creator_id,speed_limit,brand,pilot))
             connection.commit()
 
         return redirect(url_for('home'))
@@ -920,6 +926,25 @@ def engine_add():
          now = datetime.datetime.now()
          return render_template('car_add.html')
 
+@app.route('/creator_add',methods = ['GET','POST'])
+def creator_add():
+    if request.method =='POST':
+        name = request.form['creator_name']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """INSERT INTO CREATORS (Name) VALUES ('"""+name+"""')"""
+            print(query)
+
+            cursor.execute(query)
+            connection.commit()
+
+        return redirect(url_for('home'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_add.html')
+
+
 
 @app.route('/car_delete',methods = ['GET','POST'])
 def car_delete():
@@ -943,17 +968,6 @@ def engine_delete():
         engine_name = request.form['engine_name']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND ENGINES.Engine_Name=%s"""
-
-            cursor.execute(query,([engine_name]))
-
-            for record in cursor:
-                engine_list.append(record)
-
-            if len(engine_list) != 0:
-                return redirect(url_for('home'))
-
-
 
             query =  """DELETE FROM ENGINES WHERE Engine_Name=%s"""
             cursor.execute(query,([engine_name]))
@@ -963,6 +977,21 @@ def engine_delete():
          now = datetime.datetime.now()
          return render_template('car_delete.html')
 
+@app.route('/creator_delete',methods = ['GET','POST'])
+def creator_delete():
+
+    if request.method =='POST':
+        creator_name = request.form['creator_name']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """DELETE FROM CREATORS WHERE Name=%s"""
+            cursor.execute(query,([creator_name]))
+            connection.commit()
+        return redirect(url_for('home'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_delete.html')
 
 @app.route('/car_update',methods = ['GET','POST'])
 def car_update():
@@ -971,16 +1000,17 @@ def car_update():
         image_link = request.form['image_link']
         car_name = request.form['car_name']
         engine_id = request.form['engine_id']
+        creator_id = request.form['creator_id']
         speed_limit = request.form['speed_limit']
         brand = request.form['brand']
         pilot = request.form['pilot']
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
 
-            query =  """UPDATE CARS SET (Image_Link, Name, Engine_ID,Speed, BRAND, PILOT) = (%s,%s,%s,%s,%s,%s) WHERE Name=%s"""
+            query =  """UPDATE CARS SET (Image_Link, Name, Engine_ID,Creator_ID,Speed, BRAND_ID, PILOT_ID) = (%s,%s,%s,%s,%s,%s,%s) WHERE Name=%s"""
             #print(query)
 
-            cursor.execute(query,(image_link,car_name,engine_id,speed_limit,brand,pilot,car_name_up))
+            cursor.execute(query,(image_link,car_name,engine_id,creator_id,speed_limit,brand,pilot,car_name_up))
 
             connection.commit()
 
@@ -988,6 +1018,51 @@ def car_update():
     else:
          now = datetime.datetime.now()
          return render_template('car_add.html')
+
+@app.route('/engine_update',methods = ['GET','POST'])
+def engine_update():
+    if request.method =='POST':
+        engine_name_up =request.form['engine_name_up']
+        engine_name =request.form['engine_name']
+        horse_power =request.form['horse_power']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """UPDATE ENGINES SET (Engine_Name , HorsePower ) = (%s,%s) WHERE Engine_Name=%s"""
+            #print(query)
+
+            cursor.execute(query,(engine_name,horse_power,engine_name_up))
+
+            connection.commit()
+
+        return redirect(url_for('home'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_add.html')
+
+@app.route('/creator_update',methods = ['GET','POST'])
+def creator_update():
+    if request.method =='POST':
+        creator_name_up =request.form['creator_name_up']
+        creator_name =request.form['creator_name']
+
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """UPDATE CREATORS SET Name = %s WHERE Name=%s"""
+            #print(query)
+
+            cursor.execute(query,(creator_name,creator_name_up))
+
+            connection.commit()
+
+        return redirect(url_for('home'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('car_add.html')
+
 
 #the search method
 @app.route('/search', methods = ['GET','POST'])
@@ -1014,22 +1089,32 @@ def search():
             elif area == '1':
                 #search cars
                 search = "%" +search + "%"
-                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Name LIKE %s)"""
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (CARS.Name ILIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.PILOT LIKE %s)"""
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (ENGINES.Engine_Name ILIKE %s) """
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.BRAND LIKE %s)"""
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (CREATORS.Name ILIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
 
-                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,ENGINES.HorsePower,CARS.Speed,CARS.BRAND,CARS.PILOT FROM CARS,ENGINES WHERE (CARS.Engine_ID = ENGINES.Id ) AND (ENGINES.Engine_Name LIKE %s)"""
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (PILOTS.Name ILIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (PILOTS.Surname ILIKE %s)"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query = """SELECT CARS.Image_Link,CARS.Name,ENGINES.Engine_Name,CREATORS.Name,ENGINES.HorsePower,CARS.Speed,TEAMS.Teams,PILOTS.Name,PILOTS.Surname FROM CARS,ENGINES,CREATORS,PILOTS,TEAMS WHERE (CARS.Engine_ID = ENGINES.Id ) AND (CARS.Creator_ID = CREATORS.Id) AND (CARS.BRAND_ID = TEAMS.Id) AND (CARS.PILOT_ID = PILOTS.Id) AND (TEAMS.Teams ILIKE %s)"""
                 cursor.execute(query, ([search]))
                 for record in cursor:
                     query_list.append(record)
