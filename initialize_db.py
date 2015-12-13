@@ -145,25 +145,47 @@ def initialize_db_function(cursor):
 
 
     #database for the tracks
-    cursor.execute("""DROP TABLE IF EXISTS COUPLING_T_GP""")
     cursor.execute("""DROP TABLE IF EXISTS SEASONS""")
     cursor.execute("""DROP TABLE IF EXISTS TRACKS""")
     cursor.execute("""DROP TABLE IF EXISTS GRANDS_PRIX""")
+    cursor.execute("""DROP TABLE IF EXISTS LOCATION""")
 
-    cursor.execute("""CREATE TABLE GRANDS_PRIX (Id SERIAL PRIMARY KEY, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
-    cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location CHAR(50), Length CHAR(20), GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE, GrandsPrixHeld INTEGER)""")
-    cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
+    cursor.execute("""CREATE TABLE LOCATION (Id SERIAL PRIMARY KEY NOT NULL, Location CHAR(50))""")
+    cursor.execute("""CREATE TABLE GRANDS_PRIX (Id SERIAL PRIMARY KEY NOT NULL, GrandsPrix CHAR(30), No_of_Races INTEGER)""")
+    cursor.execute("""CREATE TABLE TRACKS (Circuit CHAR(50) UNIQUE PRIMARY KEY NOT NULL, Map TEXT, Type CHAR(20), Direction CHAR(20), Location_Id INTEGER references LOCATION(Id) ON DELETE CASCADE, Length CHAR(20), GP_Id INTEGER references GRANDS_PRIX(Id) ON DELETE CASCADE, GrandsPrixHeld INTEGER)""")
+    cursor.execute("""CREATE TABLE SEASONS (Id SERIAL PRIMARY KEY NOT NULL, Circuit_Name CHAR(50) references TRACKS(Circuit) ON DELETE CASCADE, Season CHAR(15))""")
 
     cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('German Grand Prix', 61)""")
     cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Turkish Grand Prix', 7)""")
     cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Austrian Grand Prix', 28)""")
     cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('European Grand Prix', 22)""")
     cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('French Grand Prix', 58)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('British Grand Prix', 66)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Luxembourg Grand Prix', 2)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Malaysian Grand Prix', 17)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Monaco Grand Prix', 62)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Moroccan Grand Prix', 1)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Spanish Grand Prix', 45)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Swiss Grand Prix', 6)""")
+    cursor.execute("""INSERT INTO GRANDS_PRIX ( GrandsPrix, No_of_Races) VALUES ('Australian Grand Prix', 31)""")
+
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Istanbul, Turkey')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Nurburg, Germany')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Liverpool, United Kingdom')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Melbourne, Australia')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Montmelo, Spain')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Monte Carlo, Monaco')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Dijon, France')""")
+    cursor.execute("""INSERT INTO LOCATION ( Location) VALUES ('Zeltweg, Austria')""")
 
 
-    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 'Istanbul, Turkey', '5.338 km', 2, 7)""")
-    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location, Length, GP_Id, GrandsPrixHeld) VALUES ('Nurburgring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Circuit_N%C3%BCrburgring-2002-GP.svg/225px-Circuit_N%C3%BCrburgring-2002-GP.svg.png', 'Race circuit', 'Clockwise', 'Nurburg, Germany', '5.148 km', 1, 40)""")
-
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Istanbul Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Istanbul_park.svg/225px-Istanbul_park.svg.png', 'Race Circuit', 'Anti-clockwise', 1, '5.338 km', 2, 7)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Nurburgring', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Circuit_N%C3%BCrburgring-2002-GP.svg/225px-Circuit_N%C3%BCrburgring-2002-GP.svg.png', 'Race circuit', 'Clockwise', 2, '5.148 km', 1, 40)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Aintree', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Circuit_Aintree.svg/225px-Circuit_Aintree.svg.png', 'Road circuit', 'Clockwise', 3, '4.828 km', 6, 5)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Albert Park', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Albert_Lake_Park_Street_Circuit_in_Melbourne%2C_Australia.svg/225px-Albert_Lake_Park_Street_Circuit_in_Melbourne%2C_Australia.svg.png', 'Street circuit', 'Clockwise', 4, '5.303 km', 13, 20)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Circuit de Barcelona-Catalunya', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Catalunya.svg/225px-Catalunya.svg.png', 'Race circuit', 'Clockwise', 5, '4.655 km', 11, 25)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Circuit de Monaco', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Monte_Carlo_Formula_1_track_map.svg/225px-Monte_Carlo_Formula_1_track_map.svg.png', 'Street circuit', 'Clockwise', 6, '3.337 km', 9, 62)""")
+    cursor.execute("""INSERT INTO TRACKS (Circuit, Map, Type, Direction, Location_Id, Length, GP_Id, GrandsPrixHeld) VALUES ('Dijon-Prenois', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Dijon-Prenois_Circuit.svg/225px-Dijon-Prenois_Circuit.svg.png', 'Race circuit', 'Clockwise', 7, '3.886 km', 5, 6)""")
 
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Istanbul Park', '2005-2011')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '1995-2007')""")
