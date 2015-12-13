@@ -62,7 +62,7 @@ def pilots():
     countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.ForeignKey=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
+            query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
 
             cursor.execute(query)
 
@@ -82,18 +82,32 @@ def pilots():
 @app.route('/add_pilot', methods = ['GET','POST'])
 def add_pilot():
     now = datetime.datetime.now()
+
+    cba = []
+    with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """SELECT PILOTS.Id, PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
+
+            cursor.execute(query)
+
+            for pilot in cursor:
+                cba.append(pilot)
+
+            connection.commit()
+
+
+
     if request.method =='POST':
         name = request.form['name']
         surname = request.form['surname']
         age = request.form['age']
         team = request.form['team']
+        country = request.form['country']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """INSERT INTO PILOTS (Name, Surname, Age, Team, ForeignKey) VALUES (%s, %s, %s, %s, %s)"""
-            print(query)
-            cursor.execute(query, (name, surname, age, team, foreignKey))
-
+            query = """INSERT INTO PILOTS (Name, Surname, Age, Team, Country) VALUES (%s, %s, %s, %s, %s)"""
+            cursor.execute(query, (name, surname, age, team, country))
             connection.commit()
 
 
@@ -102,22 +116,21 @@ def add_pilot():
 @app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
     now = datetime.datetime.now()
+
+    countries = []
+
+
     if request.method =='POST':
-        Countries = request.form['Countries']
-        ForeignKey = request.form['Pilot']
+        Country = request.form['country']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-
-
             query =  """INSERT INTO COUNTRIES ( Countries) VALUES (%s)"""
-
-
-            cursor.execute(query,(Countries))
+            cursor.execute(query,(Country))
             connection.commit()
 
 
-    return render_template('country_add.html', current_time=now.ctime())
+    return render_template('add_country.html', current_time=now.ctime())
 
 
 
@@ -135,7 +148,7 @@ def delete_pilot():
             connection.commit()
 
 
-    return render_template('pilot_add.html', current_time=now.ctime())
+    return render_template('add_pilot.html', current_time=now.ctime())
 
 
 @app.route('/delete_countries', methods = ['GET','POST'])
@@ -151,7 +164,7 @@ def delete_countries():
             connection.commit()
 
 
-    return render_template('country_add.html', current_time=now.ctime())
+    return render_template('add_country.html', current_time=now.ctime())
 
 @app.route('/update_pilot', methods = ['GET','POST'])
 def update_pilot():
@@ -161,16 +174,18 @@ def update_pilot():
         new_name = request.form['N_name']
         new_surname = request.form['N_surname']
         new_age = request.form['N_age']
+        new_team = request.form['N_team']
+        new_country = request.form['N_country']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """UPDATE PILOTS SET( Name, Surname, Age) = ( %s, %s, %s) WHERE Id = %s"""
+            query = """UPDATE PILOTS SET( Name, Surname, Age, Team, Country) = ( %s, %s, %s, %s, %s) WHERE Id = %s"""
 
-            cursor.execute(query, (new_name, new_surname, new_age, Id))
+            cursor.execute(query, (new_name, new_surname, new_age, new_team, new_country, Id))
             connection.commit()
 
 
-    return render_template('pilot_add.html', current_time=now.ctime())
+    return render_template('add_pilot.html', current_time=now.ctime())
 
 
 @app.route('/update_country', methods = ['GET','POST'])
@@ -179,17 +194,16 @@ def update_countries():
     if request.method =='POST':
         Id = request.form['id']
         new_country = request.form['N_country']
-        new_pilot = request.form['N_pilot']
 
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """UPDATE COUNTRIES SET( Countries, ForeignKey) = ( %s, %s) WHERE Id = %s"""
+            query = """UPDATE COUNTRIES SET( Countries) = ( %s) WHERE Id = %s"""
 
-            cursor.execute(query, (new_country, new_pilot, Id))
+            cursor.execute(query, (new_country, Id))
             connection.commit()
 
 
-    return render_template('country_add.html', current_time=now.ctime())
+    return render_template('add_country.html', current_time=now.ctime())
 
 
 
