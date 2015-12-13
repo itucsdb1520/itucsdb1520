@@ -29,7 +29,7 @@ def initialize_db_function(cursor):
     cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
     cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
     cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
-    cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team CHAR(25) )""")
+    cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team CHAR(25),ForeignKey INTEGER references COUNTRIES(Id) )""")
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
 
     cursor.execute("""INSERT INTO PILOTS ( Name, Surname, Age, Team) VALUES ('Lewis','Hamilton', 30, 'MERCEDES')""")
@@ -76,7 +76,7 @@ def initialize_db_function(cursor):
 
     #database for the brands
 
-    
+
     cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25), CountryId INTEGER References COUNTRIES(Id))""")
     cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website, CountryId) VALUES ('Shell', 'One of the biggest petrochemistry companies in the world', 1907, 'shell_logo.svg', 'Oil Distribution', 'www.shell.com', 9)""")
     cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website, CountryId) VALUES ('Kaspersky', 'An Antivirus Company founded in Moskov', 1997, 'Kaspersky_lab_logo.svg', 'Computer Security', 'www.kaspersky.com', 5) """)

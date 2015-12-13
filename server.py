@@ -62,7 +62,7 @@ def pilots():
     countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT Pilots.Name, Pilots.Surname, Pilots.Age, Pilots.Team, Countries.Countries FROM PILOTS INNER JOIN COUNTRIES ON Pilots.Id=Countries.ForeignKey;"""
+            query = """SELECT Pilots.Name, Pilots.Surname, Pilots.Age, Pilots.Team, Countries.Countries FROM PILOTS INNER JOIN COUNTRIES ON Pilots.ForeignKey=Countries.Id;"""
 
             cursor.execute(query)
 
@@ -556,14 +556,14 @@ def brands_db(operation):
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                
+
                 query = """SELECT Id FROM COUNTRIES WHERE COUNTRIES.countries = '""" + country + """'"""
                 cursor.execute(query)
-                
+
                 countryid = None
                 for record in cursor:
                     countryid = record
-                    
+
                 print(countryid[0])
                 query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website, CountryId) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
                 cursor.execute(query, (brand_name,description,foundation,imagelink,industry,website, countryid[0]))
@@ -622,14 +622,14 @@ def brands_db(operation):
             new_country = request.form['country']
             edit = request.form['edit']
             print(new_country)
-            
+
 
             with dbapi2.connect(app.config['dsn']) as connection:
                 cursor = connection.cursor()
-                
+
                 query = """SELECT Id FROM COUNTRIES WHERE COUNTRIES.countries = '""" + new_country + """'"""
                 cursor.execute(query)
-                
+
                 countryid = None
                 for record in cursor:
                     countryid = record
