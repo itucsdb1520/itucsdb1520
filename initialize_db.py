@@ -23,21 +23,15 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('fatih','pass')""")
 
     #database for the pilots
-    cursor.execute("""DROP TABLE IF EXISTS FOUNDERS""")
-    print("a")
-    cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
-    print("b")
-    cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
-    print("c")
-    cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
-    print("d")
+    cursor.execute("""DROP TABLE IF EXISTS FOUNDERS, BRANDS""")
+    cursor.execute("""DROP TABLE IF EXISTS PILOTS, COUNTRIES""")
     cursor.execute("""DROP TABLE IF EXISTS TEAMS""")
-    print("aa")
+
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE TEAMS (Id SERIAL PRIMARY KEY NOT NULL, Teams CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team INTEGER references TEAMS(Id), Country INTEGER references COUNTRIES(Id) )""")
 
-    print("e")
+
     cursor.execute("""INSERT INTO TEAMS ( Teams) VALUES ('MERCEDES')""")
     cursor.execute("""INSERT INTO TEAMS ( Teams) VALUES ('FERRARI')""")
     cursor.execute("""INSERT INTO TEAMS ( Teams) VALUES ('WILLIAMS')""")
@@ -91,8 +85,6 @@ def initialize_db_function(cursor):
 
 
     #database for the brands
-
-    print("f")
     cursor.execute("""CREATE TABLE BRANDS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Comment CHAR(75), Foundation INTEGER, Image Char(50), Industry CHAR(20), Website CHAR(25), CountryId INTEGER References COUNTRIES(Id))""")
     cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website, CountryId) VALUES ('Shell', 'One of the biggest petrochemistry companies in the world', 1907, 'shell_logo.svg', 'Oil Distribution', 'www.shell.com', 9)""")
     cursor.execute("""INSERT INTO BRANDS (Name, Comment, Foundation,  Image, Industry, Website, CountryId) VALUES ('Kaspersky', 'An Antivirus Company founded in Moskov', 1997, 'Kaspersky_lab_logo.svg', 'Computer Security', 'www.kaspersky.com', 5) """)
@@ -129,7 +121,6 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO FOUNDERS (Name, Surname, Brand_Id) VALUES ('Gene Francis', 'Haas', 16) """)
 
     #database for the cars
-    print("g")
     cursor.execute("""DROP TABLE IF EXISTS CARS""")
     cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
 
@@ -154,7 +145,6 @@ def initialize_db_function(cursor):
 
 
     #database for the tracks
-    print("h")
     cursor.execute("""DROP TABLE IF EXISTS COUPLING_T_GP""")
     cursor.execute("""DROP TABLE IF EXISTS SEASONS""")
     cursor.execute("""DROP TABLE IF EXISTS TRACKS""")
