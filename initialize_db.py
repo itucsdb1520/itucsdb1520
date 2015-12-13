@@ -1,14 +1,12 @@
 def initialize_db_function(cursor):
 
     #Database for the counter
-    print("a")
     cursor.execute("""DROP TABLE IF EXISTS COUNTER""")
     cursor.execute("""CREATE TABLE COUNTER (N INTEGER)""")
     cursor.execute("""INSERT INTO COUNTER (N) VALUES (0)""")
 
 
     #Database for the users
-    print("b")
     cursor.execute("""DROP TABLE IF EXISTS USERS""")
     cursor.execute("""CREATE TABLE USERS (Username CHAR(20) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(20) )""")
 
@@ -17,7 +15,6 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('fatih','pass')""")
 
     #Database for the admins
-    print("c")
     cursor.execute("""DROP TABLE IF EXISTS ADMINS""")
     cursor.execute("""CREATE TABLE ADMINS(Username CHAR(20) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(20) )""")
 
@@ -26,13 +23,16 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO ADMINS (Username, Password) VALUES ('fatih','pass')""")
 
     #database for the pilots
-    print("d")
     cursor.execute("""DROP TABLE IF EXISTS FOUNDERS""")
+    print("a")
     cursor.execute("""DROP TABLE IF EXISTS BRANDS""")
+    print("b")
     cursor.execute("""DROP TABLE IF EXISTS PILOTS""")
+    print("c")
     cursor.execute("""DROP TABLE IF EXISTS COUNTRIES""")
+    print("d")
     cursor.execute("""DROP TABLE IF EXISTS TEAMS""")
-
+    print("aa")
     cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE TEAMS (Id SERIAL PRIMARY KEY NOT NULL, Teams CHAR(25) Unique)""")
     cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team INTEGER references TEAMS(Id), Country INTEGER references COUNTRIES(Id) )""")
