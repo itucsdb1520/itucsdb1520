@@ -83,18 +83,6 @@ def pilots():
 def add_pilot():
     now = datetime.datetime.now()
 
-    cba = []
-    with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-            query = """SELECT PILOTS.Id, PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.Country=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
-
-            cursor.execute(query)
-
-            for pilot in cursor:
-                cba.append(pilot)
-
-            connection.commit()
-
 
 
     if request.method =='POST':
@@ -126,11 +114,31 @@ def add_countries():
         with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
             query =  """INSERT INTO COUNTRIES ( Countries) VALUES (%s)"""
-            cursor.execute(query,(Country))
+            cursor.execute(query,([Country]))
             connection.commit()
 
 
     return render_template('add_country.html', current_time=now.ctime())
+
+
+@app.route('/add_team', methods = ['GET','POST'])
+def add_team():
+    now = datetime.datetime.now()
+
+
+
+
+    if request.method =='POST':
+        Team = request.form['team']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """INSERT INTO TEAMS ( Teams) VALUES (%s)"""
+            cursor.execute(query,([Team]))
+            connection.commit()
+
+
+    return render_template('add_team.html', current_time=now.ctime())
 
 
 
@@ -151,20 +159,7 @@ def delete_pilot():
     return render_template('add_pilot.html', current_time=now.ctime())
 
 
-@app.route('/delete_countries', methods = ['GET','POST'])
-def delete_countries():
-    now = datetime.datetime.now()
-    if request.method =='POST':
-        id = request.form['id']
 
-        with dbapi2.connect(app.config['dsn']) as connection:
-            cursor = connection.cursor()
-            query = """DELETE FROM COUNTRIES WHERE Id = '""" +id + """' """
-            cursor.execute(query)
-            connection.commit()
-
-
-    return render_template('add_country.html', current_time=now.ctime())
 
 @app.route('/update_pilot', methods = ['GET','POST'])
 def update_pilot():
@@ -188,7 +183,7 @@ def update_pilot():
     return render_template('add_pilot.html', current_time=now.ctime())
 
 
-@app.route('/update_country', methods = ['GET','POST'])
+@app.route('/update_countries', methods = ['GET','POST'])
 def update_countries():
     now = datetime.datetime.now()
     if request.method =='POST':
@@ -206,13 +201,25 @@ def update_countries():
     return render_template('add_country.html', current_time=now.ctime())
 
 
-@app.route('/show_people', methods = ['GET','POST'])
-def show_people():
+
+@app.route('/update_teams', methods = ['GET','POST'])
+def update_teams():
     now = datetime.datetime.now()
+    if request.method =='POST':
+        Id = request.form['id']
+        new_team = request.form['N_team']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE TEAMS SET( Teams) = ( %s) WHERE Id = %s"""
+
+            cursor.execute(query, (new_team, Id))
+            connection.commit()
 
 
+    return render_template('add_team.html', current_time=now.ctime())
 
-    return render_template('people.html', current_time=now.ctime())
+
 
 
 
