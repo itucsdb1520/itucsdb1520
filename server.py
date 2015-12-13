@@ -117,7 +117,7 @@ def add_pilot():
 def add_countries():
     now = datetime.datetime.now()
 
-    countries = []
+
 
 
     if request.method =='POST':
@@ -204,6 +204,15 @@ def update_countries():
 
 
     return render_template('add_country.html', current_time=now.ctime())
+
+
+@app.route('/show_people', methods = ['GET','POST'])
+def show_people():
+    now = datetime.datetime.now()
+
+
+
+    return render_template('people.html', current_time=now.ctime())
 
 
 
