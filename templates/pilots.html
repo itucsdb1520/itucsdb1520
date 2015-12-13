@@ -34,13 +34,13 @@
 				<th > COUNTRY</th>
 
 			</tr>
-			{% for id, name, surname, age, team in pilots %}
+			{% for name, surname, age, team, country in pilots %}
 			<tr>
-				<td>{{ id }} </td>
 				<td>{{ name }} </td>
 				<td>{{ surname }} </td>
 				<td>{{ age }} </td>
 				<td>{{ team }} </td>
+				<td>{{ country }} </td>
 			</tr>
 			{% endfor %}
 		</table>
