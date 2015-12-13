@@ -891,17 +891,23 @@ def search():
             elif area == '2':
                 #search pilots
                 search = "%" + search +"%"
-                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (PILOTS.Name LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                query = """  SELECT PILOTS.Name, PILOTS.Surname, TEAMS.Teams,COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE (PILOTS.Name LIKE %s) AND (PILOTS.Country = COUNTRIES.Id AND PILOTS.Team = TEAMS.Id) """
                 cursor.execute(query, ([search]))
                 for klm in cursor:
                     query_list.append(klm)
 
-                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (PILOTS.Surname LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                query = """  SELECT PILOTS.Name, PILOTS.Surname,  TEAMS.Teams,COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE (PILOTS.Surname LIKE %s) AND (PILOTS.Country = COUNTRIES.Id AND PILOTS.Team = TEAMS.Id) """
                 cursor.execute(query, ([search]))
                 for klm in cursor:
                     query_list.append(klm)
 
-                query = """  SELECT PILOTS.Name, PILOTS.Surname,COUNTRIES.Countries FROM PILOTS, COUNTRIES WHERE (COUNTRIES.Countries LIKE %s) AND (PILOTS.Id = COUNTRIES.ForeignKey) """
+                query = """  SELECT PILOTS.Name, PILOTS.Surname, TEAMS.Teams,COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE (COUNTRIES.Countries LIKE %s) AND (PILOTS.Country = COUNTRIES.Id AND PILOTS.Team = TEAMS.Id) """
+                cursor.execute(query, ([search]))
+                for klm in cursor:
+                    query_list.append(klm)
+
+
+                query = """  SELECT PILOTS.Name, PILOTS.Surname, TEAMS.Teams,COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE (TEAMS.Teams LIKE %s) AND (PILOTS.Country = COUNTRIES.Id AND PILOTS.Team = TEAMS.Id) """
                 cursor.execute(query, ([search]))
                 for klm in cursor:
                     query_list.append(klm)
