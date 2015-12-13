@@ -41,38 +41,7 @@
 			{% endfor %}
 		</table>
 		</br>
-	      <div >
-		<div>
-		  <form action="/add_pilot" method="post" id="addpilot">
-		    Name: <input type="text" name="name"><br>
-		    Surname: <input type="text" name="surname"><br>
-		    Age: <input type="text" name="age"><br>
-		  </form>
 
-		  <button type="submit" form="addpilot" value="Submit">Add</button>
-		</div>
-
-		<div id="delete-form">
-		  <form action="/delete_pilot" method="post" id="deletepilot">
-		    Enter ID: <input type="text" name="id"><br>
-		  </form>
-
-		  <button type="submit" form="deletepilot" value="Submit">Delete</button>
-		</div>
-
-		<div>
-		  <form action="/update_pilot" method="post" id="updatepilot">
-		    ID: <input type="text" name="id"><br>
-		    New Name: <input type="text" name="N_name"><br>
-		    New Surname: <input type="text" name="N_surname"><br>
-		    New Age: <input type="text" name="N_age"><br>
-		  </form>
-
-		  <button type="submit" form="updatepilot" value="Submit">update</button>
-		</div>
-
-
-		</div>
 
 
 <br>
@@ -83,9 +52,9 @@
 		<table>
 
 			<tr>
-				<th > id</th>
-				<th > Countries</th>
-				<th > Pilot </th>
+				<th > ID</th>
+				<th > COUNTRY</th>
+				<th > PILOT </th>
 
 			</tr>
 			{% for id, Countries, ForeignKey in countries %}
@@ -98,33 +67,7 @@
 		</table>
 
 
-	<div>
-		  <form action="/add_countries" method="post" id="addcountries">
-		    Country: <input type="text" name="Countries"><br>
-		    Pilot: <input type="text" name="Pilot"><br>
-		  </form>
 
-		  <button type="submit" form="addcountries" value="Submit">Add</button>
-	</div>
-
-
-		<div id="delete-form">
-		  <form action="/delete_countries" method="post" id="deletecountries">
-		    Enter ID: <input type="text" name="id"><br>
-		  </form>
-
-		  <button type="submit" form="deletecountries" value="Submit">Delete</button>
-		</div>
-
-		<div>
-		  <form action="/update_country" method="post" id="updatecountry">
-		    ID: <input type="text" name="id"><br>
-		    New Country: <input type="text" name="N_country"><br>
-		    New Pilot: <input type="text" name="N_pilot"><br>
-		  </form>
-
-		  <button type="submit" form="updatecountry" value="Submit">update</button>
-		</div>
 
 
 

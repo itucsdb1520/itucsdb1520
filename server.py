@@ -101,7 +101,7 @@ def add_pilot():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('pilot_add.html', current_time=now.ctime())
 
 @app.route('/add_countries', methods = ['GET','POST'])
 def add_countries():
@@ -121,7 +121,7 @@ def add_countries():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('country_add.html', current_time=now.ctime())
 
 
 
@@ -139,7 +139,7 @@ def delete_pilot():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('pilot_add.html', current_time=now.ctime())
 
 
 @app.route('/delete_countries', methods = ['GET','POST'])
@@ -155,7 +155,7 @@ def delete_countries():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('country_add.html', current_time=now.ctime())
 
 @app.route('/update_pilot', methods = ['GET','POST'])
 def update_pilot():
@@ -174,7 +174,7 @@ def update_pilot():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('pilot_add.html', current_time=now.ctime())
 
 
 @app.route('/update_country', methods = ['GET','POST'])
@@ -193,7 +193,7 @@ def update_countries():
             connection.commit()
 
 
-    return redirect(url_for('pilots'))
+    return render_template('country_add.html', current_time=now.ctime())
 
 
 
