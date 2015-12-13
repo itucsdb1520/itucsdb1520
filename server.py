@@ -62,7 +62,7 @@ def pilots():
     countries = []
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, PILOTS.Team, COUNTRIES.Countries FROM PILOTS INNER JOIN COUNTRIES ON PILOTS.ForeignKey=COUNTRIES.Id;"""
+            query = """SELECT PILOTS.Name, PILOTS.Surname, PILOTS.Age, TEAMS.Teams, COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE PILOTS.ForeignKey=COUNTRIES.Id AND PILOTS.Team = TEAMS.Id;"""
 
             cursor.execute(query)
 
