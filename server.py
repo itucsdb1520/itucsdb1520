@@ -894,11 +894,26 @@ def login():
     return render_template('login.html', current_time=now.ctime())
 
 
-#Sign in page
-@app.route('/signUp')
+#Sign up page
+@app.route('/signUp',methods = ['GET','POST'])
 def signUp():
-    now = datetime.datetime.now()
-    return render_template('signUp.html', current_time=now.ctime())
+
+    if request.method =='POST':
+        username = request.form['username']
+        password = request.form['password']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query =  """INSERT INTO USERS ( username, password) VALUES (%s,%s)"""
+            print(query)
+
+            cursor.execute(query,(username, password))
+            connection.commit()
+
+        return redirect(url_for('signUp'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('signUp.html')
 
 
 #statistics page may be implemented in future
