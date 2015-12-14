@@ -11,7 +11,6 @@ def initialize_db_function(cursor):
     cursor.execute("""CREATE TABLE USERS (Username CHAR(20) UNIQUE PRIMARY KEY NOT NULL, Password CHAR(20) )""")
 
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('user','user')""")
-    cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('admin','admin')""")
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('aliercccan','pass')""")
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('ebru','pass')""")
     cursor.execute("""INSERT INTO USERS (Username, Password) VALUES ('fatih','pass')""")
