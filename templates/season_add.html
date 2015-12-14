@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Add same header and footer to all pages -->
+    {% extends "layout.html" %}
+
+    <!-- Title for the page -->
+	{% block title %} Tracks {% endblock %}
+
+	<!-- Add specific css, js etc. for this page only!-->
+	{% block specific_links%}
+	<link rel="stylesheet" href="/static/css/tracks_add.css" />
+	{% endblock %}
+
+	<!-- Content for this page -->
+	{% block body_content %}
+
+	<br>
+
+	<table id="season-table">
+		  <caption>List of All Seasons</caption>
+			<tr>
+
+				<th id="Circuit_name">Circuit</th>
+				<th id="Season"> Season</th>
+			</tr>
+
+			{% for id in seasons_list %}
+			<tr>
+				<td>{{ id[0] }} </td>
+				<td>{{ id[1] }} </td>
+
+			</tr>
+			{% endfor %}
+		</table>
+
+<br><br>
+
+	<form action="/season_add" method="post">
+	<h3> Season Adding </h3>
+	<div><label for='circuit'>Circuit name : </label> <input type="text" name="circuit"></input></div>
+  	<div><label for='seasons'> Season :</label> <input type="text" name="seasons"></input></div>
+
+	<div class =button""><input type="submit" value="Add"></input></div>
+
+	</form>
+
+	<form action="/season_delete" method="post">
+	<h3> Delete a Season </h3>
+	<div><label for='seasons'> Season : </label> <input type="text" name="seasons"></input></div>
+	<div class =button""><input type="submit" value="Delete"></input></div>
+
+	</form>
+
+	<form action="/season_update" method="post">
+	<h3> Update an existing Season</h3>
+
+	<div><label for='oldseason'> Old season: </label> <input type="text" name="oldseason"></input></div>
+	<div><label for='seasons'> Season : </label> <input type="text" name="seasons"></input></div>
+  	<div><label for='circuit'> Circuit Name :</label> <input type="text" name="circuit"></input></div>
+
+	<div class =button""><input type="submit" value="Update"></input> </div>
+
+	</form>
+
+<br><br><br><br>
+
+	{% endblock %}

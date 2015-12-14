@@ -565,7 +565,61 @@ def grandsprix_update():
         now = datetime.datetime.now()
         return render_template('grandsprix_add.html')
 
+@app.route('/season_add',methods = ['GET','POST'])
+def season_add():
+    if request.method =='POST':
+        circuit = request.form['circuit']
+        seasons = request.form['seasons']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
 
+            query =  """INSERT INTO SEASONS ( Circuit_Name, Season) VALUES (%s,%s)"""
+            print(query)
+
+            cursor.execute(query,(circuit, seasons))
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+         now = datetime.datetime.now()
+         return render_template('season_add.html')
+
+
+@app.route('/season_delete',methods = ['GET','POST'])
+def season_delete():
+    if request.method =='POST':
+        seasons = request.form['seasons']
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """DELETE FROM SEASONS WHERE Season=%s"""
+            cursor.execute(query,([seasons]))
+            connection.commit()
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('season_add.html')
+
+@app.route('/season_update',methods = ['GET','POST'])
+def season_update():
+    if request.method =='POST':
+        oldseason = request.form['oldseason']
+        seasons = request.form['seasons']
+        circuit = request.form['circuit']
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+
+            query = """UPDATE SEASONS SET (Circuit_Name, Season ) = (%s,%s) WHERE Season=%s"""
+            #print(query)
+
+            cursor.execute(query,(circuit, seasons, oldseason))
+
+            connection.commit()
+
+        return redirect(url_for('tracks'))
+    else:
+        now = datetime.datetime.now()
+        return render_template('season_add.html')
 
 
 
