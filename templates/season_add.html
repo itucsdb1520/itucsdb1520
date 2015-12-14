@@ -6,7 +6,7 @@
     {% extends "layout.html" %}
 
     <!-- Title for the page -->
-	{% block title %} Tracks {% endblock %}
+	{% block title %} Seasons {% endblock %}
 
 	<!-- Add specific css, js etc. for this page only!-->
 	{% block specific_links%}
@@ -15,25 +15,6 @@
 
 	<!-- Content for this page -->
 	{% block body_content %}
-
-	<br>
-
-	<table id="season-table">
-		  <caption>List of All Seasons</caption>
-			<tr>
-
-				<th id="Circuit_name">Circuit</th>
-				<th id="Season"> Season</th>
-			</tr>
-
-			{% for id in seasons_list %}
-			<tr>
-				<td>{{ id[0] }} </td>
-				<td>{{ id[1] }} </td>
-
-			</tr>
-			{% endfor %}
-		</table>
 
 <br><br>
 

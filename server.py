@@ -381,10 +381,10 @@ def tracks():
     tracks_list = []
     seasons_list = []
     grandsprix_list = []
-    location_list = []
+
     with dbapi2.connect(app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, LOCATION.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX, LOCATION WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id) AND (LOCATION.Id = TRACKS.Location_Id)"""
+            query = """SELECT TRACKS.Circuit, TRACKS.Map, TRACKS.Type, TRACKS.Direction, LOCATION.Location, TRACKS.Length, GRANDS_PRIX.GrandsPrix, TRACKS.GrandsPrixHeld FROM TRACKS, GRANDS_PRIX, LOCATION WHERE (TRACKS.GP_Id = GRANDS_PRIX.Id) AND (LOCATION.Id = TRACKS.Location_Id) ORDER BY TRACKS.Circuit"""
 
             cursor.execute(query)
 
@@ -392,23 +392,17 @@ def tracks():
                 tracks_list.append(record)
             connection.commit()
 
-            query = """SELECT Circuit_Name, Season FROM SEASONS"""
+            query = """SELECT Circuit_Name, Season FROM SEASONS ORDER BY Circuit_Name"""
             cursor.execute(query)
             for record in cursor:
                 seasons_list.append(record)
 
-            query = """SELECT GrandsPrix, No_of_Races FROM GRANDS_PRIX"""
+            query = """SELECT GrandsPrix, No_of_Races FROM GRANDS_PRIX ORDER BY GrandsPrix"""
             cursor.execute(query)
             for record in cursor:
                 grandsprix_list.append(record)
 
-            query = """SELECT * FROM LOCATION"""
-            cursor.execute(query)
-            for record in cursor:
-                location_list.append(record)
-
-
-    return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, grandsprix_list = grandsprix_list, location_list = location_list, current_time=now.ctime())
+    return render_template('tracks.html', tracks_list = tracks_list, seasons_list = seasons_list, grandsprix_list = grandsprix_list, current_time=now.ctime())
 
 @app.route('/tracks_add', methods = ['GET', 'POST'])
 def tracks_add():
