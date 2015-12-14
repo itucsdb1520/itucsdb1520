@@ -197,4 +197,11 @@ def initialize_db_function(cursor):
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Istanbul Park', '2005-2011')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '1995-2007')""")
     cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '2013')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Nurburgring', '1971-1976')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Circuit de Barcelona-Catalunya', '1991-2015')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Circuit de Monaco', '1950')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Circuit de Monaco', '1955-2015')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Dijon-Prenois', '1981-1982')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Aintree', '1961-1962')""")
+    cursor.execute("""INSERT INTO SEASONS (Circuit_Name, Season ) VALUES ('Albert Park', '1996-2015')""")
 

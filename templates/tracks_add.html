@@ -16,10 +16,10 @@
 	<!-- Content for this page -->
 	{% block body_content %}
 
-	<br><br><br><br>
+	<br>
 
    <form action="/tracks_add" method="post">
-<h1> Tracks Adding </h1>
+<h3> Tracks Adding </h3>
   <div><label for='name'>Circuit name : </label> <input type="text" name="name"></input></div>
   <div><label for='map_link'> Map :</label> <input type="text" name="map_link"></input></div>
   <div><label for='type'> Type :</label> <input type="text" name="type"></input></div>
@@ -34,14 +34,14 @@
 	</form>
 
 	<form action="/track_delete" method="post">
-<h1> Delete a Track </h1>
+<h3> Delete a Track </h3>
 	<div><label for='circuit_name'> Circuit Name : </label> <input type="text" name="circuit_name"></input></div>
 	<div class =button""><input type="submit" value="Delete"></input></div>
 
 	</form>
 
 	<form action="/track_update" method="post">
-	<h1> Update an existing track</h1>
+	<h3> Update an existing track</h3>
 
 	<div><label for='oldname'>Current name of Circuit : </label> <input type="text" name="oldname"></input></div>
 	<div><label for='name'> Circuit name : </label> <input type="text" name="name"></input></div>
@@ -57,33 +57,6 @@
 
 	</form>
 
-
-	<form action="/grandsprix_add" method="post">
-	<h1> Grands Prix Adding </h1>
-	<div><label for='gpname'>Grands Prix name : </label> <input type="text" name="gpname"></input></div>
-  	<div><label for='no_of_races'> No of Races :</label> <input type="text" name="no_of_races"></input></div>
-
-	<div class =button""><input type="submit" value="Add"></input></div>
-
-	</form>
-
-	<form action="/grandsprix_delete" method="post">
-	<h1> Delete a Grands Prix </h1>
-	<div><label for='gpname'> Grands Prix name : </label> <input type="text" name="gpname"></input></div>
-	<div class =button""><input type="submit" value="Delete"></input></div>
-
-	</form>
-
-	<form action="/grandsprix_update" method="post">
-	<h1> Update an existing Grands Prix</h1>
-
-	<div><label for='oldname'>Current name of Grands Prix : </label> <input type="text" name="oldname"></input></div>
-	<div><label for='gpname'>Grands Prix name : </label> <input type="text" name="gpname"></input></div>
-  	<div><label for='no_of_races'> No of Races :</label> <input type="text" name="no_of_races"></input></div>
-
-	<div class =button""><input type="submit" value="Update"></input> </div>
-
-	</form>
 
 <br><br><br><br>
 

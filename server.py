@@ -527,7 +527,7 @@ def grandsprix_add():
         return redirect(url_for('tracks'))
     else:
          now = datetime.datetime.now()
-         return render_template('tracks_add.html')
+         return render_template('grandsprix_add.html')
 
 @app.route('/grandsprix_delete',methods = ['GET','POST'])
 def grandsprix_delete():
@@ -541,7 +541,7 @@ def grandsprix_delete():
         return redirect(url_for('tracks'))
     else:
         now = datetime.datetime.now()
-        return render_template('tracks_add.html')
+        return render_template('grandsprix_add.html')
 
 @app.route('/grandsprix_update',methods = ['GET','POST'])
 def grandsprix_update():
@@ -563,7 +563,7 @@ def grandsprix_update():
         return redirect(url_for('tracks'))
     else:
         now = datetime.datetime.now()
-        return render_template('tracks_add.html')
+        return render_template('grandsprix_add.html')
 
 
 
