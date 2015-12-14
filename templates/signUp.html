@@ -21,23 +21,23 @@
         </div>
 
 <div>
-  <form method="post"  class="signUp">
+  <form action="/signUp" method="post" >
     <p>
-      <label for="signUp">Username:</label>
-      <input type="text" name="signUp" id="signUp" value="" placeholder="Username">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="signUp" value="" placeholder="Username">
     </p>
 
     <p>
       <label for="password">Password:</label>
-      <input type="password" name="password" id="password" value="" placeholder="*******">
+      <input type="text" name="password" id="password" value="" placeholder="*******">
     </p>
     <p>
       <label for="password">Password Again:</label>
-      <input type="password" name="password" id="password" value="" placeholder="*******">
+      <input type="text" name="password" id="password" value="" placeholder="*******">
     </p>
 
     <p class="signUp-submit">
-      <button type="submit"  a href="#">Sign Up</button>
+      <button type="submit" onclick="location.href = '{{ url_for('home') }}'" >Sign Up</button>
   </form>
 </div>
 
