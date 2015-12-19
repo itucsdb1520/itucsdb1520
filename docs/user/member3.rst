@@ -3,14 +3,14 @@ Parts Implemented by Muhammet Sadık Uğursoy
 
 In the brands page, there is a big mapped image. This image has 16 number of clickable brands on it. Each one of them redirects to a specific brand page where the image and a small information about the brand can be seen.
 
-.. figure:: images\brands.png
+.. figure:: brands.png
    :scale: 80 %
    :alt: Brands page
    :align: center
 
    The brands page with mapped image and listing buttons
 
-.. figure:: images\singlebrand.png
+.. figure:: singlebrand.png
    :scale: 80 %
    :alt: Brand page
    :align: center
@@ -22,7 +22,7 @@ List brands button lists all the brands along with edit and delete buttons. Ther
 javascript for turning already filled information into input boxes filled with those information. Any change within those fields are applied if update button is pressed again. All fields are not required to be filled
 except foundation year and country id.
 
-.. figure:: images\brandsAddEditDemo.png
+.. figure:: brandsAddEditDemo.png
    :scale: 80 %
    :alt: Brands adding and editing demo
    :align: center
