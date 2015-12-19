@@ -8,7 +8,7 @@ navigation buttons and 2 buttons for signing in and logging in. In navigatino ba
 The search can be made for different categories such as cars, engines, pilots, countries, tracks, brands, founders and grands prix.
 
 
-.. figure:: images\bar.png
+.. figure:: images/bar.png
    :scale: 80 %
    :alt: navigation bar
    :align: center
