@@ -8,7 +8,7 @@ Developer Guide
 
 **ER Diagram**
 
-.. figure:: images\erdiagram.png
+.. figure:: erdiagram.png
    :scale: 80 %
    :alt: ER Diagram
    :align: center
