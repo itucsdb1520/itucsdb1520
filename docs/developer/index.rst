@@ -1,26 +1,38 @@
 Developer Guide
 ===============
 
-Database Design
----------------
+**Database Design**
+###################
 
 **explain the database design of your project**
 
-**include the E/R diagram(s)**
+**ER Diagram**
 
-Code
-----
+.. figure:: images\erdiagram.png
+   :scale: 80 %
+   :alt: ER Diagram
+   :align: center
 
-**explain the technical structure of your code**
+   The ER diagram of the database, created by DeZign software.
 
-**to include a code listing, use the following example**::
+The database has different dependencies in between as it can be seen from the ER diagram. The application has a default database.
+It is defined in "initialize_db.py" file as a seperate file. The other codes are inside a one consistent file. The initialization drops all the current tables accordingly (by that it is referred to using cascade while dropping).
+After that tables are created and some default values are inserted. For example:
 
-   .. code-block:: python
 
-      class Foo:
+**Code**
+########
 
-         def __init__(self, x):
-            self.x = x
+**Dropping and creating table with initial values, common for all tables**
+
+.. code-block:: python
+
+   cursor.execute("""DROP TABLE IF EXISTS PILOTS, COUNTRIES CASCADE""")
+   cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
+   cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team INTEGER references TEAMS(Id), Country INTEGER references COUNTRIES(Id) )""")
+
+**Group Members**
+#################
 
 .. toctree::
 
