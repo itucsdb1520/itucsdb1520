@@ -54,3 +54,5 @@ Again, the country should be converted to an ID value. This is done by a simple 
        query = """UPDATE BRANDS SET (Name, Comment, Foundation,  Image, Industry, Website, CountryId) = (%s, %s,%s,%s,%s,%s,%s) WHERE ID = %s;"""
        cursor.execute(query, (new_name, new_description, new_foundation, new_imagelink, new_industry, new_website, countryid[0], edit))
        connection.commit()
+
+

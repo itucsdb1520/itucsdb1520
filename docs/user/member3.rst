@@ -13,12 +13,6 @@ In the brands page, there is a big mapped image. This image has 16 number of cli
 
    The brands page with mapped image and listing buttons
 
-.. figure:: singlebrand.png
-   :scale: 80 %
-   :alt: Brand page
-   :align: center
-
-   The single brand page with some information about the brand
 
 There are 3 buttons for the brands page. Those buttons are for listing brands, founders and both of them, respectively. The corresponding pages opens when theose buttons are pressed.
 List brands button lists all the brands along with edit and delete buttons. There is also an add button below which creates input fields by using javascript. Edit button also works similar. It uses
@@ -30,7 +24,7 @@ except foundation year and country id.
    :alt: Brands adding and editing demo
    :align: center
 
-   Listing brands (left), Adding new brand (middle), Editing a brand (right)
+   Listing brands (top), Adding new brand (middle), Editing a brand (bottom)
 
 The operational buttons are not supposed to work when logged in as admin and never shown otherwise.
 

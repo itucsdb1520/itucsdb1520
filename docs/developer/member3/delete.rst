@@ -25,3 +25,5 @@ As it can be seen in the snippet, pressing the delete button will sent the id va
           connection.commit()
 
 Deleting a brand will cause the deletion of the founder but deleting the founder will not cause the deletion of the brand.
+
+

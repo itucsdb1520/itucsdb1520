@@ -4,8 +4,6 @@ Developer Guide
 **Database Design**
 ###################
 
-**explain the database design of your project**
-
 **ER Diagram**
 
 .. figure:: erdiagram.png
@@ -20,16 +18,16 @@ It is defined in "initialize_db.py" file as a seperate file. The other codes are
 After that tables are created and some default values are inserted. For example:
 
 
-**Code**
-########
-
-**Dropping and creating table with initial values, common for all tables**
-
 .. code-block:: python
 
    cursor.execute("""DROP TABLE IF EXISTS PILOTS, COUNTRIES CASCADE""")
    cursor.execute("""CREATE TABLE COUNTRIES (Id SERIAL PRIMARY KEY NOT NULL, Countries CHAR(25) Unique)""")
    cursor.execute("""CREATE TABLE PILOTS (Id SERIAL PRIMARY KEY NOT NULL, Name CHAR(25), Surname CHAR(25), Age INTEGER, Team INTEGER references TEAMS(Id), Country INTEGER references COUNTRIES(Id) )""")
+
+**Code**
+########
+
+The code is written in Python 3.4.3. It is used in html documents to create the dynamic tables. Javascript also used for creating a responsive interface along with css. jQuery is used as a framework.
 
 **Group Members**
 #################

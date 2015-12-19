@@ -39,3 +39,4 @@ Now the id for the requested country is taken and it is ready to be add.
     connection.commit()
 
 The brand is added succesfully. Adding the founder is pretty much the same.
+
