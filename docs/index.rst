@@ -1,17 +1,17 @@
-Welcome to itucsdb's documentation!
+Welcome to F1DB's documentation!
 ===================================
 
-:Team: Team Name
+:Team: F1DB
 
 :Members:
 
-   * Member 1
-   * Member 2
-   * Member 3
-   * Member 4
-   * Member 5
+   * Fatih Demirel
+   * Mehmet Aygün
+   * Muhammet Sadık Uğursoy
+   * Müşerref Ebru Özaltın
+   * Ali Ercan
 
-**project description goes here (a few paragraphs)**
+**F1DB is a web application that lets users to access general information about the Formula 1 cars, pilots, tracks and brands**
 
 Contents:
 
