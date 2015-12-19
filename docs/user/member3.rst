@@ -32,6 +32,8 @@ except foundation year and country id.
 
    Listing brands (left), Adding new brand (middle), Editing a brand (right)
 
+The operational buttons are not supposed to work when logged in as admin and never shown otherwise.
+
 Founders Page
 ^^^^^^^^^^^^^
 Founders table is also similar. The buttons are all the same. Adding is a bit different since it is required to enter a brand id. While adding a brand, you can simply enter the country name to add it. But this is not the case with the
@@ -45,6 +47,7 @@ The brand id is placed as a foreign key so it is a necessary field to filled in.
 
    The list of all founders
 
+The operational buttons are not supposed to work when logged in as admin and never shown otherwise.
 
 Brands and Founders Page
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -57,4 +60,16 @@ This page has no buttons. It is only for showing the relation between brands and
 
    The list of all founders and brands in one table
 
+
+Single Brand Page
+^^^^^^^^^^^^^^^^^
+This page is created for visual purposes. It shows less information than the tuple of the brand has yet it shows the image of the brand. It was planned to show
+the teams and pilots who uses the brand as well but it could not be implemented. The page content is dynamic.
+
+.. figure:: singleBrand.png
+   :scale: 80 %
+   :alt: A single brand page example
+   :align: center
+
+   The information of a brand
 
