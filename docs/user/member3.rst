@@ -1,6 +1,9 @@
 Parts Implemented by Muhammet Sadık Uğursoy
 ===========================================
 
+
+Brands Page
+^^^^^^^^^^^
 In the brands page, there is a big mapped image. This image has 16 number of clickable brands on it. Each one of them redirects to a specific brand page where the image and a small information about the brand can be seen.
 
 .. figure:: brands.png
@@ -29,5 +32,29 @@ except foundation year and country id.
 
    Listing brands (left), Adding new brand (middle), Editing a brand (right)
 
-Founders table is also similar. The buttons are all the same. Adding is a bit different since it is required to enter a brand id. This is not done as in the country
+Founders Page
+^^^^^^^^^^^^^
+Founders table is also similar. The buttons are all the same. Adding is a bit different since it is required to enter a brand id. While adding a brand, you can simply enter the country name to add it. But this is not the case with the
+founder. It has to be entered as the real brand id. This is not a feature rather it is a forgotten part that requires to be fixed. Each founder has a founder name and surname. The primary key is again an id variable since duplicate names and surnames may occur.
+The brand id is placed as a foreign key so it is a necessary field to filled in. Name and surname can be NULL. This is allowed because there may be a founder with only a name or a surname (mononymous persons).
+
+.. figure:: founders.png
+   :scale: 80 %
+   :alt: Founders page
+   :align: center
+
+   The list of all founders
+
+
+Brands and Founders Page
+^^^^^^^^^^^^^^^^^^^^^^^^
+This page has no buttons. It is only for showing the relation between brands and founders. Each relative brand and founder is printed next to next.
+
+.. figure:: brandsandfounders.png
+   :scale: 80 %
+   :alt: List both page
+   :align: center
+
+   The list of all founders and brands in one table
+
 

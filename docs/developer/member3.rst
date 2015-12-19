@@ -17,7 +17,7 @@ Founders database is dependen on the brands. It uses a brand id as a reference t
 
 .. toctree::
 
-   member3/add_brands
-   member3/delete_brands
-   member3/update_brands
-   member3/search_brands
+   member3/add
+   member3/delete
+   member3/update
+   member3/search
