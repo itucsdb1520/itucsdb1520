@@ -16,24 +16,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>user/add_country.png</name>
-			<type>1</type>
-			<location>C:/Users/Demirel/Dropbox/DBMS/add_country.png</location>
-		</link>
-		<link>
-			<name>user/add_pilots.png</name>
-			<type>1</type>
-			<location>C:/Users/Demirel/Dropbox/DBMS/add_pilots.png</location>
-		</link>
-		<link>
-			<name>user/add_team.png</name>
-			<type>1</type>
-			<location>C:/Users/Demirel/Dropbox/DBMS/add_team.png</location>
-		</link>
-		<link>
 			<name>user/pilots.png</name>
 			<type>1</type>
-			<location>C:/Users/Demirel/Dropbox/DBMS/pilots.png</location>
+			<location>C:/Users/Demirel/AppData/Roaming/SPB_16.6/git/itucsdb1520/docs/user/pilots.png</location>
 		</link>
 	</linkedResources>
 </projectDescription>
