@@ -4,22 +4,37 @@ Parts Implemented by Fatih Demirel
 Pilots Page
 ^^^^^^^^^^^
 
+.. figure:: pilots.png
+   :scale: 80 %
+   :align: left
 
 
 
 
-add_pilot Page
+Add Pilot Page
 ^^^^^^^^^^^^^^
 
+.. figure:: add_pilots.png
+   :scale: 80 %
+   :align: left
 
 
 
 
-add_team Page
+Add Team Page
 ^^^^^^^^^^^^^
 
+.. figure:: add_team.png
+   :scale: 80 %
+   :align: left
 
 
 
-add_country Page
+Add Country Page
 ^^^^^^^^^^^^^^^^
+
+.. figure:: add_country.png
+   :scale: 80 %
+   :align: left
+
+
