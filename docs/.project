@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>user/pilots.png</name>
-			<type>1</type>
-			<location>C:/Users/Demirel/AppData/Roaming/SPB_16.6/git/itucsdb1520/docs/user/pilots.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
