@@ -20,6 +20,7 @@ A circuit can be used more than one season.
 .. figure:: seasons.png
    :scale: 75%
    :alt: Season Table
+   :align: center
 
 
 **List of all Grands Prix is shown in Tracks Page.**
@@ -27,6 +28,7 @@ A circuit can be used more than one season.
 .. figure:: grandsPrix.png
    :scale: 75%
    :alt: Grands Prix Table
+   :align: center
 
 
 
@@ -41,7 +43,7 @@ In this kind of a situation, all columns can be changed except circuit name.
 .. figure:: add_track.png
    :scale: 75%
    :alt: Add Track
-
+   :align: center
 
 ****************
 Grands Prix Page
@@ -56,7 +58,7 @@ All information can be changed by updating a Grands Prix.
 .. figure:: add_grandsprix.png
    :scale: 75%
    :alt: Add Grands Prix
-
+   :align: center
 
 ************
 Seasons Page
@@ -71,6 +73,6 @@ For updating an existing season, the new name of the circuit must be exist in tr
 .. figure:: add_season.png
    :scale: 75%
    :alt: Add Season
-
+   :align: center
 
 
