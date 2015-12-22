@@ -2,6 +2,7 @@ Search
 ^^^^^^
 
 Searching operation in "server.py" of code:
+
 .. code-block:: python
    elif area == '2':
    search = "%" + search +"%"
