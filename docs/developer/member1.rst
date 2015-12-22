@@ -30,7 +30,7 @@ update country
 
 
 .. toctree::
-   member1/list
+   member1/pilots
    member1/add
    member1/delete
    member1/update
