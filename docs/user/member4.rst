@@ -7,6 +7,7 @@ Tracks Page
 
 **List of all Circuits is shown in Tracks Page.**
 
+
 On the top of the page, there are 3 buttons to apply add, delete, update operations to Tracks, Grands Prix and Seasons.
 The Grands Prix information of each Circuit is added from Grands Prix table.
 
@@ -16,6 +17,7 @@ The Grands Prix information of each Circuit is added from Grands Prix table.
 
 
 **List of all Seasons is shown in Tracks Page.**
+
 
 A circuit can be used more than one season.
 
@@ -74,6 +76,7 @@ CRUD Operations for Seasons Page
 
 
 **After clicking the "CRUD operations for Seasons", the new page will be shown to apply add, delete and update operations on Seasons table.**
+
 
 For adding a new Season, the circuit name must be exist in tracks table.
 

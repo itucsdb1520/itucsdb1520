@@ -1,6 +1,12 @@
 Tracks Page
 ^^^^^^^^^^^
 
+In **tracks.html** page, there are 3 tables; list of circuits, list of seasons and list of Grands Prix.
+
+The first table, *list of circuits* is created by merging **tracks, location**, and **grands_prix** tables. *Circuit, Map, Type, Direction, Current_length* and *Grands_Prix_Held*
+attributes are taken from **tracks** table, *Location* attribute are taken from **location** table and *GrandsPrix* attribute is taken from **Grands_Prix** table.
+
+
 .. code-block:: html
 
    <table id="track-table">
@@ -33,10 +39,47 @@ Tracks Page
          {% endfor %}
       </table>
 
+      <br><br><br><br>
+
+      <table id="season-table">
+        <caption>List of All Seasons</caption>
+         <tr>
+
+            <th id="Circuit_name">Circuit</th>
+            <th id="Season"> Season</th>
+         </tr>
+
+         {% for id in seasons_list %}
+         <tr>
+            <td>{{ id[0] }} </td>
+            <td>{{ id[1] }} </td>
+
+         </tr>
+         {% endfor %}
+      </table>
+
+      <br><br><br><br>
+
+      <table id="grandsprix-table">
+        <caption>List of All Grands Prix</caption>
+         <tr>
+
+            <th id="gp_name">Grands Prix</th>
+            <th id="races"> Number Of Races</th>
+         </tr>
+
+         {% for id in grandsprix_list %}
+         <tr>
+            <td>{{ id[0] }} </td>
+            <td>{{ id[1] }} </td>
+
+         </tr>
+         {% endfor %}
+      </table>
 
 
-
-
+Here is the python code for these tables. *Circuits* are listed alphabetically by their names with using **ORDER BY** keyword. *Seasons* are listed alphabetically by circuit names
+and *Grands Prix* is listed alphabetically by their names with using this keyword.
 
 .. code-block:: python
 
