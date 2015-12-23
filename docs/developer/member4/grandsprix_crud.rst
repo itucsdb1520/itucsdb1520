@@ -86,6 +86,7 @@ The tuple whose Grands Prix name is equal to given name will be found after that
 
 
 .. code-block:: python
+
    if request.method =='POST':
         oldname = request.form['oldname']
         gpname = request.form['gpname']
@@ -103,3 +104,36 @@ The tuple whose Grands Prix name is equal to given name will be found after that
 
 
 
+****************
+Search Operation
+****************
+
+The search operation for **Grands_Prix** table is done by Grands Prix name. If any match(es) is found, result(s) will be shown.
+
+
+.. code-block:: html
+
+   {% elif table == 8%}
+                {% for gpname, no_of_races in query_list %}
+
+                    <tr>
+                        <td class="gpname">{{ gpname }} </td>
+                        <td class="no_of_races">{{ no_of_races }} </td>
+                    </tr>
+
+                {% endfor %}
+
+
+.. code-block:: python
+
+   elif area == '8':
+                #search grands_prix
+                search = "%" +search + "%"
+                query = """SELECT GrandsPrix, No_of_Races FROM GRANDS_PRIX WHERE GrandsPrix ILIKE %s"""
+                cursor.execute(query, ([search]))
+                for record in cursor:
+                    query_list.append(record)
+
+                query_list = list(set(query_list))
+
+                connection.commit()
