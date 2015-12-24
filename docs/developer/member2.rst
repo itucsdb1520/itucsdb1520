@@ -3,7 +3,7 @@ Parts Implemented by Mehmet Aygün
 
 The database is created in the "initialize_db.py" file with default values.In initialize_db.py corresponding tables CARS,ENGINES and CREATOR tables created.
 
-.. code-block:: python
+.. code-block::python
     cursor.execute("""DROP TABLE IF EXISTS CARS""")
     cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
     cursor.execute("""DROP TABLE IF EXISTS CREATORS""")
