@@ -65,45 +65,45 @@ At Delete page you can do delete operations with Engine,Creator or Cars names.Th
 All of the figures
 ******************
 .. figure:: car_add.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    car adding form
 
 .. figure:: car_up.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    car updating form
 
 .. figure:: creator_add.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    adding creator form
 
 .. figure:: creator_up.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    updating creator form
 
 .. figure:: engine_add.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    engine adding form
 
 
 .. figure:: engine_up.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    engine updating form
 
 
 .. figure:: delete_all.png
-   :scale: 40 %
+   :scale: 60 %
    :align: center
 
    delete forms
