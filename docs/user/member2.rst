@@ -18,7 +18,7 @@ Add Cars Page
 
 .. figure:: car_add.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 You can add cars on this page. The condition is you have to add name of the cars.
 
@@ -27,7 +27,7 @@ Cars Update Page
 
 .. figure:: car_up.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 
 
@@ -39,7 +39,7 @@ Add Creator Page
 
 .. figure:: creator_add.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 You can add a creator.
 
@@ -48,7 +48,7 @@ Creator Update Page
 
 .. figure:: creator_up.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 
 You can update a existing creator using old names.
@@ -59,7 +59,7 @@ Add Engine Page
 
 .. figure:: engine_add.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 You can add a new engine.
 
@@ -68,7 +68,7 @@ Engine Update Page
 
 .. figure:: engine_up.png
    :scale: 60 %
-   :align: left
+   :align: center
 
 
 
@@ -82,4 +82,4 @@ At Delete page you can do delete operations with Engine,Creator or Cars names.
 
 .. figure:: delete_all.png
    :scale: 60 %
-   :align: left
+   :align: center
