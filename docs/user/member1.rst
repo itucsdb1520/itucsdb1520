@@ -39,7 +39,7 @@ Add Country Page
 ^^^^^^^^^^^^^^^^
 
 .. figure:: add_country.png
-   :scale: 40 %
+   :scale: 10 %
    :align: left
 
 You can add a new country.
