@@ -6,27 +6,28 @@ Pilot
 
    <table>
 
-         <tr>
-            <th > NAME</th>
-            <th > SURNAME</th>
-            <th > AGE </th>
-            <th>  TEAM </th>
-            <th > COUNTRY</th>
-         </tr>
-         {% for name, surname, age, team, country in pilots %}
-         <tr>
-            <td>{{ name }} </td>
-            <td>{{ surname }} </td>
-            <td>{{ age }} </td>
-            <td>{{ team }} </td>
-            <td>{{ country }} </td>
-         </tr>
-         {% endfor %}
-      </table>
+   <tr>
+   <th > NAME</th>
+   <th > SURNAME</th>
+   <th > AGE </th>
+   <th>  TEAM </th>
+   <th > COUNTRY</th>
+   </tr>
+   {% for name, surname, age, team, country in pilots %}
+      <tr>
+          <td>{{ name }} </td>
+          <td>{{ surname }} </td>
+          <td>{{ age }} </td>
+          <td>{{ team }} </td>
+          <td>{{ country }} </td>
+      </tr>
+   {% endfor %}
+   </table>
 
  This code in "pilots.html" shows values on page.
 
 .. code-block:: python
+
       pilots = []
          with dbapi2.connect(app.config['dsn']) as connection:
                  cursor = connection.cursor()

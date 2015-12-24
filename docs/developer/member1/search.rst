@@ -4,6 +4,7 @@ Search
 Searching operation in "server.py" of code:
 
 .. code-block:: python
+
    elif area == '2':
    search = "%" + search +"%"
                 query = """  SELECT PILOTS.Name, PILOTS.Surname, TEAMS.Teams,COUNTRIES.Countries FROM PILOTS, COUNTRIES, TEAMS WHERE (PILOTS.Name LIKE %s) AND (PILOTS.Country = COUNTRIES.Id AND PILOTS.Team = TEAMS.Id) """
@@ -32,5 +33,4 @@ Searching operation in "server.py" of code:
                 print(query_list)
                 connection.commit()
                 return render_template('search.html', current_time= now.ctime(), query_list = query_list, table = 2)
-
 
