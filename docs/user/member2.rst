@@ -61,49 +61,49 @@ Delete Page
 At Delete page you can do delete operations with Engine,Creator or Cars names.This form is subarea of car_delete.html page.You can do this operations in delete forms.
 
 
-*****************
-All of the figues
-*****************
+******************
+All of the figures
+******************
 .. figure:: car_add.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    car adding form
 
 .. figure:: car_up.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    car updating form
 
 .. figure:: creator_add.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    adding creator form
 
 .. figure:: creator_up.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    updating creator form
 
 .. figure:: engine_add.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    engine adding form
 
 
 .. figure:: engine_up.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    engine updating form
 
 
 .. figure:: delete_all.png
-   :scale: 60 %
+   :scale: 40 %
    :align: center
 
    delete forms
