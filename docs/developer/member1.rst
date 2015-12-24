@@ -28,7 +28,6 @@ delete country
 update country
 ============== ==============
 
-
 .. toctree::
    member1/pilots
    member1/add
