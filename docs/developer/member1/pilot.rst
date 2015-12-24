@@ -1,6 +1,7 @@
 Pilot
 ^^^^^
 
+ This code in "pilots.html" shows values on page.
 
 .. code-block:: python
 
@@ -24,7 +25,8 @@ Pilot
    {% endfor %}
    </table>
 
- This code in "pilots.html" shows values on page.
+
+This code selects values from tables in "server.py".
 
 .. code-block:: python
 
@@ -40,4 +42,4 @@ Pilot
 
                connection.commit()
 
- This code selects values from tables in "server.py".
+
