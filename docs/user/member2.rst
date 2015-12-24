@@ -30,7 +30,8 @@ Cars Update Page
    :align: left
 
 
-You can update a pilot from list according to name of cars .
+
+You can update a cars from list according to name of cars .
 
 
 Add Creator Page
@@ -53,7 +54,7 @@ Creator Update Page
 You can update a existing creator using old names.
 
 
-Add Country Page
+Add Engine Page
 ^^^^^^^^^^^^^^^^
 
 .. figure:: engine_add.png
@@ -62,20 +63,21 @@ Add Country Page
 
 You can add a new engine.
 
-Add Country Page
+Engine Update Page
 ^^^^^^^^^^^^^^^^
 
 .. figure:: engine_up.png
    :scale: 60 %
    :align: left
 
+
 You can update a existing engine.
-
-
-At Delete page you can do delete operations with Engine,Creator or Cars names.
 
 Delete Page
 ^^^^^^^^^^^^^^^^
+
+At Delete page you can do delete operations with Engine,Creator or Cars names.
+
 
 .. figure:: delete_all.png
    :scale: 60 %
