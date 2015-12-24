@@ -18,6 +18,8 @@ At Add&Update page you can do add and  update operations.
 Add Cars Page
 ^^^^^^^^^^^^^
 
+This form is subarea of car_add.html page.
+
 .. figure:: car_add.png
    :scale: 60 %
    :align: center
@@ -28,6 +30,8 @@ You can add cars on this page. The condition is you have to add name of the cars
 
 Cars Update Page
 ^^^^^^^^^^^^^^^^
+
+This form is subarea of car_add.html page.
 
 .. figure:: car_up.png
    :scale: 60 %
@@ -40,6 +44,7 @@ You can update a cars from list according to name of cars .
 
 Add Creator Page
 ^^^^^^^^^^^^^^^^
+This form is subarea of car_add.html page.
 
 .. figure:: creator_add.png
    :scale: 60 %
@@ -51,6 +56,8 @@ You can add a creator.
 
 Creator Update Page
 ^^^^^^^^^^^^^^^^^^^
+
+This form is subarea of car_add.html page.
 
 .. figure:: creator_up.png
    :scale: 60 %
@@ -64,6 +71,8 @@ You can update a existing creator using old names.
 Add Engine Page
 ^^^^^^^^^^^^^^^
 
+This form is subarea of car_add.html page.
+
 .. figure:: engine_add.png
    :scale: 60 %
    :align: center
@@ -74,6 +83,8 @@ You can add a new engine.
 
 Engine Update Page
 ^^^^^^^^^^^^^^^^^^
+
+This form is subarea of car_add.html page.
 
 .. figure:: engine_up.png
    :scale: 60 %
@@ -87,6 +98,7 @@ You can update a existing engine.
 Delete Page
 ^^^^^^^^^^^
 
+
 At Delete page you can do delete operations with Engine,Creator or Cars names.
 
 
@@ -95,3 +107,6 @@ At Delete page you can do delete operations with Engine,Creator or Cars names.
    :align: center
 
    delete forms
+
+
+This form is subarea of car_delete.html page.
