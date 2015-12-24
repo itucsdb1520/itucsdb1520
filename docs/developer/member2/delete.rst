@@ -4,7 +4,7 @@ Delete Cars,Engines and Creators
 At car_delete.html page we take input from user for deleting cars,engines or creator based on their names.And we send this infos into deleting function that inside in server.py
 We have 3 deleting functions.All of them we take name of the items.Then in DELETE FROM table_name WHERE Name = input_variable format we execute cursor and delete this items in tables.
 
-.. code-block::python
+.. code-block:: python
 
    @app.route('/car_delete',methods = ['GET','POST'])
    def car_delete():

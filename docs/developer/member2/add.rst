@@ -8,7 +8,7 @@ we create cursor for doing database operations.Firtly we selected from ENGINES b
 we don't do this operations for concistency of databases.Then we check is there same name for cars name since it is primary key.Then lastly
 we define our inserting query for cars tables and do adding operations.And if we haven't POST request we directed to again car_add.html page.
 
-.. code-block::python
+.. code-block:: python
 
    @app.route('/car_add',methods = ['GET','POST'])
    def car_add():
@@ -59,7 +59,7 @@ we define our inserting query for cars tables and do adding operations.And if we
 
 In same way we add Creators and Engines.But we don't do any check since they are not referenced from any tables.Codes of this two functions is like ;
 
-.. code-block::python
+.. code-block:: python
 
    @app.route('/engine_add',methods = ['GET','POST'])
    def engine_add():
