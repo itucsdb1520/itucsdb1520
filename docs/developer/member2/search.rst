@@ -7,6 +7,7 @@ And we search based their name because searching a value like 300 is nonsense an
 searching.Again we use cursor for executing this operation.
 
 .. code-block:: python
+
    elif area == '1':
                    #search cars
                    search = "%" +search + "%"

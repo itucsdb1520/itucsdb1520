@@ -5,6 +5,7 @@ We take inputs for update operations at car_add.html page.Firstly we take name o
 Using UPDATE ENGINES SET query SQL statement.We have again 3 functions each of them for cars,creators and engines.And this functions are like ;
 
 .. code-block:: python
+
    @app.route('/car_update',methods = ['GET','POST'])
    def car_update():
        if request.method =='POST':
