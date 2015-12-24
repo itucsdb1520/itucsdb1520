@@ -1,29 +1,62 @@
 Delete
 ^^^^^^
-
-Delete operation is done by entity IDs. The entities have their IDs integrated on the table id. The table ids are in the "table_<entity_id>" format.
-The id value is also placed inside the delete button in the value field.
-
-.. code-block:: python
-
-   <form action="{{ url_for('brands_db', operation='delete_founder') }}" method="post">
-                   <button class="delete_button red" name="delete" value="{{id}}" type="submit">
-                     <span class="icon-minus "></span>
-                   </button>
-                 </form>
-
-As it can be seen in the snippet, pressing the delete button will sent the id value as an argument via POST method. This case applies for brands and founders tables. Both deletions are done in the same way.
+The delete operations in "server.py".
+Delete operation for pilot:
+It gets id from user to delete.
 
 .. code-block:: python
 
-   if request.method == 'POST':
-      brand_id = request.form['delete']
+     if request.method =='POST':
+        id = request.form['id']
 
-      with dbapi2.connect(app.config['dsn']) as connection:
-          cursor = connection.cursor()
-          cursor.execute("DELETE FROM BRANDS WHERE Id = %s ", ([brand_id]))
-          connection.commit()
+And it deletes the values with:
 
-Deleting a brand will cause the deletion of the founder but deleting the founder will not cause the deletion of the brand.
+.. code-block:: python
+
+   with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM PILOTS WHERE Id = '""" +id + """' """
+            cursor.execute(query)
+            connection.commit()
+
+The pilot deleted.
+
+Delete operation for team:
+It gets id from user to delete.
+
+.. code-block:: python
+
+    if request.method =='POST':
+        Team = request.form['team']
 
 
+And it deletes the values with:
+
+.. code-block:: python
+
+          with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM TEAMS WHERE TEAMS.Id = %s """
+            cursor.execute(query, ([Team]))
+
+The team deleted.
+
+Delete operation for country:
+It gets id from user to delete.
+
+.. code-block:: python
+
+     if request.method =='POST':
+        Country = request.form['N_country']
+
+
+And it deletes the values with:
+
+.. code-block:: python
+
+           with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM COUNTRIES WHERE COUNTRIES.Id = %s """
+            cursor.execute(query, ([Country]))
+
+The country deleted.

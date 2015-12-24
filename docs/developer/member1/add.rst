@@ -1,40 +1,68 @@
 Add
 ^^^
-
-Add operation for
+The add operations in "server.py".
+Add operation for pilot:
+It gets values from user
 
 .. code-block:: python
 
-   if request.method =='POST':
-      brand_name = request.form['brand-name']
-      description = request.form['description']
-      foundation = request.form['foundation']
-      imagelink = request.form['imagelink']
-      website = request.form['website']
-      industry = request.form['industry']
-      country = request.form['country']
+     if request.method =='POST':
+        name = request.form['name']
+        surname = request.form['surname']
+        age = request.form['age']
+        team = request.form['team']
+        country = request.form['country']
 
-So far, the filled informations are taken as variables. For the brands, the country variable is a string and it needs to be changed to a integer which correspnds to the entered string.
+And it inserts the values with:
 
 .. code-block:: python
 
    with dbapi2.connect(app.config['dsn']) as connection:
-       cursor = connection.cursor()
+            cursor = connection.cursor()
+            query = """INSERT INTO PILOTS (Name, Surname, Age, Team, Country) VALUES (%s, %s, %s, %s, %s)"""
+            cursor.execute(query, (name, surname, age, team, country))
+            connection.commit()
 
-       query = """SELECT Id FROM COUNTRIES WHERE COUNTRIES.countries = '""" + country + """'"""
-       cursor.execute(query)
+The pilot added.
 
-       countryid = None
-       for record in cursor:
-           countryid = record
-
-Now the id for the requested country is taken and it is ready to be add.
+Add operation for team:
+It gets values from user
 
 .. code-block:: python
 
-    query = """INSERT INTO BRANDS (Name, Comment, Foundation, Image, Industry, Website, CountryId) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
-    cursor.execute(query, (brand_name,description,foundation,imagelink,industry,website, countryid[0]))
-    connection.commit()
+     if request.method =='POST':
+        Team = request.form['team']
 
-The brand is added succesfully. Adding the founder is pretty much the same.
 
+And it inserts the values with:
+
+.. code-block:: python
+
+        with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """INSERT INTO TEAMS ( Teams) VALUES (%s)"""
+            cursor.execute(query,([Team]))
+            connection.commit()
+
+The team added.
+
+Add operation for country:
+It gets values from user
+
+.. code-block:: python
+
+      if request.method =='POST':
+        Country = request.form['country']
+
+
+And it inserts the values with:
+
+.. code-block:: python
+
+         with dbapi2.connect(app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query =  """INSERT INTO COUNTRIES ( Countries) VALUES (%s)"""
+            cursor.execute(query,([Country]))
+            connection.commit()
+
+The country added.
