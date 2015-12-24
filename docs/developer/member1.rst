@@ -34,8 +34,8 @@ update team
 
 
 .. toctree::
-   member1/pilots
    member1/add
    member1/delete
-   member1/update
+   member1/pilot
    member1/search
+   member1/update
