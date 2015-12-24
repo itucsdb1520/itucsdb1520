@@ -26,7 +26,6 @@ Pilots
 
  This code in "pilots.html" shows values on page.
 
-
 .. code-block:: python
       pilots = []
          with dbapi2.connect(app.config['dsn']) as connection:
@@ -39,6 +38,5 @@ Pilots
                  pilots.append(pilot)
 
                connection.commit()
-
 
  This code selects values from tables in "server.py".
