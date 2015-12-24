@@ -4,9 +4,15 @@ Parts Implemented by Mehmet Aygün
 The database is created in the "initialize_db.py" file with default values.In initialize_db.py corresponding tables CARS,ENGINES and CREATOR tables created.
 
 .. code-block:: python
-cursor.execute("""DROP TABLE IF EXISTS CARS""")
+    cursor.execute("""DROP TABLE IF EXISTS CARS""")
     cursor.execute("""DROP TABLE IF EXISTS ENGINES""")
     cursor.execute("""DROP TABLE IF EXISTS CREATORS""")
+
+
+    cursor.execute("""CREATE TABLE ENGINES(Id SERIAL PRIMARY KEY,Engine_Name CHAR(30), HorsePower CHAR(30)) """)
+    cursor.execute("""CREATE TABLE CREATORS(Id SERIAL PRIMARY KEY,Name CHAR(30)) """)
+    cursor.execute("""CREATE TABLE CARS (Image_Link TEXT, Name CHAR(30) UNIQUE PRIMARY KEY NOT NULL,Engine_ID INTEGER references ENGINES(Id) ON DELETE CASCADE,Creator_ID INTEGER references CREATORS(Id) ON DELETE CASCADE,Speed CHAR(30),BRAND_ID INTEGER references PILOTS(Id) ON DELETE CASCADE,PILOT_ID INTEGER references TEAMS(Id) ON DELETE CASCADE)""")
+
 
 
     cursor.execute("""CREATE TABLE ENGINES(Id SERIAL PRIMARY KEY,Engine_Name CHAR(30), HorsePower CHAR(30)) """)
