@@ -6,7 +6,7 @@ server.py, we handle add opertions in 3 main functions.
 At car_add function we take inputs from html page using POST request.Then we declera our variables such as image_link,car_name etc. then
 we create cursor for doing database operations.Firtly we selected from ENGINES because we referenced from ENGINES and if there no engines with that id
 we don't do this operations for concistency of databases.Then we check is there same name for cars name since it is primary key.Then lastly
-we define our inserting query for cars tables and do adding operations.
+we define our inserting query for cars tables and do adding operations.And if we haven't POST request we directed to again car_add.html page.
 
 .. code-block::python
 
