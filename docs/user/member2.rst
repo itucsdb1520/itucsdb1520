@@ -72,7 +72,7 @@ Add Country Page
 You can update a existing engine.
 
 
-At Delete page you can do delete operations.
+At Delete page you can do delete operations with Engine,Creator or Cars names.
 
 Delete Page
 ^^^^^^^^^^^^^^^^
