@@ -46,7 +46,7 @@ You can add a creator.
 Creator Update Page
 ^^^^^^^^^^^^^^^^^^^
 
-.. figure:: creator_add.png
+.. figure:: creator_up.png
    :scale: 60 %
    :align: left
 
@@ -69,6 +69,7 @@ Engine Update Page
 .. figure:: engine_up.png
    :scale: 60 %
    :align: left
+
 
 
 You can update a existing engine.
