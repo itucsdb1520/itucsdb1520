@@ -55,3 +55,48 @@ we define our inserting query for cars tables and do adding operations.And if we
     else:
          now = datetime.datetime.now()
          return render_template('car_add.html')
+
+
+In same way we add Creators and Engines.But we don't do any check since they are not referenced from any tables.Codes of this two functions is like ;
+
+.. code-block::python
+
+   @app.route('/engine_add',methods = ['GET','POST'])
+   def engine_add():
+       if request.method =='POST':
+           engine_name = request.form['engine_name']
+           horsepower = request.form['horsepower']
+           with dbapi2.connect(app.config['dsn']) as connection:
+               cursor = connection.cursor()
+
+               query =  """INSERT INTO ENGINES (Engine_Name, HorsePower) VALUES (%s,%s)"""
+               print(query)
+
+               cursor.execute(query,(engine_name,horsepower))
+               connection.commit()
+
+           return redirect(url_for('home'))
+       else:
+            now = datetime.datetime.now()
+            return render_template('car_add.html')
+
+   @app.route('/creator_add',methods = ['GET','POST'])
+   def creator_add():
+       if request.method =='POST':
+           name = request.form['creator_name']
+           with dbapi2.connect(app.config['dsn']) as connection:
+               cursor = connection.cursor()
+
+               query =  """INSERT INTO CREATORS (Name) VALUES ('"""+name+"""')"""
+               print(query)
+
+               cursor.execute(query)
+               connection.commit()
+
+           return redirect(url_for('home'))
+       else:
+            now = datetime.datetime.now()
+            return render_template('car_add.html')
+
+
+
