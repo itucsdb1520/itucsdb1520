@@ -6,18 +6,18 @@ At the beginning the database has given values in "initialize_db.py".
 
 Table of operations:
 
-==============  =============
-OPERATION       SUB OPERATION
-==============  =============
-pilots          name,
-                surname,
-                age,
-                team,
-                country
-country         id,
-                name
-team            id,
-                name
+============== =============
+OPERATION      SUB OPERATION
+============== =============
+pilots         name,
+               surname,
+               age,
+               team,
+               country
+country        id,
+               name
+team           id,
+               name
 add pilot
 delete pilot
 add team
